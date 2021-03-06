@@ -3,6 +3,8 @@
   <head>
     <meta charset="utf-8" />
     <title>OpenSeadragon WMTS</title>
+    <script src="https://cdn.jsdelivr.net/npm/openseadragon@2.4/build/openseadragon/openseadragon.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.7.2/proj4.js"></script>
     <style>
       html, body, #openseadragon {
         margin:0;
@@ -23,7 +25,12 @@
       var IMG_DIM = Math.pow(2, 18) * 256;
 
       window.onload = function() {
+        console.log(OpenSeadragon);
+
         var label = document.getElementById('latlon');
+
+        var wmts = OpenSeadragon.WMTS();
+
 
         var viewer = OpenSeadragon({
           id: "openseadragon",
@@ -175,7 +182,5 @@
   <body>
     <div id="openseadragon"></div>
     <div id="latlon"></div>
-    <script src="https://cdn.jsdelivr.net/npm/openseadragon@2.4/build/openseadragon/openseadragon.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.7.2/proj4.js"></script>
   </body>
 </html>

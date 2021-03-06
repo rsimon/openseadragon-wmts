@@ -17,14 +17,6 @@ module.exports = {
     libraryExport: 'default',
     pathinfo: true
   },
-  externals: {
-    openseadragon: {
-      root: 'OpenSeadragon',
-      commonjs: 'openseadragon',
-      commonjs2: 'openseadragon',
-      amd: 'openseadragon'
-    }
-  },
   performance: {
     hints: false
   },
