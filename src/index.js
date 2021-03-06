@@ -13,6 +13,17 @@ const OpenSeadragonWMTS = () => {
     .then(text => {
       const result = parser.read(text);
       console.log(result);
+
+      // TODO 
+      // 1 - get first layer
+      // 2 - get resource URL
+      // 3 - get TileMatrixSet
+      // 4 - TileMatrixSet defines zoom levels
+
+      // OSD needs
+      // - URL
+      // - zoom levels
+      // - tilesize
     });
 
 }
