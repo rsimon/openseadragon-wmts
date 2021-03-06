@@ -28,7 +28,9 @@
     "webpack-cli": "^3.3.9",
     "webpack-dev-server": "^3.11.0"
   },
-  "dependencies": {},
+  "dependencies": {
+    "ol": "^6.5.0"
+  },
   "peerDependencies": {
     "openseadragon": "^2.4.2"
   }
