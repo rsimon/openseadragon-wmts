@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>OpenSeadragon WMTS</title>
+    <script src="https://cdn.jsdelivr.net/npm/openseadragon@2.4/build/openseadragon/openseadragon.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.7.2/proj4.js"></script>
+    <style>
+      html, body, #openseadragon {
+        margin:0;
+        padding:0;
+        height:100%;
+        width:100%;
+      }
+
+      #coord-tracker {
+        background-color: #ffffffa6;
+        position: relative;
+        top: -34px;
+        padding: 5px;
+      }
+    </style>
+    <script>
+      window.onload = async function() {
+        var coordEl = document.getElementById('coord-tracker');
+
+        var viewer = OpenSeadragon({
+          id: "openseadragon",
+          prefixUrl: "https://cdn.jsdelivr.net/npm/openseadragon@2.4/build/openseadragon/images/"
+        });
+
+        var map = await OpenSeadragon.WMTS(viewer, {
+          url: 'http://maps.wien.gv.at/wmts/1.0.0/WMTSCapabilities.xml'
+        });
+
+        // We'll add a mouse tracker and translate mouse coords to lat/lon
+        new OpenSeadragon.MouseTracker({
+          element: viewer.container,
+          moveHandler: function(event) {
+            var viewportPoint = viewer.viewport.pointFromPixel(event.position);
+
+            // The 'map' object provides functions for geo-coordinate translation
+            var lonlat = map.viewportToGeoCoordinates(viewportPoint);
+            coordEl.innerHTML = 'Lat ' + lonlat[1].toFixed(5) + ' &nbsp;&nbsp; Lon ' + lonlat[0].toFixed(5);
+          }
+        }).setTracking(true);  
+      }
+    </script>
+  </head>
+  <body>
+    <div id="openseadragon"></div>
+    <div id="coord-tracker">Lat - &nbsp;&nbsp; Lon -</div>
+  <script type="text/javascript" src="openseadragon-wmts.min.js"></script></body>
+</html>
