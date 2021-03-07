@@ -1,29 +1,39 @@
-import WMTSCapabilities from 'ol/format/WMTSCapabilities';
+import wmtsConfig from './wmtsConfig';
 
-const URL = 'https://wmts.maptiler.com/aHR0cDovL3dtdHMubWFwdGlsZXIuY29tL2FIUjBjSE02THk5dFlYQnpaWEpwWlhNdGRHbHNaWE5sZEhNdWN6TXVZVzFoZW05dVlYZHpMbU52YlM4eU5WOXBibU5vTDJ4aGJtTmhjMmhwY21VdmJXVjBZV1JoZEdFdWFuTnZiZy9qc29u/wmts';
+import {
+  geoToViewportCoordinates
+} from './Projection';
 
-const parser = new WMTSCapabilities();
+const OpenSeadragonWMTS = (viewer, args) => {
 
-const OpenSeadragonWMTS = () => {
-    
-  console.log('Fetching WMTS capabilities');
+  const { url } = args;
 
-  fetch(URL)
+  fetch(url)
     .then(response => response.text())
     .then(text => {
-      const result = parser.read(text);
-      console.log(result);
 
-      // TODO 
-      // 1 - get first layer
-      // 2 - get resource URL
-      // 3 - get TileMatrixSet
-      // 4 - TileMatrixSet defines zoom levels
+      const { tileSource, mapBounds, projection } = wmtsConfig(text);
 
-      // OSD needs
-      // - URL
-      // - zoom levels
-      // - tilesize
+      // Should be [ minLon, minLat, maxLon, maxLat ]
+      const [ left, top ] = geoToViewportCoordinates(projection)([
+        Math.min(mapBounds[0], mapBounds[2]),
+        Math.max(mapBounds[3], mapBounds[1])
+      ]);
+
+      const [ right, bottom ] =geoToViewportCoordinates(projection)([
+        Math.max(mapBounds[2], mapBounds[0]),
+        Math.min(mapBounds[3], mapBounds[1])
+      ]);
+
+      const viewportBounds = new OpenSeadragon.Rect(left, top, right - left, bottom - top);
+
+      viewer.addTiledImage({ 
+        tileSource,
+        success: () => {
+          viewer.viewport.fitBounds(viewportBounds, true);
+        }
+      });
+
     });
 
 }

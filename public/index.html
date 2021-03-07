@@ -21,166 +21,22 @@
       }
     </style>
     <script>
-      // https://wmts.maptiler.com/aHR0cDovL3dtdHMubWFwdGlsZXIuY29tL2FIUjBjSE02THk5dFlYQnpaWEpwWlhNdGRHbHNaWE5sZEhNdWN6TXVZVzFoZW05dVlYZHpMbU52YlM4eU5WOXBibU5vTDJ4aGJtTmhjMmhwY21VdmJXVjBZV1JoZEdFdWFuTnZiZy9qc29u/wmts
-      var IMG_DIM = Math.pow(2, 18) * 256;
-
       window.onload = function() {
-        console.log(OpenSeadragon);
-
-        var label = document.getElementById('latlon');
-
-        var wmts = OpenSeadragon.WMTS();
-
-
         var viewer = OpenSeadragon({
           id: "openseadragon",
-          prefixUrl: "https://cdn.jsdelivr.net/npm/openseadragon@2.4/build/openseadragon/images/",
-          tileSources: {
-            width:IMG_DIM,
-            height:IMG_DIM,
-            tileSize: 256,
-
-            getTileUrl: function(level, x, y) {
-              var z = level - 8;
-              return "https://mapseries-tilesets.s3.amazonaws.com/25_inch/lancashire/" + z + "/" + x + "/" + y + ".png";
-            }
-          },
-          
-          gestureSettingsTouch: {
-            pinchRotate: true
-          }
+          prefixUrl: "https://cdn.jsdelivr.net/npm/openseadragon@2.4/build/openseadragon/images/"
         });
 
-        var wm_width = 40075016.68557849; // 2 * 20026376.39; // Web Mercator width
-        var wm_height = 40075016.68557849; // 2 * 20048966.10; // Web Mercator height
-
-        var false_e = wm_width / 2;
-        var false_n = wm_height / 2;
-
-        // Converts image pixel coordinates to Web Mercator
-        var imageToWebMercator = xy => {
-          var x_wm = xy[0] / IMG_DIM * wm_width;
-          var y_wm = xy[1] / IMG_DIM * wm_height;  
-
-          var east = x_wm - false_e;
-          var north = false_n - y_wm;
-
-          return [ east, north ];
-        }
-
-        // Converts Web Mercator coordinates to OpenSeadragon viewport [0, 1] coords
-        var webMercatorToViewport = en => {
-          var offset_e = en[0] + false_e;
-          var offset_n = false_n - en[1];
-
-          return [
-            offset_e / wm_width,
-            offset_n / wm_height
-          ];
-        }
-
-        var ulverstonGPS = [ -3.101720,54.194546 ];
-        var ulverstonEN = proj4('EPSG:4326', 'EPSG:3857', ulverstonGPS); // [ -345280,7207082 ];
-        var ulverstonOSD = webMercatorToViewport(ulverstonEN);
-        
-        var yorkLonLat = [ -2.4113135256488656, 53.57984953037537 ];
-        var yorkWM = proj4('EPSG:4326', 'EPSG:3857', yorkLonLat);
-        var [ yorkX, yorkY ] = webMercatorToViewport(yorkWM);
-
-        setTimeout(() => {
-          viewer.viewport.panTo(new OpenSeadragon.Point(ulverstonOSD[0], ulverstonOSD[1]), true);
-          viewer.viewport.zoomBy(150000, null, true);
-        }, 100);
-
-        var tracker = new OpenSeadragon.MouseTracker({
-            element: viewer.container,
-            moveHandler: function(event) {
-              var viewportPoint = viewer.viewport.pointFromPixel(event.position);
-              var imagePoint = viewer.viewport.viewportToImageCoordinates(viewportPoint);
-
-              var [ east, north ] = imageToWebMercator([ imagePoint.x, imagePoint.y ]);
-
-              var latlon = proj4('EPSG:3857', 'EPSG:4326', [ east, north ]);
-
-              label.innerHTML = 'Lat ' + latlon[1].toFixed(4) + '&nbsp;&nbsp; Lon ' + latlon[0].toFixed(4);
-              // console.log([ east, north]);
-            }
-        });  
-
-        tracker.setTracking(true);  
-
-        var anno = OpenSeadragon.Annotorious(viewer, {
-          locale: 'auto'
+        var map = OpenSeadragon.WMTS(viewer, {
+          url: 'https://wmts.maptiler.com/aHR0cDovL3dtdHMubWFwdGlsZXIuY29tL2FIUjBjSE02THk5dFlYQnpaWEpwWlhNdGRHbHNaWE5sZEhNdWN6TXVZVzFoZW05dVlYZHpMbU52YlM4eU5WOXBibU5vTDJ4aGJtTmhjMmhwY21VdmJXVjBZV1JoZEdFdWFuTnZiZy9qc29u/wmts'
         });
 
-        anno.setAuthInfo({
-          id: 'http://www.example.com/rainer',
-          displayName: 'rainer'
-        });
-
-        var toolToggle = document.getElementById('current-tool');
-        toolToggle.addEventListener('click', function() {
-          if (toolToggle.innerHTML == 'TOOL: RECTANGLE') {
-            toolToggle.innerHTML = 'TOOL: POLYGON';
-            anno.setDrawingTool('polygon');
-          } else {
-            toolToggle.innerHTML = 'TOOL: RECTANGLE';
-            anno.setDrawingTool('rect');
-          }
-        });
-
-        var modeBtn = document.getElementById('mode');
-        modeBtn.addEventListener('click', function() {          
-          if (modeBtn.innerHTML == 'MODE: VIEW') {
-            modeBtn.innerHTML = 'MODE: ANNOTATE';
-            anno.setDrawingEnabled(true);
-          } else {
-            modeBtn.innerHTML = 'MODE: VIEW';
-            anno.setDrawingEnabled(false);
-          }
-        });
-
-        anno.on('createSelection', function(selection) {
-          console.log('selection', selection);
-          const { snippet } = anno.getSelectedImageSnippet();
-          // document.body.appendChild(snippet);
-        });
-
-        anno.on('selectAnnotation', function(annotation) {
-          console.log('selected', annotation);
-        });
-
-        anno.on('createAnnotation', function(a) {
-          console.log('created', a);
-          modeBtn.innerHTML = 'MODE: VIEW';
-        });
-
-        anno.on('cancelSelection', function(a) {
-          modeBtn.innerHTML = 'MODE: VIEW';
-        });
-
-        anno.on('updateAnnotation', function(annotation, previous) {
-          console.log('updated', previous, 'with', annotation);
-        });
-
-        anno.on('deleteAnnotation', function(annotation) {
-          console.log('deleted', annotation);
-        });
-
-        anno.on('mouseEnterAnnotation', function(annotation) {
-          console.log('mouseEnter', annotation);
-        });
-
-        anno.on('mouseLeaveAnnotation', function(annotation) {
-          console.log('mouseLeave', annotation);
-        });
-
-        anno.loadAnnotations('annotations.w3c.json');
+        // map.viewportToMapCoordinates(xy);
+        // map.mapToViewportCoordinates(lonLat);
       }
     </script>
   </head>
   <body>
     <div id="openseadragon"></div>
-    <div id="latlon"></div>
   </body>
 </html>

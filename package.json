@@ -30,7 +30,7 @@
   },
   "dependencies": {
     "ol": "^6.5.0",
-    "proj4js": "^10.0.0"
+    "proj4": "^2.7.2"
   },
   "peerDependencies": {
     "openseadragon": "^2.4.2"
