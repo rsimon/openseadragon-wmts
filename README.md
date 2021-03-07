@@ -32,7 +32,7 @@ var mouseTracker = new OpenSeadragon.MouseTracker({
 mouseTracker.setTracking(true);
 ```
 
-Per default, the plugin adds the first available map layer with the default style. To select a specific layer and style:
+Per default, the plugin displays the first available map layer with the default style. To select a specific layer and style:
 
 ```js
 var map = await OpenSeadragon.WMTS(viewer, {
