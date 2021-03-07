@@ -1,20 +1,18 @@
 import WMTSCapabilities from 'ol/format/WMTSCapabilities';
 
-const parseCRS = urn =>
-  urn.substring(urn.indexOf('EPSG')).replace('::', ':');
-
-const buildTileConfig = (wmtsCapabilitiesResponse, args) => {
+export const parseCapabilities = (response, args) => {
 
   const parser = new WMTSCapabilities();
 
-  const capabilities = parser.read(wmtsCapabilitiesResponse);
-
-  console.log(capabilities);
+  const capabilities = parser.read(response);
 
   // Pick layer by name or (default) take first in list
   const Layer = args?.layer ? 
     capabilities.Contents.Layer.find(l => l.Title === args.layer) :
     capabilities.Contents.Layer[0];
+
+  const Style = args?.style || 
+    Layer.Style.find(s => s.isDefault).Identifier;
 
   const TileUrlTemplate = 
     Layer.ResourceURL[0].template;
@@ -44,6 +42,7 @@ const buildTileConfig = (wmtsCapabilitiesResponse, args) => {
       minLevel: 8,
 
       getTileUrl: (level, x, y) => TileUrlTemplate
+        .replace('{Style}', Style)
         .replace('{TileMatrix}', level - 8)
         .replace('{TileCol}', x)
         .replace('{TileRow}', y)
@@ -53,12 +52,10 @@ const buildTileConfig = (wmtsCapabilitiesResponse, args) => {
     mapBounds: Layer.WGS84BoundingBox,
 
     projection: {
-      code: parseCRS(TileMatrixSet.SupportedCRS),
+      code: TileMatrixSet.SupportedCRS,
       extent: [ 2 * Math.abs(TopLeftCorner[0]), 2 * Math.abs(TopLeftCorner[1]) ]
     }
     
   }
 
 }
-
-export default buildTileConfig;

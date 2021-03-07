@@ -13,7 +13,7 @@
         width:100%;
       }
 
-      #latlon {
+      #coord-tracker {
         background-color: #ffffffa6;
         position: relative;
         top: -34px;
@@ -21,22 +21,34 @@
       }
     </style>
     <script>
-      window.onload = function() {
+      window.onload = async function() {
+        var coordEl = document.getElementById('coord-tracker');
+
         var viewer = OpenSeadragon({
           id: "openseadragon",
           prefixUrl: "https://cdn.jsdelivr.net/npm/openseadragon@2.4/build/openseadragon/images/"
         });
 
-        var map = OpenSeadragon.WMTS(viewer, {
-          url: 'https://wmts.maptiler.com/aHR0cDovL3dtdHMubWFwdGlsZXIuY29tL2FIUjBjSE02THk5dFlYQnpaWEpwWlhNdGRHbHNaWE5sZEhNdWN6TXVZVzFoZW05dVlYZHpMbU52YlM4eU5WOXBibU5vTDJ4aGJtTmhjMmhwY21VdmJXVjBZV1JoZEdFdWFuTnZiZy9qc29u/wmts'
+        var map = await OpenSeadragon.WMTS(viewer, {
+          url: 'http://maps.wien.gv.at/wmts/1.0.0/WMTSCapabilities.xml' // 'https://wmts.maptiler.com/aHR0cDovL3dtdHMubWFwdGlsZXIuY29tL2FIUjBjSE02THk5dFlYQnpaWEpwWlhNdGRHbHNaWE5sZEhNdWN6TXVZVzFoZW05dVlYZHpMbU52YlM4eU5WOXBibU5vTDJ4aGJtTmhjMmhwY21VdmJXVjBZV1JoZEdFdWFuTnZiZy9qc29u/wmts'
         });
 
-        // map.viewportToMapCoordinates(xy);
-        // map.mapToViewportCoordinates(lonLat);
+        // We'll add a mouse tracker and translate mouse coords to lat/lon
+        new OpenSeadragon.MouseTracker({
+          element: viewer.container,
+          moveHandler: function(event) {
+            var viewportPoint = viewer.viewport.pointFromPixel(event.position);
+
+            // The 'map' object provides functions for geo-coordinate translation
+            var lonlat = map.viewportToGeoCoordinates(viewportPoint);
+            coordEl.innerHTML = 'Lat ' + lonlat[1].toFixed(5) + ' &nbsp;&nbsp; Lon ' + lonlat[0].toFixed(5);
+          }
+        }).setTracking(true);  
       }
     </script>
   </head>
   <body>
     <div id="openseadragon"></div>
+    <div id="coord-tracker">Lat - &nbsp;&nbsp; Lon -</div>
   </body>
 </html>
