@@ -15,24 +15,8 @@ var viewer = OpenSeadragon({
 var map = await OpenSeadragon.WMTS(viewer, {
   url: 'http://maps.wien.gv.at/wmts/1.0.0/WMTSCapabilities.xml'
 });
-```
 
-The plugin will fetch the WMTS capabilities manifest, and (as default) add 
-the __first available map layer__ using the __default style__. You can also 
-select a specific layer and style:
-
-```js
-var map = await OpenSeadragon.WMTS(viewer, {
-  url: 'http://maps.wien.gv.at/wmts/1.0.0/WMTSCapabilities.xml',
-  layer: 'Orthofoto 2020',
-  style: 'farbe'
-});
-```
-
-The `map` object provides functions to convert OpenSeadragon viewport coordinates
-to WGS84 GPS coordinates.
-
-```js
+// The map object provides functions to convert OSD coordinates to WGS84
 var mouseTracker = new OpenSeadragon.MouseTracker({
   element: viewer.container,
 
@@ -48,7 +32,21 @@ var mouseTracker = new OpenSeadragon.MouseTracker({
 mouseTracker.setTracking(true);
 ```
 
-| API Method               | Type                |                                         |
+Per default, the plugin adds the first available map layer with the default style. 
+
+Select a specific layer and style:
+
+```js
+var map = await OpenSeadragon.WMTS(viewer, {
+  url: 'http://maps.wien.gv.at/wmts/1.0.0/WMTSCapabilities.xml',
+  layer: 'Orthofoto 2020',
+  style: 'farbe'
+});
+```
+
+## API
+
+| Method                   | Type                |                                         |
 |--------------------------|---------------------|-----------------------------------------|
 | viewportToGeoCoordinates | OpenSeadragon.Point | OSD viewport coordinate to [ lon, lat]  |
 | geoToViewportCoordinates | [ lon, lat]         | WGS84 coordinate to OpenSeadragon.Point |
