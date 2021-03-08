@@ -43,6 +43,7 @@ export const parseCapabilities = (response, args) => {
 
       getTileUrl: (level, x, y) => TileUrlTemplate
         .replace('{Style}', Style)
+        .replace('{TileMatrixSet}', TileMatrixSetLink)
         .replace('{TileMatrix}', level - 8)
         .replace('{TileCol}', x)
         .replace('{TileRow}', y)

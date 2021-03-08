@@ -11,7 +11,7 @@ const OpenSeadragonWMTS = (viewer, args) => {
   return fetch(url)
     .then(response => response.text())
     .then(text => {
-      const { tileSource, mapBounds, projection } = parseCapabilities(text);
+      const { tileSource, mapBounds, projection } = parseCapabilities(text, args);
 
       const topLeft = geoToViewportCoordinates(projection)([
         Math.min(mapBounds[0], mapBounds[2]),
