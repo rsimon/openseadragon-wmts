@@ -26,7 +26,10 @@
 
         var viewer = OpenSeadragon({
           id: "openseadragon",
-          prefixUrl: "https://cdn.jsdelivr.net/npm/openseadragon@2.4/build/openseadragon/images/"
+          prefixUrl: "https://cdn.jsdelivr.net/npm/openseadragon@2.4/build/openseadragon/images/",
+          gestureSettingsTouch: {
+            pinchRotate: true
+          }
         });
 
         var map = await OpenSeadragon.WMTS(viewer, {
