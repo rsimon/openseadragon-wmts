@@ -14,6 +14,12 @@ directly from the CDN. Import into your page:
 <script src="https://cdn.jsdelivr.net/npm/openseadragon-wmts@latest/dist/openseadragon-wmts.min.js"></script>
 ```
 
+Or install via npm:
+
+```sh
+$ npm install openseadragon-wmts
+```
+
 ## Use
 
 ```js
