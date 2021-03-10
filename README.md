@@ -5,6 +5,15 @@ served from a [WMTS](https://en.wikipedia.org/wiki/Web_Map_Tile_Service) endpoin
 
 Try the [Demo](https://recogito.github.io/openseadragon-wmts).
 
+## Install
+
+Download the [latest release](https://github.com/recogito/openseadragon-wmts/releases/latest) or grab
+directly from the CDN. Import into your page:
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/openseadragon-wmts@latest/dist/openseadragon-wmts.min.js"></script>
+```
+
 ## Use
 
 ```js
