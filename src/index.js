@@ -1,11 +1,13 @@
 import { parseCapabilities } from './WMTS';
 import {
-  viewportToMapCoordinates,
-  viewportToLonLat,
-  mapToViewportCoordinates,
-  mapToLonLat,
+  imageToLonLat,
+  lonLatToImageCoordinates,
+  lonLatToMapCoordinates,
   lonLatToViewportCoordinates,
-  lonLatToMapCoordinates
+  mapToLonLat,
+  mapToViewportCoordinates,
+  viewportToLonLat,
+  viewportToMapCoordinates
 } from './Transform';
 
 const OpenSeadragonWMTS = (viewer, args) => {
@@ -37,12 +39,14 @@ const OpenSeadragonWMTS = (viewer, args) => {
       });
 
       return {
-        viewportToMapCoordinates: viewportToMapCoordinates(projection.extent),
-        viewportToLonLat: viewportToLonLat(projection),
-        mapToViewportCoordinates: mapToViewportCoordinates(projection.extent),
-        mapToLonLat: mapToLonLat(projection),
+        imageToLonLat: imageToLonLat(viewer.viewport, projection),
+        lonLatToImageCoordinates: lonLatToImageCoordinates(viewer.viewport, projection),
+        lonLatToMapCoordinates: lonLatToMapCoordinates(projection),
         lonLatToViewportCoordinates: lonLatToViewportCoordinates(projection),
-        lonLatToMapCoordinates: lonLatToMapCoordinates(projection)
+        mapToLonLat: mapToLonLat(projection),
+        mapToViewportCoordinates: mapToViewportCoordinates(projection.extent),
+        viewportToLonLat: viewportToLonLat(projection),
+        viewportToMapCoordinates: viewportToMapCoordinates(projection.extent)
       }
     });
 
