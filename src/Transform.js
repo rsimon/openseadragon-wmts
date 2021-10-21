@@ -1,6 +1,7 @@
 import proj4 from 'proj4';
 
 proj4.defs('urn:ogc:def:crs:EPSG:6.18.3:3857', proj4.defs('EPSG:3857'));
+proj4.defs('urn:ogc:def:crs:EPSG:3857', proj4.defs('EPSG:3857'));
 proj4.defs('urn:ogc:def:crs:EPSG::3857', proj4.defs('EPSG:3857'));
 
 export const imageToLonLat = (viewport, projection) => xy => {
