@@ -69,5 +69,5 @@ var map = await OpenSeadragon.WMTS(viewer, {
 | lonLatToViewportCoordinates | [lon, lat]    | lon/lat to OSD viewport X/Y        |
 | mapToLonLat                 | [east, north] | Map projection to lon/lat          |
 | mapToViewportCoordinates    | [east, north] | Map projection to OSD viewport X/Y |
-| viewportToLonLat            | [{x, y}       | OSD viewport X/Y to lon/lat        |
-| viewportToMapCoordinates    | [{x, y}       | OSD viewport X/Y to map projection |
+| viewportToLonLat            | {x, y}        | OSD viewport X/Y to lon/lat        |
+| viewportToMapCoordinates    | {x, y}        | OSD viewport X/Y to map projection |
