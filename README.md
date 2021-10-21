@@ -40,7 +40,7 @@ var mouseTracker = new OpenSeadragon.MouseTracker({
   moveHandler: function(event) {
     var viewportPoint = viewer.viewport.pointFromPixel(event.position);
 
-    var lonlat = map.viewportToGeoCoordinates(viewportPoint);
+    var lonlat = map.viewportToLonLat(viewportPoint);
     console.log(lonlat);
  }
 
