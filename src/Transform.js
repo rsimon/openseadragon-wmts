@@ -17,7 +17,7 @@ export const viewportToMapCoordinates = worldExtent => xy => {
   return { x: east, y: north };
 }
 
-export const viewportToGeoCoordinates = projection => xy => {
+export const viewportToLonLat = projection => xy => {
   const { x, y } = viewportToMapCoordinates(projection.extent)(xy);
   return proj4(projection.code, 'EPSG:4326', [ x, y ]);
 }
@@ -37,7 +37,15 @@ export const mapToViewportCoordinates = worldExtent => eastNorth => {
   return { x: x / worldWidth, y: y / worldHeight };
 }
 
-export const geoToViewportCoordinates = projection => lonLat => {
+export const mapToLonLat = projection => eastNorth => {
+  return proj4(projection.code, 'EPSG:4326', eastNorth);
+}
+
+export const lonLatToViewportCoordinates = projection => lonLat => {
   const eastNorth = proj4('EPSG:4326', projection.code, lonLat);
   return mapToViewportCoordinates(projection.extent)({ x: eastNorth[0], y: eastNorth[1] });
+}
+
+export const lonLatToMapCoordinates = projection => lonLat => {
+  return proj4('EPSG:4326', projection.code, lonLat);
 }

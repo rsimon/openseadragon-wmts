@@ -1,8 +1,11 @@
 import { parseCapabilities } from './WMTS';
 import {
-  geoToViewportCoordinates,
-  viewportToGeoCoordinates,
-  viewportToMapCoordinates
+  viewportToMapCoordinates,
+  viewportToLonLat,
+  mapToViewportCoordinates,
+  mapToLonLat,
+  lonLatToViewportCoordinates,
+  lonLatToMapCoordinates
 } from './Transform';
 
 const OpenSeadragonWMTS = (viewer, args) => {
@@ -14,12 +17,12 @@ const OpenSeadragonWMTS = (viewer, args) => {
     .then(text => {
       const { tileSource, mapBounds, projection } = parseCapabilities(text, args);
 
-      const topLeft = geoToViewportCoordinates(projection)([
+      const topLeft = lonLatToViewportCoordinates(projection)([
         Math.min(mapBounds[0], mapBounds[2]),
         Math.max(mapBounds[3], mapBounds[1])
       ]);
 
-      const bottomRight = geoToViewportCoordinates(projection)([
+      const bottomRight = lonLatToViewportCoordinates(projection)([
         Math.max(mapBounds[2], mapBounds[0]),
         Math.min(mapBounds[3], mapBounds[1])
       ]);
@@ -34,8 +37,12 @@ const OpenSeadragonWMTS = (viewer, args) => {
       });
 
       return {
-        geoToViewportCoordinates: geoToViewportCoordinates(projection),
-        viewportToGeoCoordinates: viewportToGeoCoordinates(projection)
+        viewportToMapCoordinates: viewportToMapCoordinates(projection.extent),
+        viewportToLonLat: viewportToLonLat(projection),
+        mapToViewportCoordinates: mapToViewportCoordinates(projection.extent),
+        mapToLonLat: mapToLonLat(projection),
+        lonLatToViewportCoordinates: lonLatToViewportCoordinates(projection),
+        lonLatToMapCoordinates: lonLatToMapCoordinates(projection)
       }
     });
 
