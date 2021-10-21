@@ -9,8 +9,6 @@ const OpenSeadragonWMTS = (viewer, args) => {
 
   const { url } = args;
 
-  console.log('YEAH');
-
   return fetch(url)
     .then(response => response.text())
     .then(text => {
@@ -28,22 +26,10 @@ const OpenSeadragonWMTS = (viewer, args) => {
 
       const viewportBounds = new OpenSeadragon.Rect(topLeft.x, topLeft.y, bottomRight.x - topLeft.x, bottomRight.y - topLeft.y);
 
-      const upper = viewportToMapCoordinates(projection.extent)(viewportBounds);
-      const lower = viewportToMapCoordinates(projection.extent)({ x: viewportBounds.x + viewportBounds.width, y: viewportBounds.y + viewportBounds.height });
-      
       viewer.addTiledImage({ 
-        tileSource,
-        x: upper.x,
-        y: upper.y,
-        width: (lower.x - upper.x),
-        
+        tileSource,        
         success: () => {
-          viewer.viewport.fitBounds(new OpenSeadragon.Rect(
-            -137495.19569796944, 
-            7393216.214966129,
-            2000,
-            2000
-          ), true);
+          viewer.viewport.fitBounds(viewportBounds, true);
         }
       });
 
