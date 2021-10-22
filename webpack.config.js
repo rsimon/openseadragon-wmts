@@ -14,8 +14,7 @@ module.exports = {
     filename: 'openseadragon-wmts.js',
     library: ['OpenSeadragon', 'WMTS'],
     libraryTarget: 'umd',
-    libraryExport: 'default',
-    pathinfo: true
+    libraryExport: 'default'
   },
   performance: {
     hints: false
