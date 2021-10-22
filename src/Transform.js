@@ -5,7 +5,7 @@ proj4.defs('urn:ogc:def:crs:EPSG:3857', proj4.defs('EPSG:3857'));
 proj4.defs('urn:ogc:def:crs:EPSG::3857', proj4.defs('EPSG:3857'));
 
 export const imageToLonLat = (viewport, projection) => xy => {
-  const viewportPoint = viewport.imageToViewportCoordinates(xy.x, xy.y);
+  const viewportPoint = viewport.imageToViewportCoordinates(xy);
   return viewportToLonLat(projection)(viewportPoint);
 }
 
@@ -39,16 +39,16 @@ export const mapToViewportCoordinates = worldExtent => eastNorth => {
   const x = east + falseEast;
   const y = falseNorth - north;
 
-  return { x: x / worldWidth, y: y / worldHeight };
+  return [ x / worldWidth, y / worldHeight ];
 }
 
 export const viewportToLonLat = projection => xy => {
-  const { x, y } = viewportToMapCoordinates(projection.extent)(xy);
-  return proj4(projection.code, 'EPSG:4326', [ x, y ]);
+  const xy = viewportToMapCoordinates(projection.extent)(xy);
+  return proj4(projection.code, 'EPSG:4326', xy);
 }
 
 export const viewportToMapCoordinates = worldExtent => xy => {
-  const { x, y } = xy;
+  const [ x, y ] = xy;
 
   const [ worldWidth, worldHeight ] = worldExtent;
 
@@ -58,7 +58,7 @@ export const viewportToMapCoordinates = worldExtent => xy => {
   const east = x * worldWidth - falseEast;
   const north = falseNorth - y * worldHeight;
 
-  return { x: east, y: north };
+  return [ east, north ];
 }
 
 
