@@ -29,7 +29,7 @@ const OpenSeadragonWMTS = (viewer, args) => {
         Math.min(mapBounds[3], mapBounds[1])
       ]);
 
-      const viewportBounds = new OpenSeadragon.Rect(topLeft.x, topLeft.y, bottomRight.x - topLeft.x, bottomRight.y - topLeft.y);
+      const viewportBounds = new OpenSeadragon.Rect(topLeft[0], topLeft[1], bottomRight[0] - topLeft[0], bottomRight[1] - topLeft[1]);
 
       viewer.addTiledImage({ 
         tileSource,        

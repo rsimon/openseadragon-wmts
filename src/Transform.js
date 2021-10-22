@@ -43,8 +43,8 @@ export const mapToViewportCoordinates = worldExtent => eastNorth => {
 }
 
 export const viewportToLonLat = projection => xy => {
-  const xy = viewportToMapCoordinates(projection.extent)(xy);
-  return proj4(projection.code, 'EPSG:4326', xy);
+  const en = viewportToMapCoordinates(projection.extent)(xy);
+  return proj4(projection.code, 'EPSG:4326', en);
 }
 
 export const viewportToMapCoordinates = worldExtent => xy => {
