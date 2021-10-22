@@ -11,7 +11,7 @@ const TerserPlugin = require('terser-webpack-plugin');
 module.exports = {
   entry: resolveAppPath('src'),
   output: {
-    filename: 'openseadragon-wmts.min.js',
+    filename: 'openseadragon-wmts.js',
     library: ['OpenSeadragon', 'WMTS'],
     libraryTarget: 'umd',
     libraryExport: 'default',
