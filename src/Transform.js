@@ -5,13 +5,13 @@ proj4.defs('urn:ogc:def:crs:EPSG:3857', proj4.defs('EPSG:3857'));
 proj4.defs('urn:ogc:def:crs:EPSG::3857', proj4.defs('EPSG:3857'));
 
 export const imageToLonLat = (viewport, projection) => xy => {
-  const viewportPoint = viewport.imageToViewportCoordinates(xy);
-  return viewportToLonLat(projection)(viewportPoint);
+  const pt = viewport.imageToViewportCoordinates(xy[0], xy[1]);
+  return viewportToLonLat(projection)([ pt.x, pt.y ]);
 }
 
 export const lonLatToImageCoordinates = (viewport, projection) => lonLat => {
-  const viewportPoint = lonLatToViewportCoordinates(projection)(lonLat);
-  const { x, y } = viewport.viewportToImageCoordinates(viewportPoint);
+  const pt = lonLatToViewportCoordinates(projection)(lonLat);
+  const { x, y } = viewport.viewportToImageCoordinates(pt[0], pt[1]);
   return [ x, y ];
 }
 
@@ -21,7 +21,7 @@ export const lonLatToMapCoordinates = projection => lonLat => {
 
 export const lonLatToViewportCoordinates = projection => lonLat => {
   const eastNorth = proj4('EPSG:4326', projection.code, lonLat);
-  return mapToViewportCoordinates(projection.extent)({ x: eastNorth[0], y: eastNorth[1] });
+  return mapToViewportCoordinates(projection.extent)(eastNorth);
 }
 
 export const mapToLonLat = projection => eastNorth => {
@@ -29,9 +29,7 @@ export const mapToLonLat = projection => eastNorth => {
 }
 
 export const mapToViewportCoordinates = worldExtent => eastNorth => {
-  const east = eastNorth.x;
-  const north = eastNorth.y;
-
+  const [ east, north ] = eastNorth;
   const [ worldWidth, worldHeight ] = worldExtent;
 
   // TODO this is true for most projections in practice, BUT NOT IN GENERAL! 
