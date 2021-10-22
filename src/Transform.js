@@ -11,7 +11,8 @@ export const imageToLonLat = (viewport, projection) => xy => {
 
 export const lonLatToImageCoordinates = (viewport, projection) => lonLat => {
   const viewportPoint = lonLatToViewportCoordinates(projection)(lonLat);
-  return viewport.viewportToImageCoordinates(viewportPoint);
+  const { x, y } = viewport.viewportToImageCoordinates(viewportPoint);
+  return [ x, y ];
 }
 
 export const lonLatToMapCoordinates = projection => lonLat => {
