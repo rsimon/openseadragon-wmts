@@ -4,7 +4,6 @@
     <meta charset="utf-8" />
     <title>OpenSeadragon WMTS</title>
     <script src="https://cdn.jsdelivr.net/npm/openseadragon@2.4/build/openseadragon/openseadragon.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.7.2/proj4.js"></script>
     <style>
       html, body, #openseadragon {
         margin:0;
@@ -50,10 +49,10 @@
         new OpenSeadragon.MouseTracker({
           element: viewer.container,
           moveHandler: function(event) {
-            var viewportPoint = viewer.viewport.pointFromPixel(event.position);
+            var pt = viewer.viewport.pointFromPixel(event.position);
 
             // The 'map' object provides functions for geo-coordinate translation
-            var lonlat = map.viewportToGeoCoordinates(viewportPoint);
+            var lonlat = map.viewportToLonLat([pt.x, pt.y]);
             coordEl.innerHTML = 'Lat ' + lonlat[1].toFixed(5) + ' &nbsp;&nbsp; Lon ' + lonlat[0].toFixed(5);
           }
         }).setTracking(true);  
@@ -66,5 +65,5 @@
     <div id="attribution">
       <strong>Data source:</strong> Stadt Wien – <a href="https://data.wien.gv.at">data.wien.gv.at</a> (CC-BY-4.0)</strong>
     </div>
-  <script type="text/javascript" src="openseadragon-wmts.min.js"></script></body>
+  <script type="text/javascript" src="openseadragon-wmts.js"></script></body>
 </html>
