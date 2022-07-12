@@ -5,7 +5,7 @@ export const parseCapabilities = (response, args) => {
   const parser = new WMTSCapabilities();
 
   const capabilities = parser.read(response);
-
+  
   // Pick layer by name or (default) take first in list
   const Layer = args?.layer ? 
     capabilities.Contents.Layer.find(l => l.Title === args.layer) :
@@ -31,7 +31,7 @@ export const parseCapabilities = (response, args) => {
     MatrixWidth, 
     MatrixHeight,
     TopLeftCorner 
-  } = TileMatrix[ TileMatrix.length - 1 ];
+  } = TileMatrix[ Math.max(20, TileMatrix.length - 2) ];
 
   return {
     tileSource: {
