@@ -5,10 +5,10 @@
  * @param {Number} modulo the modulo
  * @returns {Number} the result of the modulo of number
  */
- const positiveModulo = function(number, modulo) {
+const positiveModulo = function (number, modulo) {
   var result = number % modulo;
   if (result < 0) {
-      result += modulo;
+    result += modulo;
   }
   return result;
 }
