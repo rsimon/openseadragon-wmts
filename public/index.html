@@ -53,10 +53,10 @@
 
             // The 'map' object provides functions for geo-coordinate translation
             var lonlat = map.viewportToLonLat([pt.x, pt.y]);
-            var [ x, y ] = map.lonLatToImageCoordinates(lonlat);
+            coordEl.innerHTML = 'Lat ' + lonlat[1].toFixed(5) + ' &nbsp;&nbsp; Lon ' + lonlat[0].toFixed(5);
 
-            // coordEl.innerHTML = 'Lat ' + lonlat[1].toFixed(5) + ' &nbsp;&nbsp; Lon ' + lonlat[0].toFixed(5);
-            coordEl.innerHTML = 'X ' + x + ' &nbsp;&nbsp; Y ' + y;
+            // var [ x, y ] = map.lonLatToImageRegion(lonlat);
+            // coordEl.innerHTML = 'X ' + x + ' &nbsp;&nbsp; Y ' + y;
           }
         }).setTracking(true);  
       }
