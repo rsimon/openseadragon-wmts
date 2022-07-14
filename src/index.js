@@ -20,16 +20,16 @@ const OpenSeadragonWMTS = (viewer, args) => {
     fetch(url)
       .then(response => response.text())
       .then(text => {
-        const { tileSource, mapBounds, projection } = parseCapabilities(text, args);
+        const { tileSource, wgs84Bounds, mapBounds, projection } = parseCapabilities(text, args);
 
         const topLeft = lonLatToViewportCoordinates(projection)([
-          Math.min(mapBounds[0], mapBounds[2]),
-          Math.max(mapBounds[3], mapBounds[1])
+          Math.min(wgs84Bounds[0], wgs84Bounds[2]),
+          Math.max(wgs84Bounds[3], wgs84Bounds[1])
         ]);
 
         const bottomRight = lonLatToViewportCoordinates(projection)([
-          Math.max(mapBounds[2], mapBounds[0]),
-          Math.min(mapBounds[3], mapBounds[1])
+          Math.max(wgs84Bounds[2], wgs84Bounds[0]),
+          Math.min(wgs84Bounds[3], wgs84Bounds[1])
         ]);
 
         const viewportBounds = new Rect(topLeft[0], topLeft[1], bottomRight[0] - topLeft[0], bottomRight[1] - topLeft[1]);
@@ -39,10 +39,12 @@ const OpenSeadragonWMTS = (viewer, args) => {
           success: () => {
             viewer.viewport.fitBounds(viewportBounds, true);
 
+            const offset = viewer.viewport.viewportToImageCoordinates(topLeft[0], topLeft[1]);
+
             // Loaded - resolve promise
             resolve({
-              imageToLonLat: imageToLonLat(viewer.viewport, projection),
-              lonLatToImageCoordinates: lonLatToImageCoordinates(viewer.viewport, projection),
+              imageToLonLat: imageToLonLat(viewer.viewport, projection, offset),
+              lonLatToImageCoordinates: lonLatToImageCoordinates(viewer.viewport, projection, offset),
               lonLatToMapCoordinates: lonLatToMapCoordinates(projection),
               lonLatToViewportCoordinates: lonLatToViewportCoordinates(projection),
               mapToLonLat: mapToLonLat(projection),

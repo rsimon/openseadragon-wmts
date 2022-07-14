@@ -49,8 +49,10 @@ export const parseCapabilities = (response, args) => {
         .replace('{TileRow}', y)
     },
 
+    mapBounds: TileMatrixSet.BoundingBox,
+
     // Should be [ minLon, minLat, maxLon, maxLat ]
-    mapBounds: Layer.WGS84BoundingBox,
+    wgs84Bounds: Layer.WGS84BoundingBox,
 
     projection: {
       code: TileMatrixSet.SupportedCRS,

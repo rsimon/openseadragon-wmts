@@ -4,15 +4,15 @@ proj4.defs('urn:ogc:def:crs:EPSG:6.18.3:3857', proj4.defs('EPSG:3857'));
 proj4.defs('urn:ogc:def:crs:EPSG:3857', proj4.defs('EPSG:3857'));
 proj4.defs('urn:ogc:def:crs:EPSG::3857', proj4.defs('EPSG:3857'));
 
-export const imageToLonLat = (viewport, projection) => xy => {
+export const imageToLonLat = (viewport, projection, offset) => xy => {
   const pt = viewport.imageToViewportCoordinates(xy[0], xy[1]);
-  return viewportToLonLat(projection)([ pt.x, pt.y ]);
+  return viewportToLonLat(projection)([ pt.x + offset.x, pt.y + offset.y ]);
 }
 
-export const lonLatToImageCoordinates = (viewport, projection) => lonLat => {
+export const lonLatToImageCoordinates = (viewport, projection, offset) => lonLat => {
   const pt = lonLatToViewportCoordinates(projection)(lonLat);
   const { x, y } = viewport.viewportToImageCoordinates(pt[0], pt[1]);
-  return [ x, y ];
+  return [ x - offset.x, y - offset.y ];
 }
 
 export const lonLatToMapCoordinates = projection => lonLat => {
