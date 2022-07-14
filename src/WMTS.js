@@ -33,10 +33,6 @@ export const parseCapabilities = (response, args) => {
     TopLeftCorner 
   } = TileMatrix[ Math.min(20, TileMatrix.length - 1) ];
 
-
-  // 536 870 912
-  // 268 435 456
-
   return {
     tileSource: {
       width: MatrixWidth * TileWidth,
