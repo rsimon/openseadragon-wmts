@@ -31,7 +31,11 @@ export const parseCapabilities = (response, args) => {
     MatrixWidth, 
     MatrixHeight,
     TopLeftCorner 
-  } = TileMatrix[ Math.max(20, TileMatrix.length - 2) ];
+  } = TileMatrix[ Math.min(20, TileMatrix.length - 1) ];
+
+
+  // 536 870 912
+  // 268 435 456
 
   return {
     tileSource: {
