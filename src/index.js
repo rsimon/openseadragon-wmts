@@ -20,29 +20,41 @@ const OpenSeadragonWMTS = (viewer, args) => {
     fetch(url)
       .then(response => response.text())
       .then(text => {
-        const { tileSource, wgs84Bounds, mapBounds, projection } = parseCapabilities(text, args);
+        const { tileSource, mapBounds, projection } = parseCapabilities(text, args);
 
         const topLeft = lonLatToViewportCoordinates(projection)([
-          Math.min(wgs84Bounds[0], wgs84Bounds[2]),
-          Math.max(wgs84Bounds[3], wgs84Bounds[1])
+          Math.min(mapBounds[0], mapBounds[2]),
+          Math.max(mapBounds[3], mapBounds[1])
         ]);
 
         const bottomRight = lonLatToViewportCoordinates(projection)([
-          Math.max(wgs84Bounds[2], wgs84Bounds[0]),
-          Math.min(wgs84Bounds[3], wgs84Bounds[1])
+          Math.max(mapBounds[2], mapBounds[0]),
+          Math.min(mapBounds[3], mapBounds[1])
         ]);
-
-        const viewportBounds = new Rect(topLeft[0], topLeft[1], bottomRight[0] - topLeft[0], bottomRight[1] - topLeft[1]);
 
         viewer.addTiledImage({ 
           tileSource,        
           success: () => {
-            viewer.viewport.fitBounds(viewportBounds, true);
+            const viewportRegion = new Rect(topLeft[0], topLeft[1], bottomRight[0] - topLeft[0], bottomRight[1] - topLeft[1]);
+            viewer.viewport.fitBounds(viewportRegion, true);
 
-            const offset = viewer.viewport.viewportToImageCoordinates(topLeft[0], topLeft[1]);
+            const imageTopLeft = viewer.viewport.viewportToImageCoordinates(topLeft[0], topLeft[1]);
+            const imageBottomRight = viewer.viewport.viewportToImageCoordinates(bottomRight[0], bottomRight[1]);
+
+            const imageRegion = {
+              x: imageTopLeft.x,
+              y: imageTopLeft.y,
+              width: imageBottomRight.x - imageTopLeft.x,
+              height: imageBottomRight.y - imageTopLeft.y
+            }
+
+            console.log(imageRegion);
 
             // Loaded - resolve promise
             resolve({
+              mapBounds,
+              viewportRegion,
+              imageRegion,
               imageToLonLat: imageToLonLat(viewer.viewport, projection, offset),
               lonLatToImageCoordinates: lonLatToImageCoordinates(viewer.viewport, projection, offset),
               lonLatToMapCoordinates: lonLatToMapCoordinates(projection),
