@@ -1,6 +1,6 @@
 {
   "name": "openseadragon-wmts",
-  "version": "0.5.2",
+  "version": "0.6.0",
   "description": "An experimental WMTS extension for OpenSeadragon",
   "main": "dist/openseadragon-wmts.js",
   "scripts": {
@@ -30,8 +30,5 @@
   "dependencies": {
     "ol": "^6.5.0",
     "proj4": "^2.7.2"
-  },
-  "peerDependencies": {
-    "openseadragon": "^3.0.0"
   }
 }
