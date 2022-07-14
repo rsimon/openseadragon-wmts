@@ -48,17 +48,23 @@ const OpenSeadragonWMTS = (viewer, args) => {
               height: imageBottomRight.y - imageTopLeft.y
             }
             
-            // Loaded - resolve promise
             resolve({
+              // Useful metadata
               mapBounds,
               viewportRegion,
               imageRegion,
+
+              // Image coordinate space transforms
+              imageToLonLat: imageToLonLat(viewer.viewport, projection),
               imageRegionToLonLat: imageToLonLat(viewer.viewport, projection, imageTopLeft),
+              lonLatToImage: lonLatToImageCoordinates(viewer.viewport, projection),
               lonLatToImageRegion: lonLatToImageCoordinates(viewer.viewport, projection, imageTopLeft),
-              lonLatToMapCoordinates: lonLatToMapCoordinates(projection),
-              lonLatToViewportCoordinates: lonLatToViewportCoordinates(projection),
+
+              // Map and viewport coordinate space transforms
               mapToLonLat: mapToLonLat(projection),
               mapToViewportCoordinates: mapToViewportCoordinates(projection.extent),
+              lonLatToMapCoordinates: lonLatToMapCoordinates(projection),
+              lonLatToViewportCoordinates: lonLatToViewportCoordinates(projection),
               viewportToLonLat: viewportToLonLat(projection),
               viewportToMapCoordinates: viewportToMapCoordinates(projection.extent)
             });
