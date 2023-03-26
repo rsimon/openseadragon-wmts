@@ -1,5 +1,4 @@
 import { parseCapabilities } from './WMTS';
-import Rect from './osd/Rect';
 import {
   imageToLonLat,
   lonLatToImageCoordinates,
@@ -35,7 +34,7 @@ const OpenSeadragonWMTS = (viewer, args) => {
         viewer.addTiledImage({ 
           tileSource,        
           success: () => {
-            const viewportRegion = new Rect(topLeft[0], topLeft[1], bottomRight[0] - topLeft[0], bottomRight[1] - topLeft[1]);
+            const viewportRegion = new OpenSeadragon.Rect(topLeft[0], topLeft[1], bottomRight[0] - topLeft[0], bottomRight[1] - topLeft[1]);
             viewer.viewport.fitBounds(viewportRegion, true);
 
             const imageTopLeft = viewer.viewport.viewportToImageCoordinates(topLeft[0], topLeft[1]);

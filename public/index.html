@@ -29,7 +29,9 @@
         box-shadow:0 0 12px rgba(0,0,0,0.4);
       }
     </style>
-    <script>
+    <script type="module">
+      import OpenSeadragonWMTS from '../src/index.js';
+
       window.onload = async function() {
         var coordEl = document.getElementById('coord-tracker');
 
@@ -41,7 +43,7 @@
           }
         });
 
-        var map = await OpenSeadragon.WMTS(viewer, {
+        var map = await OpenSeadragonWMTS(viewer, {
           url: 'https://maps.wien.gv.at/wmts/1.0.0/WMTSCapabilities.xml'
         });
 

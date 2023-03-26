@@ -1,3 +1,3218 @@
-/*! For license information please see openseadragon-wmts.js.LICENSE.txt */
-!function(t,s){"object"==typeof exports&&"object"==typeof module?module.exports=s():"function"==typeof define&&define.amd?define([],s):"object"==typeof exports?exports.OpenSeadragon=s():(t.OpenSeadragon=t.OpenSeadragon||{},t.OpenSeadragon.WMTS=s())}(self,(function(){return(()=>{"use strict";var t,s={d:(t,i)=>{for(var a in i)s.o(i,a)&&!s.o(t,a)&&Object.defineProperty(t,a,{enumerable:!0,get:i[a]})},o:(t,s)=>Object.prototype.hasOwnProperty.call(t,s)},i={};function a(t,s){return h(t,s,[]).join("")}function h(t,s,i){if(t.nodeType==Node.CDATA_SECTION_NODE||t.nodeType==Node.TEXT_NODE)s?i.push(String(t.nodeValue).replace(/(\r\n|\r|\n)/g,"")):i.push(t.nodeValue);else{var a=void 0;for(a=t.firstChild;a;a=a.nextSibling)h(a,s,i)}return i}function e(t,s){return function(i,a){var h=t.call(void 0!==s?s:this,i,a);void 0!==h&&a[a.length-1].push(h)}}function n(t,s,i){return function(a,h){var e=t.call(void 0!==i?i:this,a,h);if(void 0!==e){var n=h[h.length-1],r=void 0!==s?s:a.localName,o=void 0;r in n?o=n[r]:(o=[],n[r]=o),o.push(e)}}}function r(t,s,i){return function(a,h){var e=t.call(void 0!==i?i:this,a,h);void 0!==e&&(h[h.length-1][void 0!==s?s:a.localName]=e)}}function o(t,s,i){var a,h,e=void 0!==i?i:{};for(a=0,h=t.length;a<h;++a)e[t[a]]=s;return e}function l(t,s,i,a,h){return a.push(t),function(t,s,i,a){var h;for(h=s.firstElementChild;h;h=h.nextElementSibling){var e=t[h.namespaceURI];if(void 0!==e){var n=e[h.localName];void 0!==n&&n.call(a,h,i)}}}(s,i,a,h),a.pop()}s.d(i,{default:()=>Vi});const u=function(){function t(){}return t.prototype.read=function(t){if(t){if("string"==typeof t){var s=(i=t,(new DOMParser).parseFromString(i,"application/xml"));return this.readFromDocument(s)}return"documentElement"in t?this.readFromDocument(t):this.readFromNode(t)}return null;var i},t.prototype.readFromDocument=function(t){for(var s=t.firstChild;s;s=s.nextSibling)if(s.nodeType==Node.ELEMENT_NODE)return this.readFromNode(s);return null},t.prototype.readFromNode=function(t){},t}();function c(t){return t.getAttributeNS("http://www.w3.org/1999/xlink","href")}function f(t){var s,i=a(t,!1);return(s=/^\s*(\d+)\s*$/.exec(i))?parseInt(s[1],10):void 0}function M(t){return a(t,!1).trim()}var d,p=(d=function(t,s){return d=Object.setPrototypeOf||{__proto__:[]}instanceof Array&&function(t,s){t.__proto__=s}||function(t,s){for(var i in s)Object.prototype.hasOwnProperty.call(s,i)&&(t[i]=s[i])},d(t,s)},function(t,s){if("function"!=typeof s&&null!==s)throw new TypeError("Class extends value "+String(s)+" is not a constructor or null");function i(){this.constructor=t}d(t,s),t.prototype=null===s?Object.create(s):(i.prototype=s.prototype,new i)}),m=[null,"http://www.opengis.net/ows/1.1"],y=o(m,{ServiceIdentification:r((function(t,s){return l({},I,t,s)})),ServiceProvider:r((function(t,s){return l({},O,t,s)})),OperationsMetadata:r((function(t,s){return l({},N,t,s)}))}),g=function(t){function s(){return t.call(this)||this}return p(s,t),s.prototype.readFromNode=function(t){return l({},y,t,[])||null},s}(u),_=o(m,{DeliveryPoint:r(M),City:r(M),AdministrativeArea:r(M),PostalCode:r(M),Country:r(M),ElectronicMailAddress:r(M)}),v=o(m,{Value:n((function(t,s){return M(t)}))}),x=o(m,{AllowedValues:r((function(t,s){return l({},v,t,s)}))}),b=o(m,{Phone:r((function(t,s){return l({},P,t,s)})),Address:r((function(t,s){return l({},_,t,s)}))}),w=o(m,{HTTP:r((function(t,s){return l({},S,t,s)}))}),S=o(m,{Get:n((function(t,s){var i=c(t);if(i)return l({href:i},E,t,s)})),Post:void 0}),C=o(m,{DCP:r((function(t,s){return l({},w,t,s)}))}),N=o(m,{Operation:function(t,s){var i=t.getAttribute("name"),a=l({},C,t,s);a&&(s[s.length-1][i]=a)}}),P=o(m,{Voice:r(M),Facsimile:r(M)}),E=o(m,{Constraint:n((function(t,s){var i=t.getAttribute("name");if(i)return l({name:i},x,t,s)}))}),A=o(m,{IndividualName:r(M),PositionName:r(M),ContactInfo:r((function(t,s){return l({},b,t,s)}))}),I=o(m,{Abstract:r(M),AccessConstraints:r(M),Fees:r(M),Title:r(M),ServiceTypeVersion:r(M),ServiceType:r(M)}),O=o(m,{ProviderName:r(M),ProviderSite:r(c),ServiceContact:r((function(t,s){return l({},A,t,s)}))});const k=g;function q(t,s){s[0]<t[0]&&(t[0]=s[0]),s[0]>t[2]&&(t[2]=s[0]),s[1]<t[1]&&(t[1]=s[1]),s[1]>t[3]&&(t[3]=s[1])}var T=function(){var t=function(s,i){return t=Object.setPrototypeOf||{__proto__:[]}instanceof Array&&function(t,s){t.__proto__=s}||function(t,s){for(var i in s)Object.prototype.hasOwnProperty.call(s,i)&&(t[i]=s[i])},t(s,i)};return function(s,i){if("function"!=typeof i&&null!==i)throw new TypeError("Class extends value "+String(i)+" is not a constructor or null");function a(){this.constructor=s}t(s,i),s.prototype=null===i?Object.create(i):(a.prototype=i.prototype,new a)}}(),L=[null,"http://www.opengis.net/wmts/1.0"],j=[null,"http://www.opengis.net/ows/1.1"],G=o(L,{Contents:r((function(t,s){return l({},B,t,s)}))}),R=function(t){function s(){var s=t.call(this)||this;return s.owsParser_=new k,s}return T(s,t),s.prototype.readFromNode=function(t){var s=t.getAttribute("version");s&&(s=s.trim());var i=this.owsParser_.readFromNode(t);return i?(i.version=s,(i=l(i,G,t,[]))||null):null},s}(u),B=o(L,{Layer:n((function(t,s){return l({},z,t,s)})),TileMatrixSet:n((function(t,s){return l({},X,t,s)}))}),z=o(L,{Style:n((function(t,s){var i=l({},D,t,s);if(i){var a="true"===t.getAttribute("isDefault");return i.isDefault=a,i}})),Format:n(M),TileMatrixSetLink:n((function(t,s){return l({},F,t,s)})),Dimension:n((function(t,s){return l({},Q,t,s)})),ResourceURL:n((function(t,s){var i=t.getAttribute("format"),a=t.getAttribute("template"),h=t.getAttribute("resourceType"),e={};return i&&(e.format=i),a&&(e.template=a),h&&(e.resourceType=h),e}))},o(j,{Title:r(M),Abstract:r(M),WGS84BoundingBox:r(J),Identifier:r(M)})),D=o(L,{LegendURL:n((function(t,s){var i={};return i.format=t.getAttribute("format"),i.href=c(t),i}))},o(j,{Title:r(M),Identifier:r(M)})),F=o(L,{TileMatrixSet:r(M),TileMatrixSetLimits:r((function(t,s){return l([],U,t,s)}))}),U=o(L,{TileMatrixLimits:e((function(t,s){return l({},W,t,s)}))}),W=o(L,{TileMatrix:r(M),MinTileRow:r(f),MaxTileRow:r(f),MinTileCol:r(f),MaxTileCol:r(f)}),Q=o(L,{Default:r(M),Value:n(M)},o(j,{Identifier:r(M)})),H=o(j,{LowerCorner:e(K),UpperCorner:e(K)}),X=o(L,{WellKnownScaleSet:r(M),TileMatrix:n((function(t,s){return l({},V,t,s)}))},o(j,{SupportedCRS:r(M),Identifier:r(M),BoundingBox:r(J)})),V=o(L,{TopLeftCorner:r(K),ScaleDenominator:r((function(t){var s,i=a(t,!1);return(s=/^\s*([+\-]?\d*\.?\d+(?:e[+\-]?\d+)?)\s*$/i.exec(i))?parseFloat(s[1]):void 0})),TileWidth:r(f),TileHeight:r(f),MatrixWidth:r(f),MatrixHeight:r(f)},o(j,{Identifier:r(M)}));function J(t,s){var i=l([],H,t,s);if(2==i.length)return function(t){for(var s=[1/0,1/0,-1/0,-1/0],i=0,a=t.length;i<a;++i)q(s,t[i]);return s}(i)}function K(t,s){var i=M(t).split(/\s+/);if(i&&2==i.length){var a=+i[0],h=+i[1];if(!isNaN(a)&&!isNaN(h))return[a,h]}}const Z=R;var $=6378137,Y=.0066943799901413165,tt=484813681109536e-20,st=Math.PI/2,it=1e-10,at=.017453292519943295,ht=57.29577951308232,et=Math.PI/4,nt=2*Math.PI,rt=3.14159265359,ot={greenwich:0,lisbon:-9.131906111111,paris:2.337229166667,bogota:-74.080916666667,madrid:-3.687938888889,rome:12.452333333333,bern:7.439583333333,jakarta:106.807719444444,ferro:-17.666666666667,brussels:4.367975,stockholm:18.058277777778,athens:23.7163375,oslo:10.722916666667};const lt={ft:{to_meter:.3048},"us-ft":{to_meter:1200/3937}};var ut=/[\s_\-\/\(\)]/g;function ct(t,s){if(t[s])return t[s];for(var i,a=Object.keys(t),h=s.toLowerCase().replace(ut,""),e=-1;++e<a.length;)if((i=a[e]).toLowerCase().replace(ut,"")===h)return t[i]}function ft(t){var s,i,a,h={},e=t.split("+").map((function(t){return t.trim()})).filter((function(t){return t})).reduce((function(t,s){var i=s.split("=");return i.push(!0),t[i[0].toLowerCase()]=i[1],t}),{}),n={proj:"projName",datum:"datumCode",rf:function(t){h.rf=parseFloat(t)},lat_0:function(t){h.lat0=t*at},lat_1:function(t){h.lat1=t*at},lat_2:function(t){h.lat2=t*at},lat_ts:function(t){h.lat_ts=t*at},lon_0:function(t){h.long0=t*at},lon_1:function(t){h.long1=t*at},lon_2:function(t){h.long2=t*at},alpha:function(t){h.alpha=parseFloat(t)*at},gamma:function(t){h.rectified_grid_angle=parseFloat(t)},lonc:function(t){h.longc=t*at},x_0:function(t){h.x0=parseFloat(t)},y_0:function(t){h.y0=parseFloat(t)},k_0:function(t){h.k0=parseFloat(t)},k:function(t){h.k0=parseFloat(t)},a:function(t){h.a=parseFloat(t)},b:function(t){h.b=parseFloat(t)},r_a:function(){h.R_A=!0},zone:function(t){h.zone=parseInt(t,10)},south:function(){h.utmSouth=!0},towgs84:function(t){h.datum_params=t.split(",").map((function(t){return parseFloat(t)}))},to_meter:function(t){h.to_meter=parseFloat(t)},units:function(t){h.units=t;var s=ct(lt,t);s&&(h.to_meter=s.to_meter)},from_greenwich:function(t){h.from_greenwich=t*at},pm:function(t){var s=ct(ot,t);h.from_greenwich=(s||parseFloat(t))*at},nadgrids:function(t){"@null"===t?h.datumCode="none":h.nadgrids=t},axis:function(t){var s="ewnsud";3===t.length&&-1!==s.indexOf(t.substr(0,1))&&-1!==s.indexOf(t.substr(1,1))&&-1!==s.indexOf(t.substr(2,1))&&(h.axis=t)},approx:function(){h.approx=!0}};for(s in e)i=e[s],s in n?"function"==typeof(a=n[s])?a(i):h[a]=i:h[s]=i;return"string"==typeof h.datumCode&&"WGS84"!==h.datumCode&&(h.datumCode=h.datumCode.toLowerCase()),h}var Mt=/\s/,dt=/[A-Za-z]/,pt=/[A-Za-z84]/,mt=/[,\]]/,yt=/[\d\.E\-\+]/;function gt(t){if("string"!=typeof t)throw new Error("not a string");this.text=t.trim(),this.level=0,this.place=0,this.root=null,this.stack=[],this.currentObject=null,this.state=1}function _t(t,s,i){Array.isArray(s)&&(i.unshift(s),s=null);var a=s?{}:t,h=i.reduce((function(t,s){return vt(s,t),t}),a);s&&(t[s]=h)}function vt(t,s){if(Array.isArray(t)){var i=t.shift();if("PARAMETER"===i&&(i=t.shift()),1===t.length)return Array.isArray(t[0])?(s[i]={},void vt(t[0],s[i])):void(s[i]=t[0]);if(t.length)if("TOWGS84"!==i){if("AXIS"===i)return i in s||(s[i]=[]),void s[i].push(t);var a;switch(Array.isArray(i)||(s[i]={}),i){case"UNIT":case"PRIMEM":case"VERT_DATUM":return s[i]={name:t[0].toLowerCase(),convert:t[1]},void(3===t.length&&vt(t[2],s[i]));case"SPHEROID":case"ELLIPSOID":return s[i]={name:t[0],a:t[1],rf:t[2]},void(4===t.length&&vt(t[3],s[i]));case"PROJECTEDCRS":case"PROJCRS":case"GEOGCS":case"GEOCCS":case"PROJCS":case"LOCAL_CS":case"GEODCRS":case"GEODETICCRS":case"GEODETICDATUM":case"EDATUM":case"ENGINEERINGDATUM":case"VERT_CS":case"VERTCRS":case"VERTICALCRS":case"COMPD_CS":case"COMPOUNDCRS":case"ENGINEERINGCRS":case"ENGCRS":case"FITTED_CS":case"LOCAL_DATUM":case"DATUM":return t[0]=["name",t[0]],void _t(s,i,t);default:for(a=-1;++a<t.length;)if(!Array.isArray(t[a]))return vt(t,s[i]);return _t(s,i,t)}}else s[i]=t;else s[i]=!0}else s[t]=!0}function xt(t){return xt="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(t){return typeof t}:function(t){return t&&"function"==typeof Symbol&&t.constructor===Symbol&&t!==Symbol.prototype?"symbol":typeof t},xt(t)}function bt(t){return.017453292519943295*t}function wt(t){var s=new gt(t).output(),i=s.shift(),a=s.shift();s.unshift(["name",a]),s.unshift(["type",i]);var h={};return vt(s,h),function(t){if("GEOGCS"===t.type?t.projName="longlat":"LOCAL_CS"===t.type?(t.projName="identity",t.local=!0):"object"===xt(t.PROJECTION)?t.projName=Object.keys(t.PROJECTION)[0]:t.projName=t.PROJECTION,t.AXIS){for(var s="",i=0,a=t.AXIS.length;i<a;++i){var h=[t.AXIS[i][0].toLowerCase(),t.AXIS[i][1].toLowerCase()];-1!==h[0].indexOf("north")||("y"===h[0]||"lat"===h[0])&&"north"===h[1]?s+="n":-1!==h[0].indexOf("south")||("y"===h[0]||"lat"===h[0])&&"south"===h[1]?s+="s":-1!==h[0].indexOf("east")||("x"===h[0]||"lon"===h[0])&&"east"===h[1]?s+="e":-1===h[0].indexOf("west")&&("x"!==h[0]&&"lon"!==h[0]||"west"!==h[1])||(s+="w")}2===s.length&&(s+="u"),3===s.length&&(t.axis=s)}t.UNIT&&(t.units=t.UNIT.name.toLowerCase(),"metre"===t.units&&(t.units="meter"),t.UNIT.convert&&("GEOGCS"===t.type?t.DATUM&&t.DATUM.SPHEROID&&(t.to_meter=t.UNIT.convert*t.DATUM.SPHEROID.a):t.to_meter=t.UNIT.convert));var e=t.GEOGCS;function n(s){return s*(t.to_meter||1)}"GEOGCS"===t.type&&(e=t),e&&(e.DATUM?t.datumCode=e.DATUM.name.toLowerCase():t.datumCode=e.name.toLowerCase(),"d_"===t.datumCode.slice(0,2)&&(t.datumCode=t.datumCode.slice(2)),"new_zealand_geodetic_datum_1949"!==t.datumCode&&"new_zealand_1949"!==t.datumCode||(t.datumCode="nzgd49"),"wgs_1984"!==t.datumCode&&"world_geodetic_system_1984"!==t.datumCode||("Mercator_Auxiliary_Sphere"===t.PROJECTION&&(t.sphere=!0),t.datumCode="wgs84"),"_ferro"===t.datumCode.slice(-6)&&(t.datumCode=t.datumCode.slice(0,-6)),"_jakarta"===t.datumCode.slice(-8)&&(t.datumCode=t.datumCode.slice(0,-8)),~t.datumCode.indexOf("belge")&&(t.datumCode="rnb72"),e.DATUM&&e.DATUM.SPHEROID&&(t.ellps=e.DATUM.SPHEROID.name.replace("_19","").replace(/[Cc]larke\_18/,"clrk"),"international"===t.ellps.toLowerCase().slice(0,13)&&(t.ellps="intl"),t.a=e.DATUM.SPHEROID.a,t.rf=parseFloat(e.DATUM.SPHEROID.rf,10)),e.DATUM&&e.DATUM.TOWGS84&&(t.datum_params=e.DATUM.TOWGS84),~t.datumCode.indexOf("osgb_1936")&&(t.datumCode="osgb36"),~t.datumCode.indexOf("osni_1952")&&(t.datumCode="osni52"),(~t.datumCode.indexOf("tm65")||~t.datumCode.indexOf("geodetic_datum_of_1965"))&&(t.datumCode="ire65"),"ch1903+"===t.datumCode&&(t.datumCode="ch1903"),~t.datumCode.indexOf("israel")&&(t.datumCode="isr93")),t.b&&!isFinite(t.b)&&(t.b=t.a),[["standard_parallel_1","Standard_Parallel_1"],["standard_parallel_1","Latitude of 1st standard parallel"],["standard_parallel_2","Standard_Parallel_2"],["standard_parallel_2","Latitude of 2nd standard parallel"],["false_easting","False_Easting"],["false_easting","False easting"],["false-easting","Easting at false origin"],["false_northing","False_Northing"],["false_northing","False northing"],["false_northing","Northing at false origin"],["central_meridian","Central_Meridian"],["central_meridian","Longitude of natural origin"],["central_meridian","Longitude of false origin"],["latitude_of_origin","Latitude_Of_Origin"],["latitude_of_origin","Central_Parallel"],["latitude_of_origin","Latitude of natural origin"],["latitude_of_origin","Latitude of false origin"],["scale_factor","Scale_Factor"],["k0","scale_factor"],["latitude_of_center","Latitude_Of_Center"],["latitude_of_center","Latitude_of_center"],["lat0","latitude_of_center",bt],["longitude_of_center","Longitude_Of_Center"],["longitude_of_center","Longitude_of_center"],["longc","longitude_of_center",bt],["x0","false_easting",n],["y0","false_northing",n],["long0","central_meridian",bt],["lat0","latitude_of_origin",bt],["lat0","standard_parallel_1",bt],["lat1","standard_parallel_1",bt],["lat2","standard_parallel_2",bt],["azimuth","Azimuth"],["alpha","azimuth",bt],["srsCode","name"]].forEach((function(s){return function(t,s){var i=s[0],a=s[1];!(i in t)&&a in t&&(t[i]=t[a],3===s.length&&(t[i]=s[2](t[i])))}(t,s)})),t.long0||!t.longc||"Albers_Conic_Equal_Area"!==t.projName&&"Lambert_Azimuthal_Equal_Area"!==t.projName||(t.long0=t.longc),t.lat_ts||!t.lat1||"Stereographic_South_Pole"!==t.projName&&"Polar Stereographic (variant B)"!==t.projName||(t.lat0=bt(t.lat1>0?90:-90),t.lat_ts=t.lat1)}(h),h}function St(t){var s=this;if(2===arguments.length){var i=arguments[1];"string"==typeof i?"+"===i.charAt(0)?St[t]=ft(arguments[1]):St[t]=wt(arguments[1]):St[t]=i}else if(1===arguments.length){if(Array.isArray(t))return t.map((function(t){Array.isArray(t)?St.apply(s,t):St(t)}));if("string"==typeof t){if(t in St)return St[t]}else"EPSG"in t?St["EPSG:"+t.EPSG]=t:"ESRI"in t?St["ESRI:"+t.ESRI]=t:"IAU2000"in t?St["IAU2000:"+t.IAU2000]=t:console.log(t);return}}gt.prototype.readCharicter=function(){var t=this.text[this.place++];if(4!==this.state)for(;Mt.test(t);){if(this.place>=this.text.length)return;t=this.text[this.place++]}switch(this.state){case 1:return this.neutral(t);case 2:return this.keyword(t);case 4:return this.quoted(t);case 5:return this.afterquote(t);case 3:return this.number(t);case-1:return}},gt.prototype.afterquote=function(t){if('"'===t)return this.word+='"',void(this.state=4);if(mt.test(t))return this.word=this.word.trim(),void this.afterItem(t);throw new Error("havn't handled \""+t+'" in afterquote yet, index '+this.place)},gt.prototype.afterItem=function(t){return","===t?(null!==this.word&&this.currentObject.push(this.word),this.word=null,void(this.state=1)):"]"===t?(this.level--,null!==this.word&&(this.currentObject.push(this.word),this.word=null),this.state=1,this.currentObject=this.stack.pop(),void(this.currentObject||(this.state=-1))):void 0},gt.prototype.number=function(t){if(!yt.test(t)){if(mt.test(t))return this.word=parseFloat(this.word),void this.afterItem(t);throw new Error("havn't handled \""+t+'" in number yet, index '+this.place)}this.word+=t},gt.prototype.quoted=function(t){'"'!==t?this.word+=t:this.state=5},gt.prototype.keyword=function(t){if(pt.test(t))this.word+=t;else{if("["===t){var s=[];return s.push(this.word),this.level++,null===this.root?this.root=s:this.currentObject.push(s),this.stack.push(this.currentObject),this.currentObject=s,void(this.state=1)}if(!mt.test(t))throw new Error("havn't handled \""+t+'" in keyword yet, index '+this.place);this.afterItem(t)}},gt.prototype.neutral=function(t){if(dt.test(t))return this.word=t,void(this.state=2);if('"'===t)return this.word="",void(this.state=4);if(yt.test(t))return this.word=t,void(this.state=3);if(!mt.test(t))throw new Error("havn't handled \""+t+'" in neutral yet, index '+this.place);this.afterItem(t)},gt.prototype.output=function(){for(;this.place<this.text.length;)this.readCharicter();if(-1===this.state)return this.root;throw new Error('unable to parse string "'+this.text+'". State is '+this.state)},function(t){t("EPSG:4326","+title=WGS 84 (long/lat) +proj=longlat +ellps=WGS84 +datum=WGS84 +units=degrees"),t("EPSG:4269","+title=NAD83 (long/lat) +proj=longlat +a=6378137.0 +b=6356752.31414036 +ellps=GRS80 +datum=NAD83 +units=degrees"),t("EPSG:3857","+title=WGS 84 / Pseudo-Mercator +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +no_defs"),t.WGS84=t["EPSG:4326"],t["EPSG:3785"]=t["EPSG:3857"],t.GOOGLE=t["EPSG:3857"],t["EPSG:900913"]=t["EPSG:3857"],t["EPSG:102113"]=t["EPSG:3857"]}(St);const Ct=St;var Nt=["PROJECTEDCRS","PROJCRS","GEOGCS","GEOCCS","PROJCS","LOCAL_CS","GEODCRS","GEODETICCRS","GEODETICDATUM","ENGCRS","ENGINEERINGCRS"],Pt=["3857","900913","3785","102113"];function Et(t,s){var i,a;if(t=t||{},!s)return t;for(a in s)void 0!==(i=s[a])&&(t[a]=i);return t}function At(t,s,i){var a=t*s;return i/Math.sqrt(1-a*a)}function It(t){return t<0?-1:1}function Ot(t){return Math.abs(t)<=rt?t:t-It(t)*nt}function kt(t,s,i){var a=t*i,h=.5*t;return a=Math.pow((1-a)/(1+a),h),Math.tan(.5*(st-s))/a}function qt(t,s){for(var i,a,h=.5*t,e=st-2*Math.atan(s),n=0;n<=15;n++)if(i=t*Math.sin(e),e+=a=st-2*Math.atan(s*Math.pow((1-i)/(1+i),h))-e,Math.abs(a)<=1e-10)return e;return-9999}function Tt(t){return t}var Lt=[{init:function(){var t=this.b/this.a;this.es=1-t*t,"x0"in this||(this.x0=0),"y0"in this||(this.y0=0),this.e=Math.sqrt(this.es),this.lat_ts?this.sphere?this.k0=Math.cos(this.lat_ts):this.k0=At(this.e,Math.sin(this.lat_ts),Math.cos(this.lat_ts)):this.k0||(this.k?this.k0=this.k:this.k0=1)},forward:function(t){var s,i,a=t.x,h=t.y;if(h*ht>90&&h*ht<-90&&a*ht>180&&a*ht<-180)return null;if(Math.abs(Math.abs(h)-st)<=it)return null;if(this.sphere)s=this.x0+this.a*this.k0*Ot(a-this.long0),i=this.y0+this.a*this.k0*Math.log(Math.tan(et+.5*h));else{var e=Math.sin(h),n=kt(this.e,h,e);s=this.x0+this.a*this.k0*Ot(a-this.long0),i=this.y0-this.a*this.k0*Math.log(n)}return t.x=s,t.y=i,t},inverse:function(t){var s,i,a=t.x-this.x0,h=t.y-this.y0;if(this.sphere)i=st-2*Math.atan(Math.exp(-h/(this.a*this.k0)));else{var e=Math.exp(-h/(this.a*this.k0));if(-9999===(i=qt(this.e,e)))return null}return s=Ot(this.long0+a/(this.a*this.k0)),t.x=s,t.y=i,t},names:["Mercator","Popular Visualisation Pseudo Mercator","Mercator_1SP","Mercator_Auxiliary_Sphere","merc"]},{init:function(){},forward:Tt,inverse:Tt,names:["longlat","identity"]}],jt={},Gt=[];function Rt(t,s){var i=Gt.length;return t.names?(Gt[i]=t,t.names.forEach((function(t){jt[t.toLowerCase()]=i})),this):(console.log(s),!0)}const Bt={start:function(){Lt.forEach(Rt)},add:Rt,get:function(t){if(!t)return!1;var s=t.toLowerCase();return void 0!==jt[s]&&Gt[jt[s]]?Gt[jt[s]]:void 0}};var zt={MERIT:{a:6378137,rf:298.257,ellipseName:"MERIT 1983"},SGS85:{a:6378136,rf:298.257,ellipseName:"Soviet Geodetic System 85"},GRS80:{a:6378137,rf:298.257222101,ellipseName:"GRS 1980(IUGG, 1980)"},IAU76:{a:6378140,rf:298.257,ellipseName:"IAU 1976"},airy:{a:6377563.396,b:6356256.91,ellipseName:"Airy 1830"},APL4:{a:6378137,rf:298.25,ellipseName:"Appl. Physics. 1965"},NWL9D:{a:6378145,rf:298.25,ellipseName:"Naval Weapons Lab., 1965"},mod_airy:{a:6377340.189,b:6356034.446,ellipseName:"Modified Airy"},andrae:{a:6377104.43,rf:300,ellipseName:"Andrae 1876 (Den., Iclnd.)"},aust_SA:{a:6378160,rf:298.25,ellipseName:"Australian Natl & S. Amer. 1969"},GRS67:{a:6378160,rf:298.247167427,ellipseName:"GRS 67(IUGG 1967)"},bessel:{a:6377397.155,rf:299.1528128,ellipseName:"Bessel 1841"},bess_nam:{a:6377483.865,rf:299.1528128,ellipseName:"Bessel 1841 (Namibia)"},clrk66:{a:6378206.4,b:6356583.8,ellipseName:"Clarke 1866"},clrk80:{a:6378249.145,rf:293.4663,ellipseName:"Clarke 1880 mod."},clrk58:{a:6378293.645208759,rf:294.2606763692654,ellipseName:"Clarke 1858"},CPM:{a:6375738.7,rf:334.29,ellipseName:"Comm. des Poids et Mesures 1799"},delmbr:{a:6376428,rf:311.5,ellipseName:"Delambre 1810 (Belgium)"},engelis:{a:6378136.05,rf:298.2566,ellipseName:"Engelis 1985"},evrst30:{a:6377276.345,rf:300.8017,ellipseName:"Everest 1830"},evrst48:{a:6377304.063,rf:300.8017,ellipseName:"Everest 1948"},evrst56:{a:6377301.243,rf:300.8017,ellipseName:"Everest 1956"},evrst69:{a:6377295.664,rf:300.8017,ellipseName:"Everest 1969"},evrstSS:{a:6377298.556,rf:300.8017,ellipseName:"Everest (Sabah & Sarawak)"},fschr60:{a:6378166,rf:298.3,ellipseName:"Fischer (Mercury Datum) 1960"},fschr60m:{a:6378155,rf:298.3,ellipseName:"Fischer 1960"},fschr68:{a:6378150,rf:298.3,ellipseName:"Fischer 1968"},helmert:{a:6378200,rf:298.3,ellipseName:"Helmert 1906"},hough:{a:6378270,rf:297,ellipseName:"Hough"},intl:{a:6378388,rf:297,ellipseName:"International 1909 (Hayford)"},kaula:{a:6378163,rf:298.24,ellipseName:"Kaula 1961"},lerch:{a:6378139,rf:298.257,ellipseName:"Lerch 1979"},mprts:{a:6397300,rf:191,ellipseName:"Maupertius 1738"},new_intl:{a:6378157.5,b:6356772.2,ellipseName:"New International 1967"},plessis:{a:6376523,rf:6355863,ellipseName:"Plessis 1817 (France)"},krass:{a:6378245,rf:298.3,ellipseName:"Krassovsky, 1942"},SEasia:{a:6378155,b:6356773.3205,ellipseName:"Southeast Asia"},walbeck:{a:6376896,b:6355834.8467,ellipseName:"Walbeck"},WGS60:{a:6378165,rf:298.3,ellipseName:"WGS 60"},WGS66:{a:6378145,rf:298.25,ellipseName:"WGS 66"},WGS7:{a:6378135,rf:298.26,ellipseName:"WGS 72"}},Dt=zt.WGS84={a:6378137,rf:298.257223563,ellipseName:"WGS 84"};zt.sphere={a:6370997,b:6370997,ellipseName:"Normal Sphere (r=6370997)"};var Ft={wgs84:{towgs84:"0,0,0",ellipse:"WGS84",datumName:"WGS84"},ch1903:{towgs84:"674.374,15.056,405.346",ellipse:"bessel",datumName:"swiss"},ggrs87:{towgs84:"-199.87,74.79,246.62",ellipse:"GRS80",datumName:"Greek_Geodetic_Reference_System_1987"},nad83:{towgs84:"0,0,0",ellipse:"GRS80",datumName:"North_American_Datum_1983"},nad27:{nadgrids:"@conus,@alaska,@ntv2_0.gsb,@ntv1_can.dat",ellipse:"clrk66",datumName:"North_American_Datum_1927"},potsdam:{towgs84:"598.1,73.7,418.2,0.202,0.045,-2.455,6.7",ellipse:"bessel",datumName:"Potsdam Rauenberg 1950 DHDN"},carthage:{towgs84:"-263.0,6.0,431.0",ellipse:"clark80",datumName:"Carthage 1934 Tunisia"},hermannskogel:{towgs84:"577.326,90.129,463.919,5.137,1.474,5.297,2.4232",ellipse:"bessel",datumName:"Hermannskogel"},osni52:{towgs84:"482.530,-130.596,564.557,-1.042,-0.214,-0.631,8.15",ellipse:"airy",datumName:"Irish National"},ire65:{towgs84:"482.530,-130.596,564.557,-1.042,-0.214,-0.631,8.15",ellipse:"mod_airy",datumName:"Ireland 1965"},rassadiran:{towgs84:"-133.63,-157.5,-158.62",ellipse:"intl",datumName:"Rassadiran"},nzgd49:{towgs84:"59.47,-5.04,187.44,0.47,-0.1,1.024,-4.5993",ellipse:"intl",datumName:"New Zealand Geodetic Datum 1949"},osgb36:{towgs84:"446.448,-125.157,542.060,0.1502,0.2470,0.8421,-20.4894",ellipse:"airy",datumName:"Airy 1830"},s_jtsk:{towgs84:"589,76,480",ellipse:"bessel",datumName:"S-JTSK (Ferro)"},beduaram:{towgs84:"-106,-87,188",ellipse:"clrk80",datumName:"Beduaram"},gunung_segara:{towgs84:"-403,684,41",ellipse:"bessel",datumName:"Gunung Segara Jakarta"},rnb72:{towgs84:"106.869,-52.2978,103.724,-0.33657,0.456955,-1.84218,1",ellipse:"intl",datumName:"Reseau National Belge 1972"}};var Ut={};function Wt(t){if(0===t.length)return null;var s="@"===t[0];return s&&(t=t.slice(1)),"null"===t?{name:"null",mandatory:!s,grid:null,isNull:!0}:{name:t,mandatory:!s,grid:Ut[t]||null,isNull:!1}}function Qt(t){return t/3600*Math.PI/180}function Ht(t,s,i){return String.fromCharCode.apply(null,new Uint8Array(t.buffer.slice(s,i)))}function Xt(t){return t.map((function(t){return[Qt(t.longitudeShift),Qt(t.latitudeShift)]}))}function Vt(t,s,i){return{name:Ht(t,s+8,s+16).trim(),parent:Ht(t,s+24,s+24+8).trim(),lowerLatitude:t.getFloat64(s+72,i),upperLatitude:t.getFloat64(s+88,i),lowerLongitude:t.getFloat64(s+104,i),upperLongitude:t.getFloat64(s+120,i),latitudeInterval:t.getFloat64(s+136,i),longitudeInterval:t.getFloat64(s+152,i),gridNodeCount:t.getInt32(s+168,i)}}function Jt(t,s,i,a){for(var h=s+176,e=[],n=0;n<i.gridNodeCount;n++){var r={latitudeShift:t.getFloat32(h+16*n,a),longitudeShift:t.getFloat32(h+16*n+4,a),latitudeAccuracy:t.getFloat32(h+16*n+8,a),longitudeAccuracy:t.getFloat32(h+16*n+12,a)};e.push(r)}return e}function Kt(t){return Kt="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(t){return typeof t}:function(t){return t&&"function"==typeof Symbol&&t.constructor===Symbol&&t!==Symbol.prototype?"symbol":typeof t},Kt(t)}function Zt(t,s){if(!(this instanceof Zt))return new Zt(t);s=s||function(t){if(t)throw t};var i=function(t){if(!function(t){return"string"==typeof t}(t))return t;if(function(t){return t in Ct}(t))return Ct[t];if(function(t){return Nt.some((function(s){return t.indexOf(s)>-1}))}(t)){var s=wt(t);if(function(t){var s=ct(t,"authority");if(s){var i=ct(s,"epsg");return i&&Pt.indexOf(i)>-1}}(s))return Ct["EPSG:3857"];var i=function(t){var s=ct(t,"extension");if(s)return ct(s,"proj4")}(s);return i?ft(i):s}return function(t){return"+"===t[0]}(t)?ft(t):void 0}(t);if("object"===Kt(i)){var a=Zt.projections.get(i.projName);if(a){if(i.datumCode&&"none"!==i.datumCode){var h=ct(Ft,i.datumCode);h&&(i.datum_params=i.datum_params||(h.towgs84?h.towgs84.split(","):null),i.ellps=h.ellipse,i.datumName=h.datumName?h.datumName:i.datumCode)}i.k0=i.k0||1,i.axis=i.axis||"enu",i.ellps=i.ellps||"wgs84",i.lat1=i.lat1||i.lat0;var e,n,r,o,l,u,c=function(t,s,i,a,h){if(!t){var e=ct(zt,a);e||(e=Dt),t=e.a,s=e.b,i=e.rf}return i&&!s&&(s=(1-1/i)*t),(0===i||Math.abs(t-s)<it)&&(h=!0,s=t),{a:t,b:s,rf:i,sphere:h}}(i.a,i.b,i.rf,i.ellps,i.sphere),f=(e=c.a,n=c.b,c.rf,l=((r=e*e)-(o=n*n))/r,u=0,i.R_A?(r=(e*=1-l*(.16666666666666666+l*(.04722222222222222+.022156084656084655*l)))*e,l=0):u=Math.sqrt(l),{es:l,e:u,ep2:(r-o)/o}),M=function(t){return void 0===t?null:t.split(",").map(Wt)}(i.nadgrids),d=i.datum||function(t,s,i,a,h,e,n){var r={};return r.datum_type=void 0===t||"none"===t?5:4,s&&(r.datum_params=s.map(parseFloat),0===r.datum_params[0]&&0===r.datum_params[1]&&0===r.datum_params[2]||(r.datum_type=1),r.datum_params.length>3&&(0===r.datum_params[3]&&0===r.datum_params[4]&&0===r.datum_params[5]&&0===r.datum_params[6]||(r.datum_type=2,r.datum_params[3]*=tt,r.datum_params[4]*=tt,r.datum_params[5]*=tt,r.datum_params[6]=r.datum_params[6]/1e6+1))),n&&(r.datum_type=3,r.grids=n),r.a=i,r.b=a,r.es=h,r.ep2=e,r}(i.datumCode,i.datum_params,c.a,c.b,f.es,f.ep2,M);Et(this,i),Et(this,a),this.a=c.a,this.b=c.b,this.rf=c.rf,this.sphere=c.sphere,this.es=f.es,this.e=f.e,this.ep2=f.ep2,this.datum=d,this.init(),s(null,this)}else s(t)}else s(t)}Zt.projections=Bt,Zt.projections.start();const $t=Zt;function Yt(t,s,i){var a,h,e,n,r=t.x,o=t.y,l=t.z?t.z:0;if(o<-st&&o>-1.001*st)o=-st;else if(o>st&&o<1.001*st)o=st;else{if(o<-st)return{x:-1/0,y:-1/0,z:t.z};if(o>st)return{x:1/0,y:1/0,z:t.z}}return r>Math.PI&&(r-=2*Math.PI),h=Math.sin(o),n=Math.cos(o),e=h*h,{x:((a=i/Math.sqrt(1-s*e))+l)*n*Math.cos(r),y:(a+l)*n*Math.sin(r),z:(a*(1-s)+l)*h}}function ts(t,s,i,a){var h,e,n,r,o,l,u,c,f,M,d,p,m,y,g,_=t.x,v=t.y,x=t.z?t.z:0;if(h=Math.sqrt(_*_+v*v),e=Math.sqrt(_*_+v*v+x*x),h/i<1e-12){if(y=0,e/i<1e-12)return g=-a,{x:t.x,y:t.y,z:t.z}}else y=Math.atan2(v,_);n=x/e,c=(r=h/e)*(1-s)*(o=1/Math.sqrt(1-s*(2-s)*r*r)),f=n*o,m=0;do{m++,l=s*(u=i/Math.sqrt(1-s*f*f))/(u+(g=h*c+x*f-u*(1-s*f*f))),p=(d=n*(o=1/Math.sqrt(1-l*(2-l)*r*r)))*c-(M=r*(1-l)*o)*f,c=M,f=d}while(p*p>1e-24&&m<30);return{x:y,y:Math.atan(d/Math.abs(M)),z:g}}function ss(t){return 1===t||2===t}function is(t,s,i){if(null===t.grids||0===t.grids.length)return console.log("Grid shift grids not found"),-1;for(var a={x:-i.x,y:i.y},h={x:Number.NaN,y:Number.NaN},e=[],n=0;n<t.grids.length;n++){var r=t.grids[n];if(e.push(r.name),r.isNull){h=a;break}if(r.mandatory,null!==r.grid){var o=r.grid.subgrids[0],l=(Math.abs(o.del[1])+Math.abs(o.del[0]))/1e4,u=o.ll[0]-l,c=o.ll[1]-l,f=o.ll[0]+(o.lim[0]-1)*o.del[0]+l,M=o.ll[1]+(o.lim[1]-1)*o.del[1]+l;if(!(c>a.y||u>a.x||M<a.y||f<a.x||(h=as(a,s,o),isNaN(h.x))))break}else if(r.mandatory)return console.log("Unable to find mandatory grid '"+r.name+"'"),-1}return isNaN(h.x)?(console.log("Failed to find a grid shift table for location '"+-a.x*ht+" "+a.y*ht+" tried: '"+e+"'"),-1):(i.x=-h.x,i.y=h.y,0)}function as(t,s,i){var a={x:Number.NaN,y:Number.NaN};if(isNaN(t.x))return a;var h={x:t.x,y:t.y};h.x-=i.ll[0],h.y-=i.ll[1],h.x=Ot(h.x-Math.PI)+Math.PI;var e=hs(h,i);if(s){if(isNaN(e.x))return a;e.x=h.x-e.x,e.y=h.y-e.y;var n,r,o=9;do{if(r=hs(e,i),isNaN(r.x)){console.log("Inverse grid shift iteration failed, presumably at grid edge.  Using first approximation.");break}n={x:h.x-(r.x+e.x),y:h.y-(r.y+e.y)},e.x+=n.x,e.y+=n.y}while(o--&&Math.abs(n.x)>1e-12&&Math.abs(n.y)>1e-12);if(o<0)return console.log("Inverse grid shift iterator failed to converge."),a;a.x=Ot(e.x+i.ll[0]),a.y=e.y+i.ll[1]}else isNaN(e.x)||(a.x=t.x+e.x,a.y=t.y+e.y);return a}function hs(t,s){var i,a={x:t.x/s.del[0],y:t.y/s.del[1]},h=Math.floor(a.x),e=Math.floor(a.y),n=a.x-1*h,r=a.y-1*e,o={x:Number.NaN,y:Number.NaN};if(h<0||h>=s.lim[0])return o;if(e<0||e>=s.lim[1])return o;i=e*s.lim[0]+h;var l=s.cvs[i][0],u=s.cvs[i][1];i++;var c=s.cvs[i][0],f=s.cvs[i][1];i+=s.lim[0];var M=s.cvs[i][0],d=s.cvs[i][1];i--;var p=s.cvs[i][0],m=s.cvs[i][1],y=n*r,g=n*(1-r),_=(1-n)*(1-r),v=(1-n)*r;return o.x=_*l+g*c+v*p+y*M,o.y=_*u+g*f+v*m+y*d,o}function es(t,s,i){var a,h,e,n=i.x,r=i.y,o=i.z||0,l={};for(e=0;e<3;e++)if(!s||2!==e||void 0!==i.z)switch(0===e?(a=n,h=-1!=="ew".indexOf(t.axis[e])?"x":"y"):1===e?(a=r,h=-1!=="ns".indexOf(t.axis[e])?"y":"x"):(a=o,h="z"),t.axis[e]){case"e":case"n":l[h]=a;break;case"w":case"s":l[h]=-a;break;case"u":void 0!==i[h]&&(l.z=a);break;case"d":void 0!==i[h]&&(l.z=-a);break;default:return null}return l}function ns(t){var s={x:t[0],y:t[1]};return t.length>2&&(s.z=t[2]),t.length>3&&(s.m=t[3]),s}function rs(t){if("function"==typeof Number.isFinite){if(Number.isFinite(t))return;throw new TypeError("coordinates must be finite numbers")}if("number"!=typeof t||t!=t||!isFinite(t))throw new TypeError("coordinates must be finite numbers")}function os(t,s,i,a){var h;if(Array.isArray(i)&&(i=ns(i)),function(t){rs(t.x),rs(t.y)}(i),t.datum&&s.datum&&function(t,s){return(1===t.datum.datum_type||2===t.datum.datum_type)&&"WGS84"!==s.datumCode||(1===s.datum.datum_type||2===s.datum.datum_type)&&"WGS84"!==t.datumCode}(t,s)&&(i=os(t,h=new $t("WGS84"),i,a),t=h),a&&"enu"!==t.axis&&(i=es(t,!1,i)),"longlat"===t.projName)i={x:i.x*at,y:i.y*at,z:i.z||0};else if(t.to_meter&&(i={x:i.x*t.to_meter,y:i.y*t.to_meter,z:i.z||0}),!(i=t.inverse(i)))return;if(t.from_greenwich&&(i.x+=t.from_greenwich),i=function(t,s,i){if(function(t,s){return t.datum_type===s.datum_type&&!(t.a!==s.a||Math.abs(t.es-s.es)>5e-11)&&(1===t.datum_type?t.datum_params[0]===s.datum_params[0]&&t.datum_params[1]===s.datum_params[1]&&t.datum_params[2]===s.datum_params[2]:2!==t.datum_type||t.datum_params[0]===s.datum_params[0]&&t.datum_params[1]===s.datum_params[1]&&t.datum_params[2]===s.datum_params[2]&&t.datum_params[3]===s.datum_params[3]&&t.datum_params[4]===s.datum_params[4]&&t.datum_params[5]===s.datum_params[5]&&t.datum_params[6]===s.datum_params[6])}(t,s))return i;if(5===t.datum_type||5===s.datum_type)return i;var a=t.a,h=t.es;if(3===t.datum_type){if(0!==is(t,!1,i))return;a=$,h=Y}var e=s.a,n=s.b,r=s.es;return 3===s.datum_type&&(e=$,n=6356752.314,r=Y),h!==r||a!==e||ss(t.datum_type)||ss(s.datum_type)?(i=Yt(i,h,a),ss(t.datum_type)&&(i=function(t,s,i){if(1===s)return{x:t.x+i[0],y:t.y+i[1],z:t.z+i[2]};if(2===s){var a=i[0],h=i[1],e=i[2],n=i[3],r=i[4],o=i[5],l=i[6];return{x:l*(t.x-o*t.y+r*t.z)+a,y:l*(o*t.x+t.y-n*t.z)+h,z:l*(-r*t.x+n*t.y+t.z)+e}}}(i,t.datum_type,t.datum_params)),ss(s.datum_type)&&(i=function(t,s,i){if(1===s)return{x:t.x-i[0],y:t.y-i[1],z:t.z-i[2]};if(2===s){var a=i[0],h=i[1],e=i[2],n=i[3],r=i[4],o=i[5],l=i[6],u=(t.x-a)/l,c=(t.y-h)/l,f=(t.z-e)/l;return{x:u+o*c-r*f,y:-o*u+c+n*f,z:r*u-n*c+f}}}(i,s.datum_type,s.datum_params)),i=ts(i,r,e,n),3!==s.datum_type||0===is(s,!0,i)?i:void 0):i}(t.datum,s.datum,i))return s.from_greenwich&&(i={x:i.x-s.from_greenwich,y:i.y,z:i.z||0}),"longlat"===s.projName?i={x:i.x*ht,y:i.y*ht,z:i.z||0}:(i=s.forward(i),s.to_meter&&(i={x:i.x/s.to_meter,y:i.y/s.to_meter,z:i.z||0})),a&&"enu"!==s.axis?es(s,!0,i):i}var ls=$t("WGS84");function us(t,s,i,a){var h,e,n;return Array.isArray(i)?(h=os(t,s,i,a)||{x:NaN,y:NaN},i.length>2?void 0!==t.name&&"geocent"===t.name||void 0!==s.name&&"geocent"===s.name?"number"==typeof h.z?[h.x,h.y,h.z].concat(i.splice(3)):[h.x,h.y,i[2]].concat(i.splice(3)):[h.x,h.y].concat(i.splice(2)):[h.x,h.y]):(e=os(t,s,i,a),2===(n=Object.keys(i)).length||n.forEach((function(a){if(void 0!==t.name&&"geocent"===t.name||void 0!==s.name&&"geocent"===s.name){if("x"===a||"y"===a||"z"===a)return}else if("x"===a||"y"===a)return;e[a]=i[a]})),e)}function cs(t){return t instanceof $t?t:t.oProj?t.oProj:$t(t)}const fs=function(t,s,i){t=cs(t);var a,h=!1;return void 0===s?(s=t,t=ls,h=!0):(void 0!==s.x||Array.isArray(s))&&(i=s,s=t,t=ls,h=!0),s=cs(s),i?us(t,s,i):(a={forward:function(i,a){return us(t,s,i,a)},inverse:function(i,a){return us(s,t,i,a)}},h&&(a.oProj=s),a)};var Ms="AJSAJS",ds="AFAFAF",ps=65,ms=73,ys=79;const gs={forward:_s,inverse:function(t){var s=ws(Cs(t.toUpperCase()));return s.lat&&s.lon?[s.lon,s.lat,s.lon,s.lat]:[s.left,s.bottom,s.right,s.top]},toPoint:vs};function _s(t,s){return s=s||5,function(t,s){var i,a,h,e,n,r,o,l,u,c,f,M="00000"+t.easting,d="00000"+t.northing;return t.zoneNumber+t.zoneLetter+(u=t.easting,c=t.northing,f=Ss(t.zoneNumber),i=Math.floor(u/1e5),a=Math.floor(c/1e5)%20,e=Ms.charCodeAt(h=f-1),n=ds.charCodeAt(h),l=!1,(r=e+i-1)>90&&(r=r-90+ps-1,l=!0),(r===ms||e<ms&&r>ms||(r>ms||e<ms)&&l)&&r++,(r===ys||e<ys&&r>ys||(r>ys||e<ys)&&l)&&++r===ms&&r++,r>90&&(r=r-90+ps-1),(o=n+a)>86?(o=o-86+ps-1,l=!0):l=!1,(o===ms||n<ms&&o>ms||(o>ms||n<ms)&&l)&&o++,(o===ys||n<ys&&o>ys||(o>ys||n<ys)&&l)&&++o===ms&&o++,o>86&&(o=o-86+ps-1),String.fromCharCode(r)+String.fromCharCode(o))+M.substr(M.length-5,s)+d.substr(d.length-5,s)}(function(t){var s,i,a,h,e,n,r,o=t.lat,l=t.lon,u=6378137,c=.00669438,f=.9996,M=xs(o),d=xs(l);r=Math.floor((l+180)/6)+1,180===l&&(r=60),o>=56&&o<64&&l>=3&&l<12&&(r=32),o>=72&&o<84&&(l>=0&&l<9?r=31:l>=9&&l<21?r=33:l>=21&&l<33?r=35:l>=33&&l<42&&(r=37)),n=xs(6*(r-1)-180+3),s=.006739496752268451,i=u/Math.sqrt(1-c*Math.sin(M)*Math.sin(M)),a=Math.tan(M)*Math.tan(M),h=s*Math.cos(M)*Math.cos(M);var p,m,y=f*i*((e=Math.cos(M)*(d-n))+(1-a+h)*e*e*e/6+(5-18*a+a*a+72*h-58*s)*e*e*e*e*e/120)+5e5,g=f*(u*(.9983242984503243*M-.002514607064228144*Math.sin(2*M)+2639046602129982e-21*Math.sin(4*M)-3.418046101696858e-9*Math.sin(6*M))+i*Math.tan(M)*(e*e/2+(5-a+9*h+4*h*h)*e*e*e*e/24+(61-58*a+a*a+600*h-2.2240339282485886)*e*e*e*e*e*e/720));return o<0&&(g+=1e7),{northing:Math.round(g),easting:Math.round(y),zoneNumber:r,zoneLetter:(p=o,m="Z",84>=p&&p>=72?m="X":72>p&&p>=64?m="W":64>p&&p>=56?m="V":56>p&&p>=48?m="U":48>p&&p>=40?m="T":40>p&&p>=32?m="S":32>p&&p>=24?m="R":24>p&&p>=16?m="Q":16>p&&p>=8?m="P":8>p&&p>=0?m="N":0>p&&p>=-8?m="M":-8>p&&p>=-16?m="L":-16>p&&p>=-24?m="K":-24>p&&p>=-32?m="J":-32>p&&p>=-40?m="H":-40>p&&p>=-48?m="G":-48>p&&p>=-56?m="F":-56>p&&p>=-64?m="E":-64>p&&p>=-72?m="D":-72>p&&p>=-80&&(m="C"),m)}}({lat:t[1],lon:t[0]}),s)}function vs(t){var s=ws(Cs(t.toUpperCase()));return s.lat&&s.lon?[s.lon,s.lat]:[(s.left+s.right)/2,(s.top+s.bottom)/2]}function xs(t){return t*(Math.PI/180)}function bs(t){return t/Math.PI*180}function ws(t){var s=t.northing,i=t.easting,a=t.zoneLetter,h=t.zoneNumber;if(h<0||h>60)return null;var e,n,r,o,l,u,c,f,M,d=.9996,p=6378137,m=.00669438,y=(1-Math.sqrt(.99330562))/(1+Math.sqrt(.99330562)),g=i-5e5,_=s;a<"N"&&(_-=1e7),c=6*(h-1)-180+3,e=.006739496752268451,M=(f=_/d/6367449.145945056)+(3*y/2-27*y*y*y/32)*Math.sin(2*f)+(21*y*y/16-55*y*y*y*y/32)*Math.sin(4*f)+151*y*y*y/96*Math.sin(6*f),n=p/Math.sqrt(1-m*Math.sin(M)*Math.sin(M)),r=Math.tan(M)*Math.tan(M),o=e*Math.cos(M)*Math.cos(M),l=.99330562*p/Math.pow(1-m*Math.sin(M)*Math.sin(M),1.5),u=g/(n*d);var v=M-n*Math.tan(M)/l*(u*u/2-(5+3*r+10*o-4*o*o-9*e)*u*u*u*u/24+(61+90*r+298*o+45*r*r-1.6983531815716497-3*o*o)*u*u*u*u*u*u/720);v=bs(v);var x,b=(u-(1+2*r+o)*u*u*u/6+(5-2*o+28*r-3*o*o+8*e+24*r*r)*u*u*u*u*u/120)/Math.cos(M);if(b=c+bs(b),t.accuracy){var w=ws({northing:t.northing+t.accuracy,easting:t.easting+t.accuracy,zoneLetter:t.zoneLetter,zoneNumber:t.zoneNumber});x={top:w.lat,right:w.lon,bottom:v,left:b}}else x={lat:v,lon:b};return x}function Ss(t){var s=t%6;return 0===s&&(s=6),s}function Cs(t){if(t&&0===t.length)throw"MGRSPoint coverting from nothing";for(var s,i=t.length,a=null,h="",e=0;!/[A-Z]/.test(s=t.charAt(e));){if(e>=2)throw"MGRSPoint bad conversion from: "+t;h+=s,e++}var n=parseInt(h,10);if(0===e||e+3>i)throw"MGRSPoint bad conversion from: "+t;var r=t.charAt(e++);if(r<="A"||"B"===r||"Y"===r||r>="Z"||"I"===r||"O"===r)throw"MGRSPoint zone letter "+r+" not handled: "+t;a=t.substring(e,e+=2);for(var o=Ss(n),l=function(t,s){for(var i=Ms.charCodeAt(s-1),a=1e5,h=!1;i!==t.charCodeAt(0);){if(++i===ms&&i++,i===ys&&i++,i>90){if(h)throw"Bad character: "+t;i=ps,h=!0}a+=1e5}return a}(a.charAt(0),o),u=function(t,s){if(t>"V")throw"MGRSPoint given invalid Northing "+t;for(var i=ds.charCodeAt(s-1),a=0,h=!1;i!==t.charCodeAt(0);){if(++i===ms&&i++,i===ys&&i++,i>86){if(h)throw"Bad character: "+t;i=ps,h=!0}a+=1e5}return a}(a.charAt(1),o);u<Ns(r);)u+=2e6;var c=i-e;if(c%2!=0)throw"MGRSPoint has to have an even number \nof digits after the zone letter and two 100km letters - front \nhalf for easting meters, second half for \nnorthing meters"+t;var f,M,d,p=c/2,m=0,y=0;return p>0&&(f=1e5/Math.pow(10,p),M=t.substring(e,e+p),m=parseFloat(M)*f,d=t.substring(e+p),y=parseFloat(d)*f),{easting:m+l,northing:y+u,zoneLetter:r,zoneNumber:n,accuracy:f}}function Ns(t){var s;switch(t){case"C":s=11e5;break;case"D":s=2e6;break;case"E":s=28e5;break;case"F":s=37e5;break;case"G":s=46e5;break;case"H":s=55e5;break;case"J":s=64e5;break;case"K":s=73e5;break;case"L":s=82e5;break;case"M":s=91e5;break;case"N":s=0;break;case"P":s=8e5;break;case"Q":s=17e5;break;case"R":s=26e5;break;case"S":s=35e5;break;case"T":s=44e5;break;case"U":s=53e5;break;case"V":s=62e5;break;case"W":s=7e6;break;case"X":s=79e5;break;default:s=-1}if(s>=0)return s;throw"Invalid zone letter: "+t}function Ps(t){return Ps="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(t){return typeof t}:function(t){return t&&"function"==typeof Symbol&&t.constructor===Symbol&&t!==Symbol.prototype?"symbol":typeof t},Ps(t)}function Es(t,s,i){if(!(this instanceof Es))return new Es(t,s,i);if(Array.isArray(t))this.x=t[0],this.y=t[1],this.z=t[2]||0;else if("object"===Ps(t))this.x=t.x,this.y=t.y,this.z=t.z||0;else if("string"==typeof t&&void 0===s){var a=t.split(",");this.x=parseFloat(a[0],10),this.y=parseFloat(a[1],10),this.z=parseFloat(a[2],10)||0}else this.x=t,this.y=s,this.z=i||0;console.warn("proj4.Point will be removed in version 3, use proj4.toPoint")}Es.fromMGRS=function(t){return new Es(vs(t))},Es.prototype.toMGRS=function(t){return _s([this.x,this.y],t)};const As=Es;var Is=.046875,Os=.01953125,ks=.01068115234375;function qs(t){var s=[];s[0]=1-t*(.25+t*(Is+t*(Os+t*ks))),s[1]=t*(.75-t*(Is+t*(Os+t*ks)));var i=t*t;return s[2]=i*(.46875-t*(.013020833333333334+.007120768229166667*t)),i*=t,s[3]=i*(.3645833333333333-.005696614583333333*t),s[4]=i*t*.3076171875,s}function Ts(t,s,i,a){return i*=s,s*=s,a[0]*t-i*(a[1]+s*(a[2]+s*(a[3]+s*a[4])))}function Ls(t,s,i){for(var a=1/(1-s),h=t,e=20;e;--e){var n=Math.sin(h),r=1-s*n*n;if(h-=r=(Ts(h,n,Math.cos(h),i)-t)*(r*Math.sqrt(r))*a,Math.abs(r)<it)return h}return h}const js={init:function(){this.x0=void 0!==this.x0?this.x0:0,this.y0=void 0!==this.y0?this.y0:0,this.long0=void 0!==this.long0?this.long0:0,this.lat0=void 0!==this.lat0?this.lat0:0,this.es&&(this.en=qs(this.es),this.ml0=Ts(this.lat0,Math.sin(this.lat0),Math.cos(this.lat0),this.en))},forward:function(t){var s,i,a,h=t.x,e=t.y,n=Ot(h-this.long0),r=Math.sin(e),o=Math.cos(e);if(this.es){var l=o*n,u=Math.pow(l,2),c=this.ep2*Math.pow(o,2),f=Math.pow(c,2),M=Math.abs(o)>it?Math.tan(e):0,d=Math.pow(M,2),p=Math.pow(d,2);s=1-this.es*Math.pow(r,2),l/=Math.sqrt(s);var m=Ts(e,r,o,this.en);i=this.a*(this.k0*l*(1+u/6*(1-d+c+u/20*(5-18*d+p+14*c-58*d*c+u/42*(61+179*p-p*d-479*d)))))+this.x0,a=this.a*(this.k0*(m-this.ml0+r*n*l/2*(1+u/12*(5-d+9*c+4*f+u/30*(61+p-58*d+270*c-330*d*c+u/56*(1385+543*p-p*d-3111*d))))))+this.y0}else{var y=o*Math.sin(n);if(Math.abs(Math.abs(y)-1)<it)return 93;if(i=.5*this.a*this.k0*Math.log((1+y)/(1-y))+this.x0,a=o*Math.cos(n)/Math.sqrt(1-Math.pow(y,2)),(y=Math.abs(a))>=1){if(y-1>it)return 93;a=0}else a=Math.acos(a);e<0&&(a=-a),a=this.a*this.k0*(a-this.lat0)+this.y0}return t.x=i,t.y=a,t},inverse:function(t){var s,i,a,h,e=(t.x-this.x0)*(1/this.a),n=(t.y-this.y0)*(1/this.a);if(this.es)if(i=Ls(s=this.ml0+n/this.k0,this.es,this.en),Math.abs(i)<st){var r=Math.sin(i),o=Math.cos(i),l=Math.abs(o)>it?Math.tan(i):0,u=this.ep2*Math.pow(o,2),c=Math.pow(u,2),f=Math.pow(l,2),M=Math.pow(f,2);s=1-this.es*Math.pow(r,2);var d=e*Math.sqrt(s)/this.k0,p=Math.pow(d,2);a=i-(s*=l)*p/(1-this.es)*.5*(1-p/12*(5+3*f-9*u*f+u-4*c-p/30*(61+90*f-252*u*f+45*M+46*u-p/56*(1385+3633*f+4095*M+1574*M*f)))),h=Ot(this.long0+d*(1-p/6*(1+2*f+u-p/20*(5+28*f+24*M+8*u*f+6*u-p/42*(61+662*f+1320*M+720*M*f))))/o)}else a=st*It(n),h=0;else{var m=Math.exp(e/this.k0),y=.5*(m-1/m),g=this.lat0+n/this.k0,_=Math.cos(g);s=Math.sqrt((1-Math.pow(_,2))/(1+Math.pow(y,2))),a=Math.asin(s),n<0&&(a=-a),h=0===y&&0===_?0:Ot(Math.atan2(y,_)+this.long0)}return t.x=h,t.y=a,t},names:["Fast_Transverse_Mercator","Fast Transverse Mercator"]};function Gs(t){var s=Math.exp(t);return(s-1/s)/2}function Rs(t,s){t=Math.abs(t),s=Math.abs(s);var i=Math.max(t,s),a=Math.min(t,s)/(i||1);return i*Math.sqrt(1+Math.pow(a,2))}function Bs(t,s){for(var i,a=2*Math.cos(2*s),h=t.length-1,e=t[h],n=0;--h>=0;)i=a*e-n+t[h],n=e,e=i;return s+i*Math.sin(2*s)}function zs(t,s,i){for(var a,h,e=Math.sin(s),n=Math.cos(s),r=Gs(i),o=function(t){var s=Math.exp(t);return(s+1/s)/2}(i),l=2*n*o,u=-2*e*r,c=t.length-1,f=t[c],M=0,d=0,p=0;--c>=0;)a=d,h=M,f=l*(d=f)-a-u*(M=p)+t[c],p=u*d-h+l*M;return[(l=e*o)*f-(u=n*r)*p,l*p+u*f]}const Ds={init:function(){if(!this.approx&&(isNaN(this.es)||this.es<=0))throw new Error('Incorrect elliptical usage. Try using the +approx option in the proj string, or PROJECTION["Fast_Transverse_Mercator"] in the WKT.');this.approx&&(js.init.apply(this),this.forward=js.forward,this.inverse=js.inverse),this.x0=void 0!==this.x0?this.x0:0,this.y0=void 0!==this.y0?this.y0:0,this.long0=void 0!==this.long0?this.long0:0,this.lat0=void 0!==this.lat0?this.lat0:0,this.cgb=[],this.cbg=[],this.utg=[],this.gtu=[];var t=this.es/(1+Math.sqrt(1-this.es)),s=t/(2-t),i=s;this.cgb[0]=s*(2+s*(-2/3+s*(s*(116/45+s*(26/45+s*(-2854/675)))-2))),this.cbg[0]=s*(s*(2/3+s*(4/3+s*(-82/45+s*(32/45+s*(4642/4725)))))-2),i*=s,this.cgb[1]=i*(7/3+s*(s*(-227/45+s*(2704/315+s*(2323/945)))-1.6)),this.cbg[1]=i*(5/3+s*(-16/15+s*(-13/9+s*(904/315+s*(-1522/945))))),i*=s,this.cgb[2]=i*(56/15+s*(-136/35+s*(-1262/105+s*(73814/2835)))),this.cbg[2]=i*(-26/15+s*(34/21+s*(1.6+s*(-12686/2835)))),i*=s,this.cgb[3]=i*(4279/630+s*(-332/35+s*(-399572/14175))),this.cbg[3]=i*(1237/630+s*(s*(-24832/14175)-2.4)),i*=s,this.cgb[4]=i*(4174/315+s*(-144838/6237)),this.cbg[4]=i*(-734/315+s*(109598/31185)),i*=s,this.cgb[5]=i*(601676/22275),this.cbg[5]=i*(444337/155925),i=Math.pow(s,2),this.Qn=this.k0/(1+s)*(1+i*(1/4+i*(1/64+i/256))),this.utg[0]=s*(s*(2/3+s*(-37/96+s*(1/360+s*(81/512+s*(-96199/604800)))))-.5),this.gtu[0]=s*(.5+s*(-2/3+s*(5/16+s*(41/180+s*(-127/288+s*(7891/37800)))))),this.utg[1]=i*(-1/48+s*(-1/15+s*(437/1440+s*(-46/105+s*(1118711/3870720))))),this.gtu[1]=i*(13/48+s*(s*(557/1440+s*(281/630+s*(-1983433/1935360)))-.6)),i*=s,this.utg[2]=i*(-17/480+s*(37/840+s*(209/4480+s*(-5569/90720)))),this.gtu[2]=i*(61/240+s*(-103/140+s*(15061/26880+s*(167603/181440)))),i*=s,this.utg[3]=i*(-4397/161280+s*(11/504+s*(830251/7257600))),this.gtu[3]=i*(49561/161280+s*(-179/168+s*(6601661/7257600))),i*=s,this.utg[4]=i*(-4583/161280+s*(108847/3991680)),this.gtu[4]=i*(34729/80640+s*(-3418889/1995840)),i*=s,this.utg[5]=i*(-20648693/638668800),this.gtu[5]=.6650675310896665*i;var a=Bs(this.cbg,this.lat0);this.Zb=-this.Qn*(a+function(t,s){for(var i,a=2*Math.cos(s),h=t.length-1,e=t[h],n=0;--h>=0;)i=a*e-n+t[h],n=e,e=i;return Math.sin(s)*i}(this.gtu,2*a))},forward:function(t){var s=Ot(t.x-this.long0),i=t.y;i=Bs(this.cbg,i);var a=Math.sin(i),h=Math.cos(i),e=Math.sin(s),n=Math.cos(s);i=Math.atan2(a,n*h),s=Math.atan2(e*h,Rs(a,h*n)),s=function(t){var s=Math.abs(t);return s=function(t){var s=1+t,i=s-1;return 0===i?t:t*Math.log(s)/i}(s*(1+s/(Rs(1,s)+1))),t<0?-s:s}(Math.tan(s));var r,o,l=zs(this.gtu,2*i,2*s);return i+=l[0],s+=l[1],Math.abs(s)<=2.623395162778?(r=this.a*(this.Qn*s)+this.x0,o=this.a*(this.Qn*i+this.Zb)+this.y0):(r=1/0,o=1/0),t.x=r,t.y=o,t},inverse:function(t){var s,i,a=(t.x-this.x0)*(1/this.a),h=(t.y-this.y0)*(1/this.a);if(h=(h-this.Zb)/this.Qn,a/=this.Qn,Math.abs(a)<=2.623395162778){var e=zs(this.utg,2*h,2*a);h+=e[0],a+=e[1],a=Math.atan(Gs(a));var n=Math.sin(h),r=Math.cos(h),o=Math.sin(a),l=Math.cos(a);h=Math.atan2(n*l,Rs(o,l*r)),s=Ot((a=Math.atan2(o,l*r))+this.long0),i=Bs(this.cgb,h)}else s=1/0,i=1/0;return t.x=s,t.y=i,t},names:["Extended_Transverse_Mercator","Extended Transverse Mercator","etmerc","Transverse_Mercator","Transverse Mercator","tmerc"]},Fs={init:function(){var t=function(t,s){if(void 0===t){if((t=Math.floor(30*(Ot(s)+Math.PI)/Math.PI)+1)<0)return 0;if(t>60)return 60}return t}(this.zone,this.long0);if(void 0===t)throw new Error("unknown utm zone");this.lat0=0,this.long0=(6*Math.abs(t)-183)*at,this.x0=5e5,this.y0=this.utmSouth?1e7:0,this.k0=.9996,Ds.init.apply(this),this.forward=Ds.forward,this.inverse=Ds.inverse},names:["Universal Transverse Mercator System","utm"],dependsOn:"etmerc"};function Us(t,s){return Math.pow((1-t)/(1+t),s)}const Ws={init:function(){var t=Math.sin(this.lat0),s=Math.cos(this.lat0);s*=s,this.rc=Math.sqrt(1-this.es)/(1-this.es*t*t),this.C=Math.sqrt(1+this.es*s*s/(1-this.es)),this.phic0=Math.asin(t/this.C),this.ratexp=.5*this.C*this.e,this.K=Math.tan(.5*this.phic0+et)/(Math.pow(Math.tan(.5*this.lat0+et),this.C)*Us(this.e*t,this.ratexp))},forward:function(t){var s=t.x,i=t.y;return t.y=2*Math.atan(this.K*Math.pow(Math.tan(.5*i+et),this.C)*Us(this.e*Math.sin(i),this.ratexp))-st,t.x=this.C*s,t},inverse:function(t){for(var s=t.x/this.C,i=t.y,a=Math.pow(Math.tan(.5*i+et)/this.K,1/this.C),h=20;h>0&&(i=2*Math.atan(a*Us(this.e*Math.sin(t.y),-.5*this.e))-st,!(Math.abs(i-t.y)<1e-14));--h)t.y=i;return h?(t.x=s,t.y=i,t):null},names:["gauss"]},Qs={init:function(){Ws.init.apply(this),this.rc&&(this.sinc0=Math.sin(this.phic0),this.cosc0=Math.cos(this.phic0),this.R2=2*this.rc,this.title||(this.title="Oblique Stereographic Alternative"))},forward:function(t){var s,i,a,h;return t.x=Ot(t.x-this.long0),Ws.forward.apply(this,[t]),s=Math.sin(t.y),i=Math.cos(t.y),a=Math.cos(t.x),h=this.k0*this.R2/(1+this.sinc0*s+this.cosc0*i*a),t.x=h*i*Math.sin(t.x),t.y=h*(this.cosc0*s-this.sinc0*i*a),t.x=this.a*t.x+this.x0,t.y=this.a*t.y+this.y0,t},inverse:function(t){var s,i,a,h,e;if(t.x=(t.x-this.x0)/this.a,t.y=(t.y-this.y0)/this.a,t.x/=this.k0,t.y/=this.k0,e=Math.sqrt(t.x*t.x+t.y*t.y)){var n=2*Math.atan2(e,this.R2);s=Math.sin(n),i=Math.cos(n),h=Math.asin(i*this.sinc0+t.y*s*this.cosc0/e),a=Math.atan2(t.x*s,e*this.cosc0*i-t.y*this.sinc0*s)}else h=this.phic0,a=0;return t.x=a,t.y=h,Ws.inverse.apply(this,[t]),t.x=Ot(t.x+this.long0),t},names:["Stereographic_North_Pole","Oblique_Stereographic","Polar_Stereographic","sterea","Oblique Stereographic Alternative","Double_Stereographic"]},Hs={init:function(){this.coslat0=Math.cos(this.lat0),this.sinlat0=Math.sin(this.lat0),this.sphere?1===this.k0&&!isNaN(this.lat_ts)&&Math.abs(this.coslat0)<=it&&(this.k0=.5*(1+It(this.lat0)*Math.sin(this.lat_ts))):(Math.abs(this.coslat0)<=it&&(this.lat0>0?this.con=1:this.con=-1),this.cons=Math.sqrt(Math.pow(1+this.e,1+this.e)*Math.pow(1-this.e,1-this.e)),1===this.k0&&!isNaN(this.lat_ts)&&Math.abs(this.coslat0)<=it&&(this.k0=.5*this.cons*At(this.e,Math.sin(this.lat_ts),Math.cos(this.lat_ts))/kt(this.e,this.con*this.lat_ts,this.con*Math.sin(this.lat_ts))),this.ms1=At(this.e,this.sinlat0,this.coslat0),this.X0=2*Math.atan(this.ssfn_(this.lat0,this.sinlat0,this.e))-st,this.cosX0=Math.cos(this.X0),this.sinX0=Math.sin(this.X0))},forward:function(t){var s,i,a,h,e,n,r=t.x,o=t.y,l=Math.sin(o),u=Math.cos(o),c=Ot(r-this.long0);return Math.abs(Math.abs(r-this.long0)-Math.PI)<=it&&Math.abs(o+this.lat0)<=it?(t.x=NaN,t.y=NaN,t):this.sphere?(s=2*this.k0/(1+this.sinlat0*l+this.coslat0*u*Math.cos(c)),t.x=this.a*s*u*Math.sin(c)+this.x0,t.y=this.a*s*(this.coslat0*l-this.sinlat0*u*Math.cos(c))+this.y0,t):(i=2*Math.atan(this.ssfn_(o,l,this.e))-st,h=Math.cos(i),a=Math.sin(i),Math.abs(this.coslat0)<=it?(e=kt(this.e,o*this.con,this.con*l),n=2*this.a*this.k0*e/this.cons,t.x=this.x0+n*Math.sin(r-this.long0),t.y=this.y0-this.con*n*Math.cos(r-this.long0),t):(Math.abs(this.sinlat0)<it?(s=2*this.a*this.k0/(1+h*Math.cos(c)),t.y=s*a):(s=2*this.a*this.k0*this.ms1/(this.cosX0*(1+this.sinX0*a+this.cosX0*h*Math.cos(c))),t.y=s*(this.cosX0*a-this.sinX0*h*Math.cos(c))+this.y0),t.x=s*h*Math.sin(c)+this.x0,t))},inverse:function(t){var s,i,a,h,e;t.x-=this.x0,t.y-=this.y0;var n=Math.sqrt(t.x*t.x+t.y*t.y);if(this.sphere){var r=2*Math.atan(n/(2*this.a*this.k0));return s=this.long0,i=this.lat0,n<=it?(t.x=s,t.y=i,t):(i=Math.asin(Math.cos(r)*this.sinlat0+t.y*Math.sin(r)*this.coslat0/n),s=Math.abs(this.coslat0)<it?this.lat0>0?Ot(this.long0+Math.atan2(t.x,-1*t.y)):Ot(this.long0+Math.atan2(t.x,t.y)):Ot(this.long0+Math.atan2(t.x*Math.sin(r),n*this.coslat0*Math.cos(r)-t.y*this.sinlat0*Math.sin(r))),t.x=s,t.y=i,t)}if(Math.abs(this.coslat0)<=it){if(n<=it)return i=this.lat0,s=this.long0,t.x=s,t.y=i,t;t.x*=this.con,t.y*=this.con,a=n*this.cons/(2*this.a*this.k0),i=this.con*qt(this.e,a),s=this.con*Ot(this.con*this.long0+Math.atan2(t.x,-1*t.y))}else h=2*Math.atan(n*this.cosX0/(2*this.a*this.k0*this.ms1)),s=this.long0,n<=it?e=this.X0:(e=Math.asin(Math.cos(h)*this.sinX0+t.y*Math.sin(h)*this.cosX0/n),s=Ot(this.long0+Math.atan2(t.x*Math.sin(h),n*this.cosX0*Math.cos(h)-t.y*this.sinX0*Math.sin(h)))),i=-1*qt(this.e,Math.tan(.5*(st+e)));return t.x=s,t.y=i,t},names:["stere","Stereographic_South_Pole","Polar Stereographic (variant B)"],ssfn_:function(t,s,i){return s*=i,Math.tan(.5*(st+t))*Math.pow((1-s)/(1+s),.5*i)}},Xs={init:function(){var t=this.lat0;this.lambda0=this.long0;var s=Math.sin(t),i=this.a,a=1/this.rf,h=2*a-Math.pow(a,2),e=this.e=Math.sqrt(h);this.R=this.k0*i*Math.sqrt(1-h)/(1-h*Math.pow(s,2)),this.alpha=Math.sqrt(1+h/(1-h)*Math.pow(Math.cos(t),4)),this.b0=Math.asin(s/this.alpha);var n=Math.log(Math.tan(Math.PI/4+this.b0/2)),r=Math.log(Math.tan(Math.PI/4+t/2)),o=Math.log((1+e*s)/(1-e*s));this.K=n-this.alpha*r+this.alpha*e/2*o},forward:function(t){var s=Math.log(Math.tan(Math.PI/4-t.y/2)),i=this.e/2*Math.log((1+this.e*Math.sin(t.y))/(1-this.e*Math.sin(t.y))),a=-this.alpha*(s+i)+this.K,h=2*(Math.atan(Math.exp(a))-Math.PI/4),e=this.alpha*(t.x-this.lambda0),n=Math.atan(Math.sin(e)/(Math.sin(this.b0)*Math.tan(h)+Math.cos(this.b0)*Math.cos(e))),r=Math.asin(Math.cos(this.b0)*Math.sin(h)-Math.sin(this.b0)*Math.cos(h)*Math.cos(e));return t.y=this.R/2*Math.log((1+Math.sin(r))/(1-Math.sin(r)))+this.y0,t.x=this.R*n+this.x0,t},inverse:function(t){for(var s=t.x-this.x0,i=t.y-this.y0,a=s/this.R,h=2*(Math.atan(Math.exp(i/this.R))-Math.PI/4),e=Math.asin(Math.cos(this.b0)*Math.sin(h)+Math.sin(this.b0)*Math.cos(h)*Math.cos(a)),n=Math.atan(Math.sin(a)/(Math.cos(this.b0)*Math.cos(a)-Math.sin(this.b0)*Math.tan(h))),r=this.lambda0+n/this.alpha,o=0,l=e,u=-1e3,c=0;Math.abs(l-u)>1e-7;){if(++c>20)return;o=1/this.alpha*(Math.log(Math.tan(Math.PI/4+e/2))-this.K)+this.e*Math.log(Math.tan(Math.PI/4+Math.asin(this.e*Math.sin(l))/2)),u=l,l=2*Math.atan(Math.exp(o))-Math.PI/2}return t.x=r,t.y=l,t},names:["somerc"]};function Vs(t){return Vs="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(t){return typeof t}:function(t){return t&&"function"==typeof Symbol&&t.constructor===Symbol&&t!==Symbol.prototype?"symbol":typeof t},Vs(t)}var Js=1e-7;const Ks={init:function(){var t,s,i,a,h,e,n,r,o,l,u,c,f,M=0,d=0,p=0,m=0,y=0,g=0,_=0;this.no_off=(f="object"===Vs((c=this).PROJECTION)?Object.keys(c.PROJECTION)[0]:c.PROJECTION,"no_uoff"in c||"no_off"in c||-1!==["Hotine_Oblique_Mercator","Hotine_Oblique_Mercator_Azimuth_Natural_Origin"].indexOf(f)),this.no_rot="no_rot"in this;var v=!1;"alpha"in this&&(v=!0);var x=!1;if("rectified_grid_angle"in this&&(x=!0),v&&(_=this.alpha),x&&(M=this.rectified_grid_angle*at),v||x)d=this.longc;else if(p=this.long1,y=this.lat1,m=this.long2,g=this.lat2,Math.abs(y-g)<=Js||(t=Math.abs(y))<=Js||Math.abs(t-st)<=Js||Math.abs(Math.abs(this.lat0)-st)<=Js||Math.abs(Math.abs(g)-st)<=Js)throw new Error;var b=1-this.es;s=Math.sqrt(b),Math.abs(this.lat0)>it?(r=Math.sin(this.lat0),i=Math.cos(this.lat0),t=1-this.es*r*r,this.B=i*i,this.B=Math.sqrt(1+this.es*this.B*this.B/b),this.A=this.B*this.k0*s/t,(h=(a=this.B*s/(i*Math.sqrt(t)))*a-1)<=0?h=0:(h=Math.sqrt(h),this.lat0<0&&(h=-h)),this.E=h+=a,this.E*=Math.pow(kt(this.e,this.lat0,r),this.B)):(this.B=1/s,this.A=this.k0,this.E=a=h=1),v||x?(v?(u=Math.asin(Math.sin(_)/a),x||(M=_)):(u=M,_=Math.asin(a*Math.sin(u))),this.lam0=d-Math.asin(.5*(h-1/h)*Math.tan(u))/this.B):(e=Math.pow(kt(this.e,y,Math.sin(y)),this.B),n=Math.pow(kt(this.e,g,Math.sin(g)),this.B),h=this.E/e,o=(n-e)/(n+e),l=((l=this.E*this.E)-n*e)/(l+n*e),(t=p-m)<-Math.pi?m-=nt:t>Math.pi&&(m+=nt),this.lam0=Ot(.5*(p+m)-Math.atan(l*Math.tan(.5*this.B*(p-m))/o)/this.B),u=Math.atan(2*Math.sin(this.B*Ot(p-this.lam0))/(h-1/h)),M=_=Math.asin(a*Math.sin(u))),this.singam=Math.sin(u),this.cosgam=Math.cos(u),this.sinrot=Math.sin(M),this.cosrot=Math.cos(M),this.rB=1/this.B,this.ArB=this.A*this.rB,this.BrA=1/this.ArB,this.A,this.B,this.no_off?this.u_0=0:(this.u_0=Math.abs(this.ArB*Math.atan(Math.sqrt(a*a-1)/Math.cos(_))),this.lat0<0&&(this.u_0=-this.u_0)),h=.5*u,this.v_pole_n=this.ArB*Math.log(Math.tan(et-h)),this.v_pole_s=this.ArB*Math.log(Math.tan(et+h))},forward:function(t){var s,i,a,h,e,n,r,o,l={};if(t.x=t.x-this.lam0,Math.abs(Math.abs(t.y)-st)>it){if(s=.5*((e=this.E/Math.pow(kt(this.e,t.y,Math.sin(t.y)),this.B))-(n=1/e)),i=.5*(e+n),h=Math.sin(this.B*t.x),a=(s*this.singam-h*this.cosgam)/i,Math.abs(Math.abs(a)-1)<it)throw new Error;o=.5*this.ArB*Math.log((1-a)/(1+a)),n=Math.cos(this.B*t.x),r=Math.abs(n)<Js?this.A*t.x:this.ArB*Math.atan2(s*this.cosgam+h*this.singam,n)}else o=t.y>0?this.v_pole_n:this.v_pole_s,r=this.ArB*t.y;return this.no_rot?(l.x=r,l.y=o):(r-=this.u_0,l.x=o*this.cosrot+r*this.sinrot,l.y=r*this.cosrot-o*this.sinrot),l.x=this.a*l.x+this.x0,l.y=this.a*l.y+this.y0,l},inverse:function(t){var s,i,a,h,e,n,r,o={};if(t.x=(t.x-this.x0)*(1/this.a),t.y=(t.y-this.y0)*(1/this.a),this.no_rot?(i=t.y,s=t.x):(i=t.x*this.cosrot-t.y*this.sinrot,s=t.y*this.cosrot+t.x*this.sinrot+this.u_0),h=.5*((a=Math.exp(-this.BrA*i))-1/a),e=.5*(a+1/a),r=((n=Math.sin(this.BrA*s))*this.cosgam+h*this.singam)/e,Math.abs(Math.abs(r)-1)<it)o.x=0,o.y=r<0?-st:st;else{if(o.y=this.E/Math.sqrt((1+r)/(1-r)),o.y=qt(this.e,Math.pow(o.y,1/this.B)),o.y===1/0)throw new Error;o.x=-this.rB*Math.atan2(h*this.cosgam-n*this.singam,Math.cos(this.BrA*s))}return o.x+=this.lam0,o},names:["Hotine_Oblique_Mercator","Hotine Oblique Mercator","Hotine_Oblique_Mercator_Azimuth_Natural_Origin","Hotine_Oblique_Mercator_Two_Point_Natural_Origin","Hotine_Oblique_Mercator_Azimuth_Center","Oblique_Mercator","omerc"]},Zs={init:function(){if(this.lat2||(this.lat2=this.lat1),this.k0||(this.k0=1),this.x0=this.x0||0,this.y0=this.y0||0,!(Math.abs(this.lat1+this.lat2)<it)){var t=this.b/this.a;this.e=Math.sqrt(1-t*t);var s=Math.sin(this.lat1),i=Math.cos(this.lat1),a=At(this.e,s,i),h=kt(this.e,this.lat1,s),e=Math.sin(this.lat2),n=Math.cos(this.lat2),r=At(this.e,e,n),o=kt(this.e,this.lat2,e),l=kt(this.e,this.lat0,Math.sin(this.lat0));Math.abs(this.lat1-this.lat2)>it?this.ns=Math.log(a/r)/Math.log(h/o):this.ns=s,isNaN(this.ns)&&(this.ns=s),this.f0=a/(this.ns*Math.pow(h,this.ns)),this.rh=this.a*this.f0*Math.pow(l,this.ns),this.title||(this.title="Lambert Conformal Conic")}},forward:function(t){var s=t.x,i=t.y;Math.abs(2*Math.abs(i)-Math.PI)<=it&&(i=It(i)*(st-2e-10));var a,h,e=Math.abs(Math.abs(i)-st);if(e>it)a=kt(this.e,i,Math.sin(i)),h=this.a*this.f0*Math.pow(a,this.ns);else{if((e=i*this.ns)<=0)return null;h=0}var n=this.ns*Ot(s-this.long0);return t.x=this.k0*(h*Math.sin(n))+this.x0,t.y=this.k0*(this.rh-h*Math.cos(n))+this.y0,t},inverse:function(t){var s,i,a,h,e,n=(t.x-this.x0)/this.k0,r=this.rh-(t.y-this.y0)/this.k0;this.ns>0?(s=Math.sqrt(n*n+r*r),i=1):(s=-Math.sqrt(n*n+r*r),i=-1);var o=0;if(0!==s&&(o=Math.atan2(i*n,i*r)),0!==s||this.ns>0){if(i=1/this.ns,a=Math.pow(s/(this.a*this.f0),i),-9999===(h=qt(this.e,a)))return null}else h=-st;return e=Ot(o/this.ns+this.long0),t.x=e,t.y=h,t},names:["Lambert Tangential Conformal Conic Projection","Lambert_Conformal_Conic","Lambert_Conformal_Conic_1SP","Lambert_Conformal_Conic_2SP","lcc"]},$s={init:function(){this.a=6377397.155,this.es=.006674372230614,this.e=Math.sqrt(this.es),this.lat0||(this.lat0=.863937979737193),this.long0||(this.long0=.4334234309119251),this.k0||(this.k0=.9999),this.s45=.785398163397448,this.s90=2*this.s45,this.fi0=this.lat0,this.e2=this.es,this.e=Math.sqrt(this.e2),this.alfa=Math.sqrt(1+this.e2*Math.pow(Math.cos(this.fi0),4)/(1-this.e2)),this.uq=1.04216856380474,this.u0=Math.asin(Math.sin(this.fi0)/this.alfa),this.g=Math.pow((1+this.e*Math.sin(this.fi0))/(1-this.e*Math.sin(this.fi0)),this.alfa*this.e/2),this.k=Math.tan(this.u0/2+this.s45)/Math.pow(Math.tan(this.fi0/2+this.s45),this.alfa)*this.g,this.k1=this.k0,this.n0=this.a*Math.sqrt(1-this.e2)/(1-this.e2*Math.pow(Math.sin(this.fi0),2)),this.s0=1.37008346281555,this.n=Math.sin(this.s0),this.ro0=this.k1*this.n0/Math.tan(this.s0),this.ad=this.s90-this.uq},forward:function(t){var s,i,a,h,e,n,r,o=t.x,l=t.y,u=Ot(o-this.long0);return s=Math.pow((1+this.e*Math.sin(l))/(1-this.e*Math.sin(l)),this.alfa*this.e/2),i=2*(Math.atan(this.k*Math.pow(Math.tan(l/2+this.s45),this.alfa)/s)-this.s45),a=-u*this.alfa,h=Math.asin(Math.cos(this.ad)*Math.sin(i)+Math.sin(this.ad)*Math.cos(i)*Math.cos(a)),e=Math.asin(Math.cos(i)*Math.sin(a)/Math.cos(h)),n=this.n*e,r=this.ro0*Math.pow(Math.tan(this.s0/2+this.s45),this.n)/Math.pow(Math.tan(h/2+this.s45),this.n),t.y=r*Math.cos(n)/1,t.x=r*Math.sin(n)/1,this.czech||(t.y*=-1,t.x*=-1),t},inverse:function(t){var s,i,a,h,e,n,r,o=t.x;t.x=t.y,t.y=o,this.czech||(t.y*=-1,t.x*=-1),e=Math.sqrt(t.x*t.x+t.y*t.y),h=Math.atan2(t.y,t.x)/Math.sin(this.s0),a=2*(Math.atan(Math.pow(this.ro0/e,1/this.n)*Math.tan(this.s0/2+this.s45))-this.s45),s=Math.asin(Math.cos(this.ad)*Math.sin(a)-Math.sin(this.ad)*Math.cos(a)*Math.cos(h)),i=Math.asin(Math.cos(a)*Math.sin(h)/Math.cos(s)),t.x=this.long0-i/this.alfa,n=s,r=0;var l=0;do{t.y=2*(Math.atan(Math.pow(this.k,-1/this.alfa)*Math.pow(Math.tan(s/2+this.s45),1/this.alfa)*Math.pow((1+this.e*Math.sin(n))/(1-this.e*Math.sin(n)),this.e/2))-this.s45),Math.abs(n-t.y)<1e-10&&(r=1),n=t.y,l+=1}while(0===r&&l<15);return l>=15?null:t},names:["Krovak","krovak"]};function Ys(t,s,i,a,h){return t*h-s*Math.sin(2*h)+i*Math.sin(4*h)-a*Math.sin(6*h)}function ti(t){return 1-.25*t*(1+t/16*(3+1.25*t))}function si(t){return.375*t*(1+.25*t*(1+.46875*t))}function ii(t){return.05859375*t*t*(1+.75*t)}function ai(t){return t*t*t*(35/3072)}function hi(t,s,i){var a=s*i;return t/Math.sqrt(1-a*a)}function ei(t){return Math.abs(t)<st?t:t-It(t)*Math.PI}function ni(t,s,i,a,h){var e,n;e=t/s;for(var r=0;r<15;r++)if(e+=n=(t-(s*e-i*Math.sin(2*e)+a*Math.sin(4*e)-h*Math.sin(6*e)))/(s-2*i*Math.cos(2*e)+4*a*Math.cos(4*e)-6*h*Math.cos(6*e)),Math.abs(n)<=1e-10)return e;return NaN}const ri={init:function(){this.sphere||(this.e0=ti(this.es),this.e1=si(this.es),this.e2=ii(this.es),this.e3=ai(this.es),this.ml0=this.a*Ys(this.e0,this.e1,this.e2,this.e3,this.lat0))},forward:function(t){var s,i,a=t.x,h=t.y;if(a=Ot(a-this.long0),this.sphere)s=this.a*Math.asin(Math.cos(h)*Math.sin(a)),i=this.a*(Math.atan2(Math.tan(h),Math.cos(a))-this.lat0);else{var e=Math.sin(h),n=Math.cos(h),r=hi(this.a,this.e,e),o=Math.tan(h)*Math.tan(h),l=a*Math.cos(h),u=l*l,c=this.es*n*n/(1-this.es);s=r*l*(1-u*o*(1/6-(8-o+8*c)*u/120)),i=this.a*Ys(this.e0,this.e1,this.e2,this.e3,h)-this.ml0+r*e/n*u*(.5+(5-o+6*c)*u/24)}return t.x=s+this.x0,t.y=i+this.y0,t},inverse:function(t){t.x-=this.x0,t.y-=this.y0;var s,i,a=t.x/this.a,h=t.y/this.a;if(this.sphere){var e=h+this.lat0;s=Math.asin(Math.sin(e)*Math.cos(a)),i=Math.atan2(Math.tan(a),Math.cos(e))}else{var n=ni(this.ml0/this.a+h,this.e0,this.e1,this.e2,this.e3);if(Math.abs(Math.abs(n)-st)<=it)return t.x=this.long0,t.y=st,h<0&&(t.y*=-1),t;var r=hi(this.a,this.e,Math.sin(n)),o=r*r*r/this.a/this.a*(1-this.es),l=Math.pow(Math.tan(n),2),u=a*this.a/r,c=u*u;s=n-r*Math.tan(n)/o*u*u*(.5-(1+3*l)*u*u/24),i=u*(1-c*(l/3+(1+3*l)*l*c/15))/Math.cos(n)}return t.x=Ot(i+this.long0),t.y=ei(s),t},names:["Cassini","Cassini_Soldner","cass"]};function oi(t,s){var i;return t>1e-7?(1-t*t)*(s/(1-(i=t*s)*i)-.5/t*Math.log((1-i)/(1+i))):2*s}const li={init:function(){var t,s=Math.abs(this.lat0);if(Math.abs(s-st)<it?this.mode=this.lat0<0?this.S_POLE:this.N_POLE:Math.abs(s)<it?this.mode=this.EQUIT:this.mode=this.OBLIQ,this.es>0)switch(this.qp=oi(this.e,1),this.mmf=.5/(1-this.es),this.apa=function(t){var s,i=[];return i[0]=.3333333333333333*t,s=t*t,i[0]+=.17222222222222222*s,i[1]=.06388888888888888*s,s*=t,i[0]+=.10257936507936508*s,i[1]+=.0664021164021164*s,i[2]=.016415012942191543*s,i}(this.es),this.mode){case this.N_POLE:case this.S_POLE:this.dd=1;break;case this.EQUIT:this.rq=Math.sqrt(.5*this.qp),this.dd=1/this.rq,this.xmf=1,this.ymf=.5*this.qp;break;case this.OBLIQ:this.rq=Math.sqrt(.5*this.qp),t=Math.sin(this.lat0),this.sinb1=oi(this.e,t)/this.qp,this.cosb1=Math.sqrt(1-this.sinb1*this.sinb1),this.dd=Math.cos(this.lat0)/(Math.sqrt(1-this.es*t*t)*this.rq*this.cosb1),this.ymf=(this.xmf=this.rq)/this.dd,this.xmf*=this.dd}else this.mode===this.OBLIQ&&(this.sinph0=Math.sin(this.lat0),this.cosph0=Math.cos(this.lat0))},forward:function(t){var s,i,a,h,e,n,r,o,l,u,c=t.x,f=t.y;if(c=Ot(c-this.long0),this.sphere){if(e=Math.sin(f),u=Math.cos(f),a=Math.cos(c),this.mode===this.OBLIQ||this.mode===this.EQUIT){if((i=this.mode===this.EQUIT?1+u*a:1+this.sinph0*e+this.cosph0*u*a)<=it)return null;s=(i=Math.sqrt(2/i))*u*Math.sin(c),i*=this.mode===this.EQUIT?e:this.cosph0*e-this.sinph0*u*a}else if(this.mode===this.N_POLE||this.mode===this.S_POLE){if(this.mode===this.N_POLE&&(a=-a),Math.abs(f+this.lat0)<it)return null;i=et-.5*f,s=(i=2*(this.mode===this.S_POLE?Math.cos(i):Math.sin(i)))*Math.sin(c),i*=a}}else{switch(r=0,o=0,l=0,a=Math.cos(c),h=Math.sin(c),e=Math.sin(f),n=oi(this.e,e),this.mode!==this.OBLIQ&&this.mode!==this.EQUIT||(r=n/this.qp,o=Math.sqrt(1-r*r)),this.mode){case this.OBLIQ:l=1+this.sinb1*r+this.cosb1*o*a;break;case this.EQUIT:l=1+o*a;break;case this.N_POLE:l=st+f,n=this.qp-n;break;case this.S_POLE:l=f-st,n=this.qp+n}if(Math.abs(l)<it)return null;switch(this.mode){case this.OBLIQ:case this.EQUIT:l=Math.sqrt(2/l),i=this.mode===this.OBLIQ?this.ymf*l*(this.cosb1*r-this.sinb1*o*a):(l=Math.sqrt(2/(1+o*a)))*r*this.ymf,s=this.xmf*l*o*h;break;case this.N_POLE:case this.S_POLE:n>=0?(s=(l=Math.sqrt(n))*h,i=a*(this.mode===this.S_POLE?l:-l)):s=i=0}}return t.x=this.a*s+this.x0,t.y=this.a*i+this.y0,t},inverse:function(t){t.x-=this.x0,t.y-=this.y0;var s,i,a,h,e,n,r,o,l,u,c=t.x/this.a,f=t.y/this.a;if(this.sphere){var M,d=0,p=0;if((i=.5*(M=Math.sqrt(c*c+f*f)))>1)return null;switch(i=2*Math.asin(i),this.mode!==this.OBLIQ&&this.mode!==this.EQUIT||(p=Math.sin(i),d=Math.cos(i)),this.mode){case this.EQUIT:i=Math.abs(M)<=it?0:Math.asin(f*p/M),c*=p,f=d*M;break;case this.OBLIQ:i=Math.abs(M)<=it?this.lat0:Math.asin(d*this.sinph0+f*p*this.cosph0/M),c*=p*this.cosph0,f=(d-Math.sin(i)*this.sinph0)*M;break;case this.N_POLE:f=-f,i=st-i;break;case this.S_POLE:i-=st}s=0!==f||this.mode!==this.EQUIT&&this.mode!==this.OBLIQ?Math.atan2(c,f):0}else{if(r=0,this.mode===this.OBLIQ||this.mode===this.EQUIT){if(c/=this.dd,f*=this.dd,(n=Math.sqrt(c*c+f*f))<it)return t.x=this.long0,t.y=this.lat0,t;h=2*Math.asin(.5*n/this.rq),a=Math.cos(h),c*=h=Math.sin(h),this.mode===this.OBLIQ?(r=a*this.sinb1+f*h*this.cosb1/n,e=this.qp*r,f=n*this.cosb1*a-f*this.sinb1*h):(r=f*h/n,e=this.qp*r,f=n*a)}else if(this.mode===this.N_POLE||this.mode===this.S_POLE){if(this.mode===this.N_POLE&&(f=-f),!(e=c*c+f*f))return t.x=this.long0,t.y=this.lat0,t;r=1-e/this.qp,this.mode===this.S_POLE&&(r=-r)}s=Math.atan2(c,f),u=(o=Math.asin(r))+o,i=o+(l=this.apa)[0]*Math.sin(u)+l[1]*Math.sin(u+u)+l[2]*Math.sin(u+u+u)}return t.x=Ot(this.long0+s),t.y=i,t},names:["Lambert Azimuthal Equal Area","Lambert_Azimuthal_Equal_Area","laea"],S_POLE:1,N_POLE:2,EQUIT:3,OBLIQ:4};function ui(t){return Math.abs(t)>1&&(t=t>1?1:-1),Math.asin(t)}const ci={init:function(){Math.abs(this.lat1+this.lat2)<it||(this.temp=this.b/this.a,this.es=1-Math.pow(this.temp,2),this.e3=Math.sqrt(this.es),this.sin_po=Math.sin(this.lat1),this.cos_po=Math.cos(this.lat1),this.t1=this.sin_po,this.con=this.sin_po,this.ms1=At(this.e3,this.sin_po,this.cos_po),this.qs1=oi(this.e3,this.sin_po,this.cos_po),this.sin_po=Math.sin(this.lat2),this.cos_po=Math.cos(this.lat2),this.t2=this.sin_po,this.ms2=At(this.e3,this.sin_po,this.cos_po),this.qs2=oi(this.e3,this.sin_po,this.cos_po),this.sin_po=Math.sin(this.lat0),this.cos_po=Math.cos(this.lat0),this.t3=this.sin_po,this.qs0=oi(this.e3,this.sin_po,this.cos_po),Math.abs(this.lat1-this.lat2)>it?this.ns0=(this.ms1*this.ms1-this.ms2*this.ms2)/(this.qs2-this.qs1):this.ns0=this.con,this.c=this.ms1*this.ms1+this.ns0*this.qs1,this.rh=this.a*Math.sqrt(this.c-this.ns0*this.qs0)/this.ns0)},forward:function(t){var s=t.x,i=t.y;this.sin_phi=Math.sin(i),this.cos_phi=Math.cos(i);var a=oi(this.e3,this.sin_phi,this.cos_phi),h=this.a*Math.sqrt(this.c-this.ns0*a)/this.ns0,e=this.ns0*Ot(s-this.long0),n=h*Math.sin(e)+this.x0,r=this.rh-h*Math.cos(e)+this.y0;return t.x=n,t.y=r,t},inverse:function(t){var s,i,a,h,e,n;return t.x-=this.x0,t.y=this.rh-t.y+this.y0,this.ns0>=0?(s=Math.sqrt(t.x*t.x+t.y*t.y),a=1):(s=-Math.sqrt(t.x*t.x+t.y*t.y),a=-1),h=0,0!==s&&(h=Math.atan2(a*t.x,a*t.y)),a=s*this.ns0/this.a,this.sphere?n=Math.asin((this.c-a*a)/(2*this.ns0)):(i=(this.c-a*a)/this.ns0,n=this.phi1z(this.e3,i)),e=Ot(h/this.ns0+this.long0),t.x=e,t.y=n,t},names:["Albers_Conic_Equal_Area","Albers","aea"],phi1z:function(t,s){var i,a,h,e,n=ui(.5*s);if(t<it)return n;for(var r=t*t,o=1;o<=25;o++)if(n+=e=.5*(h=1-(a=t*(i=Math.sin(n)))*a)*h/Math.cos(n)*(s/(1-r)-i/h+.5/t*Math.log((1-a)/(1+a))),Math.abs(e)<=1e-7)return n;return null}},fi={init:function(){this.sin_p14=Math.sin(this.lat0),this.cos_p14=Math.cos(this.lat0),this.infinity_dist=1e3*this.a,this.rc=1},forward:function(t){var s,i,a,h,e,n,r,o=t.x,l=t.y;return a=Ot(o-this.long0),s=Math.sin(l),i=Math.cos(l),h=Math.cos(a),(e=this.sin_p14*s+this.cos_p14*i*h)>0||Math.abs(e)<=it?(n=this.x0+1*this.a*i*Math.sin(a)/e,r=this.y0+1*this.a*(this.cos_p14*s-this.sin_p14*i*h)/e):(n=this.x0+this.infinity_dist*i*Math.sin(a),r=this.y0+this.infinity_dist*(this.cos_p14*s-this.sin_p14*i*h)),t.x=n,t.y=r,t},inverse:function(t){var s,i,a,h,e,n;return t.x=(t.x-this.x0)/this.a,t.y=(t.y-this.y0)/this.a,t.x/=this.k0,t.y/=this.k0,(s=Math.sqrt(t.x*t.x+t.y*t.y))?(h=Math.atan2(s,this.rc),i=Math.sin(h),n=ui((a=Math.cos(h))*this.sin_p14+t.y*i*this.cos_p14/s),e=Math.atan2(t.x*i,s*this.cos_p14*a-t.y*this.sin_p14*i),e=Ot(this.long0+e)):(n=this.phic0,e=0),t.x=e,t.y=n,t},names:["gnom"]},Mi={init:function(){this.sphere||(this.k0=At(this.e,Math.sin(this.lat_ts),Math.cos(this.lat_ts)))},forward:function(t){var s,i,a=t.x,h=t.y,e=Ot(a-this.long0);if(this.sphere)s=this.x0+this.a*e*Math.cos(this.lat_ts),i=this.y0+this.a*Math.sin(h)/Math.cos(this.lat_ts);else{var n=oi(this.e,Math.sin(h));s=this.x0+this.a*this.k0*e,i=this.y0+this.a*n*.5/this.k0}return t.x=s,t.y=i,t},inverse:function(t){var s,i;return t.x-=this.x0,t.y-=this.y0,this.sphere?(s=Ot(this.long0+t.x/this.a/Math.cos(this.lat_ts)),i=Math.asin(t.y/this.a*Math.cos(this.lat_ts))):(i=function(t,s){var i=1-(1-t*t)/(2*t)*Math.log((1-t)/(1+t));if(Math.abs(Math.abs(s)-i)<1e-6)return s<0?-1*st:st;for(var a,h,e,n,r=Math.asin(.5*s),o=0;o<30;o++)if(h=Math.sin(r),e=Math.cos(r),n=t*h,r+=a=Math.pow(1-n*n,2)/(2*e)*(s/(1-t*t)-h/(1-n*n)+.5/t*Math.log((1-n)/(1+n))),Math.abs(a)<=1e-10)return r;return NaN}(this.e,2*t.y*this.k0/this.a),s=Ot(this.long0+t.x/(this.a*this.k0))),t.x=s,t.y=i,t},names:["cea"]},di={init:function(){this.x0=this.x0||0,this.y0=this.y0||0,this.lat0=this.lat0||0,this.long0=this.long0||0,this.lat_ts=this.lat_ts||0,this.title=this.title||"Equidistant Cylindrical (Plate Carre)",this.rc=Math.cos(this.lat_ts)},forward:function(t){var s=t.x,i=t.y,a=Ot(s-this.long0),h=ei(i-this.lat0);return t.x=this.x0+this.a*a*this.rc,t.y=this.y0+this.a*h,t},inverse:function(t){var s=t.x,i=t.y;return t.x=Ot(this.long0+(s-this.x0)/(this.a*this.rc)),t.y=ei(this.lat0+(i-this.y0)/this.a),t},names:["Equirectangular","Equidistant_Cylindrical","eqc"]},pi={init:function(){this.temp=this.b/this.a,this.es=1-Math.pow(this.temp,2),this.e=Math.sqrt(this.es),this.e0=ti(this.es),this.e1=si(this.es),this.e2=ii(this.es),this.e3=ai(this.es),this.ml0=this.a*Ys(this.e0,this.e1,this.e2,this.e3,this.lat0)},forward:function(t){var s,i,a,h=t.x,e=t.y,n=Ot(h-this.long0);if(a=n*Math.sin(e),this.sphere)Math.abs(e)<=it?(s=this.a*n,i=-1*this.a*this.lat0):(s=this.a*Math.sin(a)/Math.tan(e),i=this.a*(ei(e-this.lat0)+(1-Math.cos(a))/Math.tan(e)));else if(Math.abs(e)<=it)s=this.a*n,i=-1*this.ml0;else{var r=hi(this.a,this.e,Math.sin(e))/Math.tan(e);s=r*Math.sin(a),i=this.a*Ys(this.e0,this.e1,this.e2,this.e3,e)-this.ml0+r*(1-Math.cos(a))}return t.x=s+this.x0,t.y=i+this.y0,t},inverse:function(t){var s,i,a,h,e,n,r,o,l;if(a=t.x-this.x0,h=t.y-this.y0,this.sphere)if(Math.abs(h+this.a*this.lat0)<=it)s=Ot(a/this.a+this.long0),i=0;else{var u;for(n=this.lat0+h/this.a,r=a*a/this.a/this.a+n*n,o=n,e=20;e;--e)if(o+=l=-1*(n*(o*(u=Math.tan(o))+1)-o-.5*(o*o+r)*u)/((o-n)/u-1),Math.abs(l)<=it){i=o;break}s=Ot(this.long0+Math.asin(a*Math.tan(o)/this.a)/Math.sin(i))}else if(Math.abs(h+this.ml0)<=it)i=0,s=Ot(this.long0+a/this.a);else{var c,f,M,d,p;for(n=(this.ml0+h)/this.a,r=a*a/this.a/this.a+n*n,o=n,e=20;e;--e)if(p=this.e*Math.sin(o),c=Math.sqrt(1-p*p)*Math.tan(o),f=this.a*Ys(this.e0,this.e1,this.e2,this.e3,o),M=this.e0-2*this.e1*Math.cos(2*o)+4*this.e2*Math.cos(4*o)-6*this.e3*Math.cos(6*o),o-=l=(n*(c*(d=f/this.a)+1)-d-.5*c*(d*d+r))/(this.es*Math.sin(2*o)*(d*d+r-2*n*d)/(4*c)+(n-d)*(c*M-2/Math.sin(2*o))-M),Math.abs(l)<=it){i=o;break}c=Math.sqrt(1-this.es*Math.pow(Math.sin(i),2))*Math.tan(i),s=Ot(this.long0+Math.asin(a*c/this.a)/Math.sin(i))}return t.x=s,t.y=i,t},names:["Polyconic","poly"]},mi={init:function(){this.A=[],this.A[1]=.6399175073,this.A[2]=-.1358797613,this.A[3]=.063294409,this.A[4]=-.02526853,this.A[5]=.0117879,this.A[6]=-.0055161,this.A[7]=.0026906,this.A[8]=-.001333,this.A[9]=67e-5,this.A[10]=-34e-5,this.B_re=[],this.B_im=[],this.B_re[1]=.7557853228,this.B_im[1]=0,this.B_re[2]=.249204646,this.B_im[2]=.003371507,this.B_re[3]=-.001541739,this.B_im[3]=.04105856,this.B_re[4]=-.10162907,this.B_im[4]=.01727609,this.B_re[5]=-.26623489,this.B_im[5]=-.36249218,this.B_re[6]=-.6870983,this.B_im[6]=-1.1651967,this.C_re=[],this.C_im=[],this.C_re[1]=1.3231270439,this.C_im[1]=0,this.C_re[2]=-.577245789,this.C_im[2]=-.007809598,this.C_re[3]=.508307513,this.C_im[3]=-.112208952,this.C_re[4]=-.15094762,this.C_im[4]=.18200602,this.C_re[5]=1.01418179,this.C_im[5]=1.64497696,this.C_re[6]=1.9660549,this.C_im[6]=2.5127645,this.D=[],this.D[1]=1.5627014243,this.D[2]=.5185406398,this.D[3]=-.03333098,this.D[4]=-.1052906,this.D[5]=-.0368594,this.D[6]=.007317,this.D[7]=.0122,this.D[8]=.00394,this.D[9]=-.0013},forward:function(t){var s,i=t.x,a=t.y-this.lat0,h=i-this.long0,e=a/tt*1e-5,n=h,r=1,o=0;for(s=1;s<=10;s++)r*=e,o+=this.A[s]*r;var l,u=o,c=n,f=1,M=0,d=0,p=0;for(s=1;s<=6;s++)l=M*u+f*c,f=f*u-M*c,M=l,d=d+this.B_re[s]*f-this.B_im[s]*M,p=p+this.B_im[s]*f+this.B_re[s]*M;return t.x=p*this.a+this.x0,t.y=d*this.a+this.y0,t},inverse:function(t){var s,i,a=t.x,h=t.y,e=a-this.x0,n=(h-this.y0)/this.a,r=e/this.a,o=1,l=0,u=0,c=0;for(s=1;s<=6;s++)i=l*n+o*r,o=o*n-l*r,l=i,u=u+this.C_re[s]*o-this.C_im[s]*l,c=c+this.C_im[s]*o+this.C_re[s]*l;for(var f=0;f<this.iterations;f++){var M,d=u,p=c,m=n,y=r;for(s=2;s<=6;s++)M=p*u+d*c,d=d*u-p*c,p=M,m+=(s-1)*(this.B_re[s]*d-this.B_im[s]*p),y+=(s-1)*(this.B_im[s]*d+this.B_re[s]*p);d=1,p=0;var g=this.B_re[1],_=this.B_im[1];for(s=2;s<=6;s++)M=p*u+d*c,d=d*u-p*c,p=M,g+=s*(this.B_re[s]*d-this.B_im[s]*p),_+=s*(this.B_im[s]*d+this.B_re[s]*p);var v=g*g+_*_;u=(m*g+y*_)/v,c=(y*g-m*_)/v}var x=u,b=c,w=1,S=0;for(s=1;s<=9;s++)w*=x,S+=this.D[s]*w;var C=this.lat0+S*tt*1e5,N=this.long0+b;return t.x=N,t.y=C,t},names:["New_Zealand_Map_Grid","nzmg"]},yi={init:function(){},forward:function(t){var s=t.x,i=t.y,a=Ot(s-this.long0),h=this.x0+this.a*a,e=this.y0+this.a*Math.log(Math.tan(Math.PI/4+i/2.5))*1.25;return t.x=h,t.y=e,t},inverse:function(t){t.x-=this.x0,t.y-=this.y0;var s=Ot(this.long0+t.x/this.a),i=2.5*(Math.atan(Math.exp(.8*t.y/this.a))-Math.PI/4);return t.x=s,t.y=i,t},names:["Miller_Cylindrical","mill"]},gi={init:function(){this.sphere?(this.n=1,this.m=0,this.es=0,this.C_y=Math.sqrt((this.m+1)/this.n),this.C_x=this.C_y/(this.m+1)):this.en=qs(this.es)},forward:function(t){var s,i,a=t.x,h=t.y;if(a=Ot(a-this.long0),this.sphere){if(this.m)for(var e=this.n*Math.sin(h),n=20;n;--n){var r=(this.m*h+Math.sin(h)-e)/(this.m+Math.cos(h));if(h-=r,Math.abs(r)<it)break}else h=1!==this.n?Math.asin(this.n*Math.sin(h)):h;s=this.a*this.C_x*a*(this.m+Math.cos(h)),i=this.a*this.C_y*h}else{var o=Math.sin(h),l=Math.cos(h);i=this.a*Ts(h,o,l,this.en),s=this.a*a*l/Math.sqrt(1-this.es*o*o)}return t.x=s,t.y=i,t},inverse:function(t){var s,i,a;return t.x-=this.x0,i=t.x/this.a,t.y-=this.y0,s=t.y/this.a,this.sphere?(s/=this.C_y,i/=this.C_x*(this.m+Math.cos(s)),this.m?s=ui((this.m*s+Math.sin(s))/this.n):1!==this.n&&(s=ui(Math.sin(s)/this.n)),i=Ot(i+this.long0),s=ei(s)):(s=Ls(t.y/this.a,this.es,this.en),(a=Math.abs(s))<st?(a=Math.sin(s),i=Ot(this.long0+t.x*Math.sqrt(1-this.es*a*a)/(this.a*Math.cos(s)))):a-it<st&&(i=this.long0)),t.x=i,t.y=s,t},names:["Sinusoidal","sinu"]},_i={init:function(){},forward:function(t){for(var s=t.x,i=t.y,a=Ot(s-this.long0),h=i,e=Math.PI*Math.sin(i);;){var n=-(h+Math.sin(h)-e)/(1+Math.cos(h));if(h+=n,Math.abs(n)<it)break}h/=2,Math.PI/2-Math.abs(i)<it&&(a=0);var r=.900316316158*this.a*a*Math.cos(h)+this.x0,o=1.4142135623731*this.a*Math.sin(h)+this.y0;return t.x=r,t.y=o,t},inverse:function(t){var s,i;t.x-=this.x0,t.y-=this.y0,i=t.y/(1.4142135623731*this.a),Math.abs(i)>.999999999999&&(i=.999999999999),s=Math.asin(i);var a=Ot(this.long0+t.x/(.900316316158*this.a*Math.cos(s)));a<-Math.PI&&(a=-Math.PI),a>Math.PI&&(a=Math.PI),i=(2*s+Math.sin(2*s))/Math.PI,Math.abs(i)>1&&(i=1);var h=Math.asin(i);return t.x=a,t.y=h,t},names:["Mollweide","moll"]},vi={init:function(){Math.abs(this.lat1+this.lat2)<it||(this.lat2=this.lat2||this.lat1,this.temp=this.b/this.a,this.es=1-Math.pow(this.temp,2),this.e=Math.sqrt(this.es),this.e0=ti(this.es),this.e1=si(this.es),this.e2=ii(this.es),this.e3=ai(this.es),this.sinphi=Math.sin(this.lat1),this.cosphi=Math.cos(this.lat1),this.ms1=At(this.e,this.sinphi,this.cosphi),this.ml1=Ys(this.e0,this.e1,this.e2,this.e3,this.lat1),Math.abs(this.lat1-this.lat2)<it?this.ns=this.sinphi:(this.sinphi=Math.sin(this.lat2),this.cosphi=Math.cos(this.lat2),this.ms2=At(this.e,this.sinphi,this.cosphi),this.ml2=Ys(this.e0,this.e1,this.e2,this.e3,this.lat2),this.ns=(this.ms1-this.ms2)/(this.ml2-this.ml1)),this.g=this.ml1+this.ms1/this.ns,this.ml0=Ys(this.e0,this.e1,this.e2,this.e3,this.lat0),this.rh=this.a*(this.g-this.ml0))},forward:function(t){var s,i=t.x,a=t.y;if(this.sphere)s=this.a*(this.g-a);else{var h=Ys(this.e0,this.e1,this.e2,this.e3,a);s=this.a*(this.g-h)}var e=this.ns*Ot(i-this.long0),n=this.x0+s*Math.sin(e),r=this.y0+this.rh-s*Math.cos(e);return t.x=n,t.y=r,t},inverse:function(t){var s,i,a,h;t.x-=this.x0,t.y=this.rh-t.y+this.y0,this.ns>=0?(i=Math.sqrt(t.x*t.x+t.y*t.y),s=1):(i=-Math.sqrt(t.x*t.x+t.y*t.y),s=-1);var e=0;return 0!==i&&(e=Math.atan2(s*t.x,s*t.y)),this.sphere?(h=Ot(this.long0+e/this.ns),a=ei(this.g-i/this.a),t.x=h,t.y=a,t):(a=ni(this.g-i/this.a,this.e0,this.e1,this.e2,this.e3),h=Ot(this.long0+e/this.ns),t.x=h,t.y=a,t)},names:["Equidistant_Conic","eqdc"]},xi={init:function(){this.R=this.a},forward:function(t){var s,i,a=t.x,h=t.y,e=Ot(a-this.long0);Math.abs(h)<=it&&(s=this.x0+this.R*e,i=this.y0);var n=ui(2*Math.abs(h/Math.PI));(Math.abs(e)<=it||Math.abs(Math.abs(h)-st)<=it)&&(s=this.x0,i=h>=0?this.y0+Math.PI*this.R*Math.tan(.5*n):this.y0+Math.PI*this.R*-Math.tan(.5*n));var r=.5*Math.abs(Math.PI/e-e/Math.PI),o=r*r,l=Math.sin(n),u=Math.cos(n),c=u/(l+u-1),f=c*c,M=c*(2/l-1),d=M*M,p=Math.PI*this.R*(r*(c-d)+Math.sqrt(o*(c-d)*(c-d)-(d+o)*(f-d)))/(d+o);e<0&&(p=-p),s=this.x0+p;var m=o+c;return p=Math.PI*this.R*(M*m-r*Math.sqrt((d+o)*(o+1)-m*m))/(d+o),i=h>=0?this.y0+p:this.y0-p,t.x=s,t.y=i,t},inverse:function(t){var s,i,a,h,e,n,r,o,l,u,c,f;return t.x-=this.x0,t.y-=this.y0,c=Math.PI*this.R,e=(a=t.x/c)*a+(h=t.y/c)*h,c=3*(h*h/(o=-2*(n=-Math.abs(h)*(1+e))+1+2*h*h+e*e)+(2*(r=n-2*h*h+a*a)*r*r/o/o/o-9*n*r/o/o)/27)/(l=(n-r*r/3/o)/o)/(u=2*Math.sqrt(-l/3)),Math.abs(c)>1&&(c=c>=0?1:-1),f=Math.acos(c)/3,i=t.y>=0?(-u*Math.cos(f+Math.PI/3)-r/3/o)*Math.PI:-(-u*Math.cos(f+Math.PI/3)-r/3/o)*Math.PI,s=Math.abs(a)<it?this.long0:Ot(this.long0+Math.PI*(e-1+Math.sqrt(1+2*(a*a-h*h)+e*e))/2/a),t.x=s,t.y=i,t},names:["Van_der_Grinten_I","VanDerGrinten","vandg"]},bi={init:function(){this.sin_p12=Math.sin(this.lat0),this.cos_p12=Math.cos(this.lat0)},forward:function(t){var s,i,a,h,e,n,r,o,l,u,c,f,M,d,p,m,y,g,_,v,x,b,w=t.x,S=t.y,C=Math.sin(t.y),N=Math.cos(t.y),P=Ot(w-this.long0);return this.sphere?Math.abs(this.sin_p12-1)<=it?(t.x=this.x0+this.a*(st-S)*Math.sin(P),t.y=this.y0-this.a*(st-S)*Math.cos(P),t):Math.abs(this.sin_p12+1)<=it?(t.x=this.x0+this.a*(st+S)*Math.sin(P),t.y=this.y0+this.a*(st+S)*Math.cos(P),t):(g=this.sin_p12*C+this.cos_p12*N*Math.cos(P),y=(m=Math.acos(g))?m/Math.sin(m):1,t.x=this.x0+this.a*y*N*Math.sin(P),t.y=this.y0+this.a*y*(this.cos_p12*C-this.sin_p12*N*Math.cos(P)),t):(s=ti(this.es),i=si(this.es),a=ii(this.es),h=ai(this.es),Math.abs(this.sin_p12-1)<=it?(e=this.a*Ys(s,i,a,h,st),n=this.a*Ys(s,i,a,h,S),t.x=this.x0+(e-n)*Math.sin(P),t.y=this.y0-(e-n)*Math.cos(P),t):Math.abs(this.sin_p12+1)<=it?(e=this.a*Ys(s,i,a,h,st),n=this.a*Ys(s,i,a,h,S),t.x=this.x0+(e+n)*Math.sin(P),t.y=this.y0+(e+n)*Math.cos(P),t):(r=C/N,o=hi(this.a,this.e,this.sin_p12),l=hi(this.a,this.e,C),u=Math.atan((1-this.es)*r+this.es*o*this.sin_p12/(l*N)),_=0===(c=Math.atan2(Math.sin(P),this.cos_p12*Math.tan(u)-this.sin_p12*Math.cos(P)))?Math.asin(this.cos_p12*Math.sin(u)-this.sin_p12*Math.cos(u)):Math.abs(Math.abs(c)-Math.PI)<=it?-Math.asin(this.cos_p12*Math.sin(u)-this.sin_p12*Math.cos(u)):Math.asin(Math.sin(P)*Math.cos(u)/Math.sin(c)),f=this.e*this.sin_p12/Math.sqrt(1-this.es),m=o*_*(1-(v=_*_)*(p=(M=this.e*this.cos_p12*Math.cos(c)/Math.sqrt(1-this.es))*M)*(1-p)/6+(x=v*_)/8*(d=f*M)*(1-2*p)+(b=x*_)/120*(p*(4-7*p)-3*f*f*(1-7*p))-b*_/48*d),t.x=this.x0+m*Math.sin(c),t.y=this.y0+m*Math.cos(c),t))},inverse:function(t){var s,i,a,h,e,n,r,o,l,u,c,f,M,d,p,m,y,g,_,v,x,b,w;if(t.x-=this.x0,t.y-=this.y0,this.sphere){if((s=Math.sqrt(t.x*t.x+t.y*t.y))>2*st*this.a)return;return i=s/this.a,a=Math.sin(i),h=Math.cos(i),e=this.long0,Math.abs(s)<=it?n=this.lat0:(n=ui(h*this.sin_p12+t.y*a*this.cos_p12/s),r=Math.abs(this.lat0)-st,e=Math.abs(r)<=it?this.lat0>=0?Ot(this.long0+Math.atan2(t.x,-t.y)):Ot(this.long0-Math.atan2(-t.x,t.y)):Ot(this.long0+Math.atan2(t.x*a,s*this.cos_p12*h-t.y*this.sin_p12*a))),t.x=e,t.y=n,t}return o=ti(this.es),l=si(this.es),u=ii(this.es),c=ai(this.es),Math.abs(this.sin_p12-1)<=it?(n=ni(((f=this.a*Ys(o,l,u,c,st))-(s=Math.sqrt(t.x*t.x+t.y*t.y)))/this.a,o,l,u,c),e=Ot(this.long0+Math.atan2(t.x,-1*t.y)),t.x=e,t.y=n,t):Math.abs(this.sin_p12+1)<=it?(f=this.a*Ys(o,l,u,c,st),n=ni(((s=Math.sqrt(t.x*t.x+t.y*t.y))-f)/this.a,o,l,u,c),e=Ot(this.long0+Math.atan2(t.x,t.y)),t.x=e,t.y=n,t):(s=Math.sqrt(t.x*t.x+t.y*t.y),p=Math.atan2(t.x,t.y),M=hi(this.a,this.e,this.sin_p12),m=Math.cos(p),g=-(y=this.e*this.cos_p12*m)*y/(1-this.es),_=3*this.es*(1-g)*this.sin_p12*this.cos_p12*m/(1-this.es),b=1-g*(x=(v=s/M)-g*(1+g)*Math.pow(v,3)/6-_*(1+3*g)*Math.pow(v,4)/24)*x/2-v*x*x*x/6,d=Math.asin(this.sin_p12*Math.cos(x)+this.cos_p12*Math.sin(x)*m),e=Ot(this.long0+Math.asin(Math.sin(p)*Math.sin(x)/Math.cos(d))),w=Math.sin(d),n=Math.atan2((w-this.es*b*this.sin_p12)*Math.tan(d),w*(1-this.es)),t.x=e,t.y=n,t)},names:["Azimuthal_Equidistant","aeqd"]},wi={init:function(){this.sin_p14=Math.sin(this.lat0),this.cos_p14=Math.cos(this.lat0)},forward:function(t){var s,i,a,h,e,n,r,o=t.x,l=t.y;return a=Ot(o-this.long0),s=Math.sin(l),i=Math.cos(l),h=Math.cos(a),((e=this.sin_p14*s+this.cos_p14*i*h)>0||Math.abs(e)<=it)&&(n=1*this.a*i*Math.sin(a),r=this.y0+1*this.a*(this.cos_p14*s-this.sin_p14*i*h)),t.x=n,t.y=r,t},inverse:function(t){var s,i,a,h,e,n,r;return t.x-=this.x0,t.y-=this.y0,i=ui((s=Math.sqrt(t.x*t.x+t.y*t.y))/this.a),a=Math.sin(i),h=Math.cos(i),n=this.long0,Math.abs(s)<=it?(r=this.lat0,t.x=n,t.y=r,t):(r=ui(h*this.sin_p14+t.y*a*this.cos_p14/s),e=Math.abs(this.lat0)-st,Math.abs(e)<=it?(n=this.lat0>=0?Ot(this.long0+Math.atan2(t.x,-t.y)):Ot(this.long0-Math.atan2(-t.x,t.y)),t.x=n,t.y=r,t):(n=Ot(this.long0+Math.atan2(t.x*a,s*this.cos_p14*h-t.y*this.sin_p14*a)),t.x=n,t.y=r,t))},names:["ortho"]};function Si(t,s,i,a){var h;return t<it?(a.value=1,h=0):(h=Math.atan2(s,i),Math.abs(h)<=et?a.value=1:h>et&&h<=st+et?(a.value=2,h-=st):h>st+et||h<=-(st+et)?(a.value=3,h=h>=0?h-rt:h+rt):(a.value=4,h+=st)),h}function Ci(t,s){var i=t+s;return i<-rt?i+=nt:i>+rt&&(i-=nt),i}const Ni={init:function(){this.x0=this.x0||0,this.y0=this.y0||0,this.lat0=this.lat0||0,this.long0=this.long0||0,this.lat_ts=this.lat_ts||0,this.title=this.title||"Quadrilateralized Spherical Cube",this.lat0>=st-et/2?this.face=5:this.lat0<=-(st-et/2)?this.face=6:Math.abs(this.long0)<=et?this.face=1:Math.abs(this.long0)<=st+et?this.face=this.long0>0?2:4:this.face=3,0!==this.es&&(this.one_minus_f=1-(this.a-this.b)/this.a,this.one_minus_f_squared=this.one_minus_f*this.one_minus_f)},forward:function(t){var s,i,a,h,e,n,r={x:0,y:0},o={value:0};if(t.x-=this.long0,s=0!==this.es?Math.atan(this.one_minus_f_squared*Math.tan(t.y)):t.y,i=t.x,5===this.face)h=st-s,i>=et&&i<=st+et?(o.value=1,a=i-st):i>st+et||i<=-(st+et)?(o.value=2,a=i>0?i-rt:i+rt):i>-(st+et)&&i<=-et?(o.value=3,a=i+st):(o.value=4,a=i);else if(6===this.face)h=st+s,i>=et&&i<=st+et?(o.value=1,a=-i+st):i<et&&i>=-et?(o.value=2,a=-i):i<-et&&i>=-(st+et)?(o.value=3,a=-i-st):(o.value=4,a=i>0?-i+rt:-i-rt);else{var l,u,c,f,M,d;2===this.face?i=Ci(i,+st):3===this.face?i=Ci(i,+rt):4===this.face&&(i=Ci(i,-st)),f=Math.sin(s),M=Math.cos(s),d=Math.sin(i),l=M*Math.cos(i),u=M*d,c=f,1===this.face?a=Si(h=Math.acos(l),c,u,o):2===this.face?a=Si(h=Math.acos(u),c,-l,o):3===this.face?a=Si(h=Math.acos(-l),c,-u,o):4===this.face?a=Si(h=Math.acos(-u),c,l,o):(h=a=0,o.value=1)}return n=Math.atan(12/rt*(a+Math.acos(Math.sin(a)*Math.cos(et))-st)),e=Math.sqrt((1-Math.cos(h))/(Math.cos(n)*Math.cos(n))/(1-Math.cos(Math.atan(1/Math.cos(a))))),2===o.value?n+=st:3===o.value?n+=rt:4===o.value&&(n+=1.5*rt),r.x=e*Math.cos(n),r.y=e*Math.sin(n),r.x=r.x*this.a+this.x0,r.y=r.y*this.a+this.y0,t.x=r.x,t.y=r.y,t},inverse:function(t){var s,i,a,h,e,n,r,o,l,u,c,f,M={lam:0,phi:0},d={value:0};if(t.x=(t.x-this.x0)/this.a,t.y=(t.y-this.y0)/this.a,i=Math.atan(Math.sqrt(t.x*t.x+t.y*t.y)),s=Math.atan2(t.y,t.x),t.x>=0&&t.x>=Math.abs(t.y)?d.value=1:t.y>=0&&t.y>=Math.abs(t.x)?(d.value=2,s-=st):t.x<0&&-t.x>=Math.abs(t.y)?(d.value=3,s=s<0?s+rt:s-rt):(d.value=4,s+=st),l=rt/12*Math.tan(s),e=Math.sin(l)/(Math.cos(l)-1/Math.sqrt(2)),n=Math.atan(e),(r=1-(a=Math.cos(s))*a*(h=Math.tan(i))*h*(1-Math.cos(Math.atan(1/Math.cos(n)))))<-1?r=-1:r>1&&(r=1),5===this.face)o=Math.acos(r),M.phi=st-o,1===d.value?M.lam=n+st:2===d.value?M.lam=n<0?n+rt:n-rt:3===d.value?M.lam=n-st:M.lam=n;else if(6===this.face)o=Math.acos(r),M.phi=o-st,1===d.value?M.lam=-n+st:2===d.value?M.lam=-n:3===d.value?M.lam=-n-st:M.lam=n<0?-n-rt:-n+rt;else{var p,m,y;l=(p=r)*p,m=(l+=(y=l>=1?0:Math.sqrt(1-l)*Math.sin(n))*y)>=1?0:Math.sqrt(1-l),2===d.value?(l=m,m=-y,y=l):3===d.value?(m=-m,y=-y):4===d.value&&(l=m,m=y,y=-l),2===this.face?(l=p,p=-m,m=l):3===this.face?(p=-p,m=-m):4===this.face&&(l=p,p=m,m=-l),M.phi=Math.acos(-y)-st,M.lam=Math.atan2(m,p),2===this.face?M.lam=Ci(M.lam,-st):3===this.face?M.lam=Ci(M.lam,-rt):4===this.face&&(M.lam=Ci(M.lam,+st))}return 0!==this.es&&(u=M.phi<0?1:0,c=Math.tan(M.phi),f=this.b/Math.sqrt(c*c+this.one_minus_f_squared),M.phi=Math.atan(Math.sqrt(this.a*this.a-f*f)/(this.one_minus_f*f)),u&&(M.phi=-M.phi)),M.lam+=this.long0,t.x=M.lam,t.y=M.phi,t},names:["Quadrilateralized Spherical Cube","Quadrilateralized_Spherical_Cube","qsc"]};var Pi=[[1,22199e-21,-715515e-10,31103e-10],[.9986,-482243e-9,-24897e-9,-13309e-10],[.9954,-83103e-8,-448605e-10,-9.86701e-7],[.99,-.00135364,-59661e-9,36777e-10],[.9822,-.00167442,-449547e-11,-572411e-11],[.973,-.00214868,-903571e-10,1.8736e-8],[.96,-.00305085,-900761e-10,164917e-11],[.9427,-.00382792,-653386e-10,-26154e-10],[.9216,-.00467746,-10457e-8,481243e-11],[.8962,-.00536223,-323831e-10,-543432e-11],[.8679,-.00609363,-113898e-9,332484e-11],[.835,-.00698325,-640253e-10,9.34959e-7],[.7986,-.00755338,-500009e-10,9.35324e-7],[.7597,-.00798324,-35971e-9,-227626e-11],[.7186,-.00851367,-701149e-10,-86303e-10],[.6732,-.00986209,-199569e-9,191974e-10],[.6213,-.010418,883923e-10,624051e-11],[.5722,-.00906601,182e-6,624051e-11],[.5322,-.00677797,275608e-9,624051e-11]],Ei=[[-520417e-23,.0124,121431e-23,-845284e-16],[.062,.0124,-1.26793e-9,4.22642e-10],[.124,.0124,5.07171e-9,-1.60604e-9],[.186,.0123999,-1.90189e-8,6.00152e-9],[.248,.0124002,7.10039e-8,-2.24e-8],[.31,.0123992,-2.64997e-7,8.35986e-8],[.372,.0124029,9.88983e-7,-3.11994e-7],[.434,.0123893,-369093e-11,-4.35621e-7],[.4958,.0123198,-102252e-10,-3.45523e-7],[.5571,.0121916,-154081e-10,-5.82288e-7],[.6176,.0119938,-241424e-10,-5.25327e-7],[.6769,.011713,-320223e-10,-5.16405e-7],[.7346,.0113541,-397684e-10,-6.09052e-7],[.7903,.0109107,-489042e-10,-104739e-11],[.8435,.0103431,-64615e-9,-1.40374e-9],[.8936,.00969686,-64636e-9,-8547e-9],[.9394,.00840947,-192841e-9,-42106e-10],[.9761,.00616527,-256e-6,-42106e-10],[1,.00328947,-319159e-9,-42106e-10]],Ai=.8487,Ii=1.3523,Oi=function(t,s){return t[0]+s*(t[1]+s*(t[2]+s*t[3]))};const ki={init:function(){this.x0=this.x0||0,this.y0=this.y0||0,this.long0=this.long0||0,this.es=0,this.title=this.title||"Robinson"},forward:function(t){var s=Ot(t.x-this.long0),i=Math.abs(t.y),a=Math.floor(11.459155902616464*i);a<0?a=0:a>=18&&(a=17);var h={x:Oi(Pi[a],i=ht*(i-.08726646259971647*a))*s,y:Oi(Ei[a],i)};return t.y<0&&(h.y=-h.y),h.x=h.x*this.a*Ai+this.x0,h.y=h.y*this.a*Ii+this.y0,h},inverse:function(t){var s={x:(t.x-this.x0)/(this.a*Ai),y:Math.abs(t.y-this.y0)/(this.a*Ii)};if(s.y>=1)s.x/=Pi[18][0],s.y=t.y<0?-st:st;else{var i=Math.floor(18*s.y);for(i<0?i=0:i>=18&&(i=17);;)if(Ei[i][0]>s.y)--i;else{if(!(Ei[i+1][0]<=s.y))break;++i}var a=Ei[i],h=5*(s.y-a[0])/(Ei[i+1][0]-a[0]);h=function(t,s,i,a){for(var h=s;a;--a){var e=t(h);if(h-=e,Math.abs(e)<1e-10)break}return h}((function(t){return(Oi(a,t)-s.y)/function(t,s){return t[1]+s*(2*t[2]+3*s*t[3])}(a,t)}),h,0,100),s.x/=Oi(Pi[i],h),s.y=(5*i+h)*at,t.y<0&&(s.y=-s.y)}return s.x=Ot(s.x+this.long0),s},names:["Robinson","robin"]},qi={init:function(){this.name="geocent"},forward:function(t){return Yt(t,this.es,this.a)},inverse:function(t){return ts(t,this.es,this.a,this.b)},names:["Geocentric","geocentric","geocent","Geocent"]};var Ti={h:{def:1e5,num:!0},azi:{def:0,num:!0,degrees:!0},tilt:{def:0,num:!0,degrees:!0},long0:{def:0,num:!0},lat0:{def:0,num:!0}};const Li={init:function(){if(Object.keys(Ti).forEach(function(t){if(void 0===this[t])this[t]=Ti[t].def;else{if(Ti[t].num&&isNaN(this[t]))throw new Error("Invalid parameter value, must be numeric "+t+" = "+this[t]);Ti[t].num&&(this[t]=parseFloat(this[t]))}Ti[t].degrees&&(this[t]=this[t]*at)}.bind(this)),Math.abs(Math.abs(this.lat0)-st)<it?this.mode=this.lat0<0?1:0:Math.abs(this.lat0)<it?this.mode=2:(this.mode=3,this.sinph0=Math.sin(this.lat0),this.cosph0=Math.cos(this.lat0)),this.pn1=this.h/this.a,this.pn1<=0||this.pn1>1e10)throw new Error("Invalid height");this.p=1+this.pn1,this.rp=1/this.p,this.h1=1/this.pn1,this.pfact=(this.p+1)*this.h1,this.es=0;var t=this.tilt,s=this.azi;this.cg=Math.cos(s),this.sg=Math.sin(s),this.cw=Math.cos(t),this.sw=Math.sin(t)},forward:function(t){t.x-=this.long0;var s,i,a,h,e=Math.sin(t.y),n=Math.cos(t.y),r=Math.cos(t.x);switch(this.mode){case 3:i=this.sinph0*e+this.cosph0*n*r;break;case 2:i=n*r;break;case 1:i=-e;break;case 0:i=e}switch(s=(i=this.pn1/(this.p-i))*n*Math.sin(t.x),this.mode){case 3:i*=this.cosph0*e-this.sinph0*n*r;break;case 2:i*=e;break;case 0:i*=-n*r;break;case 1:i*=n*r}return h=1/((a=i*this.cg+s*this.sg)*this.sw*this.h1+this.cw),s=(s*this.cg-i*this.sg)*this.cw*h,i=a*h,t.x=s*this.a,t.y=i*this.a,t},inverse:function(t){t.x/=this.a,t.y/=this.a;var s,i,a,h={x:t.x,y:t.y};a=1/(this.pn1-t.y*this.sw),s=this.pn1*t.x*a,i=this.pn1*t.y*this.cw*a,t.x=s*this.cg+i*this.sg,t.y=i*this.cg-s*this.sg;var e=Rs(t.x,t.y);if(Math.abs(e)<it)h.x=0,h.y=t.y;else{var n,r;switch(r=1-e*e*this.pfact,r=(this.p-Math.sqrt(r))/(this.pn1/e+e/this.pn1),n=Math.sqrt(1-r*r),this.mode){case 3:h.y=Math.asin(n*this.sinph0+t.y*r*this.cosph0/e),t.y=(n-this.sinph0*Math.sin(h.y))*e,t.x*=r*this.cosph0;break;case 2:h.y=Math.asin(t.y*r/e),t.y=n*e,t.x*=r;break;case 0:h.y=Math.asin(n),t.y=-t.y;break;case 1:h.y=-Math.asin(n)}h.x=Math.atan2(t.x,t.y)}return t.x=h.x+this.long0,t.y=h.y,t},names:["Tilted_Perspective","tpers"]};var ji;fs.defaultDatum="WGS84",fs.Proj=$t,fs.WGS84=new fs.Proj("WGS84"),fs.Point=As,fs.toPoint=ns,fs.defs=Ct,fs.nadgrid=function(t,s){var i=new DataView(s),a=function(t){var s=t.getInt32(8,!1);return 11!==s&&(11!==(s=t.getInt32(8,!0))&&console.warn("Failed to detect nadgrid endian-ness, defaulting to little-endian"),!0)}(i),h=function(t,s){return{nFields:t.getInt32(8,s),nSubgridFields:t.getInt32(24,s),nSubgrids:t.getInt32(40,s),shiftType:Ht(t,56,64).trim(),fromSemiMajorAxis:t.getFloat64(120,s),fromSemiMinorAxis:t.getFloat64(136,s),toSemiMajorAxis:t.getFloat64(152,s),toSemiMinorAxis:t.getFloat64(168,s)}}(i,a);h.nSubgrids>1&&console.log("Only single NTv2 subgrids are currently supported, subsequent sub grids are ignored");var e=function(t,s,i){for(var a=[],h=0;h<s.nSubgrids;h++){var e=Vt(t,176,i),n=Jt(t,176,e,i),r=Math.round(1+(e.upperLongitude-e.lowerLongitude)/e.longitudeInterval),o=Math.round(1+(e.upperLatitude-e.lowerLatitude)/e.latitudeInterval);a.push({ll:[Qt(e.lowerLongitude),Qt(e.lowerLatitude)],del:[Qt(e.longitudeInterval),Qt(e.latitudeInterval)],lim:[r,o],count:e.gridNodeCount,cvs:Xt(n)})}return a}(i,h,a),n={header:h,subgrids:e};return Ut[t]=n,n},fs.transform=os,fs.mgrs=gs,fs.version="__VERSION__",(ji=fs).Proj.projections.add(js),ji.Proj.projections.add(Ds),ji.Proj.projections.add(Fs),ji.Proj.projections.add(Qs),ji.Proj.projections.add(Hs),ji.Proj.projections.add(Xs),ji.Proj.projections.add(Ks),ji.Proj.projections.add(Zs),ji.Proj.projections.add($s),ji.Proj.projections.add(ri),ji.Proj.projections.add(li),ji.Proj.projections.add(ci),ji.Proj.projections.add(fi),ji.Proj.projections.add(Mi),ji.Proj.projections.add(di),ji.Proj.projections.add(pi),ji.Proj.projections.add(mi),ji.Proj.projections.add(yi),ji.Proj.projections.add(gi),ji.Proj.projections.add(_i),ji.Proj.projections.add(vi),ji.Proj.projections.add(xi),ji.Proj.projections.add(bi),ji.Proj.projections.add(wi),ji.Proj.projections.add(Ni),ji.Proj.projections.add(ki),ji.Proj.projections.add(qi),ji.Proj.projections.add(Li);const Gi=fs;function Ri(t,s){return function(t){if(Array.isArray(t))return t}(t)||function(t,s){var i=null==t?null:"undefined"!=typeof Symbol&&t[Symbol.iterator]||t["@@iterator"];if(null!=i){var a,h,e=[],n=!0,r=!1;try{for(i=i.call(t);!(n=(a=i.next()).done)&&(e.push(a.value),!s||e.length!==s);n=!0);}catch(t){r=!0,h=t}finally{try{n||null==i.return||i.return()}finally{if(r)throw h}}return e}}(t,s)||function(t,s){if(t){if("string"==typeof t)return Bi(t,s);var i=Object.prototype.toString.call(t).slice(8,-1);return"Object"===i&&t.constructor&&(i=t.constructor.name),"Map"===i||"Set"===i?Array.from(t):"Arguments"===i||/^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(i)?Bi(t,s):void 0}}(t,s)||function(){throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")}()}function Bi(t,s){(null==s||s>t.length)&&(s=t.length);for(var i=0,a=new Array(s);i<s;i++)a[i]=t[i];return a}Gi.defs("urn:ogc:def:crs:EPSG:6.18.3:3857",Gi.defs("EPSG:3857")),Gi.defs("urn:ogc:def:crs:EPSG:3857",Gi.defs("EPSG:3857")),Gi.defs("urn:ogc:def:crs:EPSG::3857",Gi.defs("EPSG:3857"));var zi=function(t,s){return function(i){var a=t.imageToViewportCoordinates(i[0],i[1]);return Hi(s)([a.x,a.y])}},Di=function(t,s){return function(i){var a=Ui(s)(i),h=t.viewportToImageCoordinates(a[0],a[1]);return[h.x,h.y]}},Fi=function(t){return function(s){return Gi("EPSG:4326",t.code,s)}},Ui=function(t){return function(s){var i=Gi("EPSG:4326",t.code,s);return Qi(t.extent)(i)}},Wi=function(t){return function(s){return Gi(t.code,"EPSG:4326",s)}},Qi=function(t){return function(s){var i=Ri(s,2),a=i[0],h=i[1],e=Ri(t,2),n=e[0],r=e[1];return[(a+n/2)/n,(r/2-h)/r]}},Hi=function(t){return function(s){var i=Xi(t.extent)(s);return Gi(t.code,"EPSG:4326",i)}},Xi=function(t){return function(s){var i=Ri(s,2),a=i[0],h=i[1],e=Ri(t,2),n=e[0],r=e[1];return[a*n-n/2,r/2-h*r]}};const Vi=function(t,s){var i=s.url;return fetch(i).then((function(t){return t.text()})).then((function(i){var a=function(t,s){var i=(new Z).read(t),a=null!=s&&s.layer?i.Contents.Layer.find((function(t){return t.Title===s.layer})):i.Contents.Layer[0],h=(null==s?void 0:s.style)||a.Style.find((function(t){return t.isDefault})).Identifier,e=a.ResourceURL[0].template,n=a.TileMatrixSetLink[0].TileMatrixSet,r=i.Contents.TileMatrixSet.find((function(t){return t.Identifier===n})),o=r.TileMatrix,l=o[o.length-1],u=l.TileWidth,c=l.TileHeight,f=l.MatrixWidth,M=l.MatrixHeight,d=l.TopLeftCorner;return{tileSource:{width:f*u,height:M*c,tileWidth:u,tileHeight:c,minLevel:8,getTileUrl:function(t,s,i){return e.replace("{Style}",h).replace("{TileMatrixSet}",n).replace("{TileMatrix}",t-8).replace("{TileCol}",s).replace("{TileRow}",i)}},mapBounds:a.WGS84BoundingBox,projection:{code:r.SupportedCRS,extent:[2*Math.abs(d[0]),2*Math.abs(d[1])]}}}(i,s),h=a.tileSource,e=a.mapBounds,n=a.projection,r=Ui(n)([Math.min(e[0],e[2]),Math.max(e[3],e[1])]),o=Ui(n)([Math.max(e[2],e[0]),Math.min(e[3],e[1])]),l=new OpenSeadragon.Rect(r[0],r[1],o[0]-r[0],o[1]-r[1]);return t.addTiledImage({tileSource:h,success:function(){t.viewport.fitBounds(l,!0)}}),{imageToLonLat:zi(t.viewport,n),lonLatToImageCoordinates:Di(t.viewport,n),lonLatToMapCoordinates:Fi(n),lonLatToViewportCoordinates:Ui(n),mapToLonLat:Wi(n),mapToViewportCoordinates:Qi(n.extent),viewportToLonLat:Hi(n),viewportToMapCoordinates:Xi(n.extent)}}))};return i.default})()}));
+function si(t, i) {
+  return wi(t, i, []).join("");
+}
+function wi(t, i, a) {
+  if (t.nodeType == Node.CDATA_SECTION_NODE || t.nodeType == Node.TEXT_NODE)
+    i ? a.push(String(t.nodeValue).replace(/(\r\n|\r|\n)/g, "")) : a.push(t.nodeValue);
+  else {
+    var e = void 0;
+    for (e = t.firstChild; e; e = e.nextSibling)
+      wi(e, i, a);
+  }
+  return a;
+}
+function ha(t) {
+  return "documentElement" in t;
+}
+function na(t) {
+  return new DOMParser().parseFromString(t, "application/xml");
+}
+function Jt(t, i) {
+  return function(a, e) {
+    var s = t.call(i !== void 0 ? i : this, a, e);
+    if (s !== void 0) {
+      var r = e[e.length - 1];
+      r.push(s);
+    }
+  };
+}
+function Q(t, i, a) {
+  return function(e, s) {
+    var r = t.call(a !== void 0 ? a : this, e, s);
+    if (r !== void 0) {
+      var n = s[s.length - 1], h = i !== void 0 ? i : e.localName, o = void 0;
+      h in n ? o = n[h] : (o = [], n[h] = o), o.push(r);
+    }
+  };
+}
+function b(t, i, a) {
+  return function(e, s) {
+    var r = t.call(a !== void 0 ? a : this, e, s);
+    if (r !== void 0) {
+      var n = s[s.length - 1], h = i !== void 0 ? i : e.localName;
+      n[h] = r;
+    }
+  };
+}
+function w(t, i, a) {
+  var e = a !== void 0 ? a : {}, s, r;
+  for (s = 0, r = t.length; s < r; ++s)
+    e[t[s]] = i;
+  return e;
+}
+function oa(t, i, a, e) {
+  var s;
+  for (s = i.firstElementChild; s; s = s.nextElementSibling) {
+    var r = t[s.namespaceURI];
+    if (r !== void 0) {
+      var n = r[s.localName];
+      n !== void 0 && n.call(e, s, a);
+    }
+  }
+}
+function p(t, i, a, e, s) {
+  return e.push(t), oa(i, a, e, s), e.pop();
+}
+var la = function() {
+  function t() {
+  }
+  return t.prototype.read = function(i) {
+    if (i)
+      if (typeof i == "string") {
+        var a = na(i);
+        return this.readFromDocument(a);
+      } else
+        return ha(i) ? this.readFromDocument(i) : this.readFromNode(i);
+    else
+      return null;
+  }, t.prototype.readFromDocument = function(i) {
+    for (var a = i.firstChild; a; a = a.nextSibling)
+      if (a.nodeType == Node.ELEMENT_NODE)
+        return this.readFromNode(a);
+    return null;
+  }, t.prototype.readFromNode = function(i) {
+  }, t;
+}();
+const Ri = la;
+var fa = "http://www.w3.org/1999/xlink";
+function ei(t) {
+  return t.getAttributeNS(fa, "href");
+}
+function ua(t) {
+  var i = si(t, !1);
+  return ca(i);
+}
+function ca(t) {
+  var i = /^\s*([+\-]?\d*\.?\d+(?:e[+\-]?\d+)?)\s*$/i.exec(t);
+  if (i)
+    return parseFloat(i[1]);
+}
+function at(t) {
+  var i = si(t, !1);
+  return Ma(i);
+}
+function Ma(t) {
+  var i = /^\s*(\d+)\s*$/.exec(t);
+  if (i)
+    return parseInt(i[1], 10);
+}
+function C(t) {
+  return si(t, !1).trim();
+}
+var va = globalThis && globalThis.__extends || function() {
+  var t = function(i, a) {
+    return t = Object.setPrototypeOf || { __proto__: [] } instanceof Array && function(e, s) {
+      e.__proto__ = s;
+    } || function(e, s) {
+      for (var r in s)
+        Object.prototype.hasOwnProperty.call(s, r) && (e[r] = s[r]);
+    }, t(i, a);
+  };
+  return function(i, a) {
+    if (typeof a != "function" && a !== null)
+      throw new TypeError("Class extends value " + String(a) + " is not a constructor or null");
+    t(i, a);
+    function e() {
+      this.constructor = i;
+    }
+    i.prototype = a === null ? Object.create(a) : (e.prototype = a.prototype, new e());
+  };
+}(), W = [null, "http://www.opengis.net/ows/1.1"], da = w(W, {
+  ServiceIdentification: b(ka),
+  ServiceProvider: b(Fa),
+  OperationsMetadata: b(Da)
+}), ma = function(t) {
+  va(i, t);
+  function i() {
+    return t.call(this) || this;
+  }
+  return i.prototype.readFromNode = function(a) {
+    var e = p({}, da, a, []);
+    return e || null;
+  }, i;
+}(Ri), ya = w(W, {
+  DeliveryPoint: b(C),
+  City: b(C),
+  AdministrativeArea: b(C),
+  PostalCode: b(C),
+  Country: b(C),
+  ElectronicMailAddress: b(C)
+}), _a = w(W, {
+  Value: Q(Ua)
+}), ga = w(W, {
+  AllowedValues: b(Ra)
+}), xa = w(W, {
+  Phone: b(Ba),
+  Address: b(wa)
+}), ba = w(W, {
+  HTTP: b(Ga)
+}), Sa = w(W, {
+  Get: Q(qa),
+  Post: void 0
+}), Ea = w(W, {
+  DCP: b(La)
+}), Aa = w(W, {
+  Operation: $a
+}), Ca = w(W, {
+  Voice: b(C),
+  Facsimile: b(C)
+}), Na = w(W, {
+  Constraint: Q(pa)
+}), Pa = w(W, {
+  IndividualName: b(C),
+  PositionName: b(C),
+  ContactInfo: b(Oa)
+}), Ta = w(W, {
+  Abstract: b(C),
+  AccessConstraints: b(C),
+  Fees: b(C),
+  Title: b(C),
+  ServiceTypeVersion: b(C),
+  ServiceType: b(C)
+}), Ia = w(W, {
+  ProviderName: b(C),
+  ProviderSite: b(ei),
+  ServiceContact: b(za)
+});
+function wa(t, i) {
+  return p({}, ya, t, i);
+}
+function Ra(t, i) {
+  return p({}, _a, t, i);
+}
+function pa(t, i) {
+  var a = t.getAttribute("name");
+  if (!!a)
+    return p({ name: a }, ga, t, i);
+}
+function Oa(t, i) {
+  return p({}, xa, t, i);
+}
+function La(t, i) {
+  return p({}, ba, t, i);
+}
+function qa(t, i) {
+  var a = ei(t);
+  if (!!a)
+    return p({ href: a }, Na, t, i);
+}
+function Ga(t, i) {
+  return p({}, Sa, t, i);
+}
+function $a(t, i) {
+  var a = t.getAttribute("name"), e = p({}, Ea, t, i);
+  if (!!e) {
+    var s = i[i.length - 1];
+    s[a] = e;
+  }
+}
+function Da(t, i) {
+  return p({}, Aa, t, i);
+}
+function Ba(t, i) {
+  return p({}, Ca, t, i);
+}
+function ka(t, i) {
+  return p({}, Ta, t, i);
+}
+function za(t, i) {
+  return p({}, Pa, t, i);
+}
+function Fa(t, i) {
+  return p({}, Ia, t, i);
+}
+function Ua(t, i) {
+  return C(t);
+}
+const Wa = ma;
+function ja(t) {
+  for (var i = Qa(), a = 0, e = t.length; a < e; ++a)
+    Ha(i, t[a]);
+  return i;
+}
+function Qa() {
+  return [1 / 0, 1 / 0, -1 / 0, -1 / 0];
+}
+function Ha(t, i) {
+  i[0] < t[0] && (t[0] = i[0]), i[0] > t[2] && (t[2] = i[0]), i[1] < t[1] && (t[1] = i[1]), i[1] > t[3] && (t[3] = i[1]);
+}
+var Xa = globalThis && globalThis.__extends || function() {
+  var t = function(i, a) {
+    return t = Object.setPrototypeOf || { __proto__: [] } instanceof Array && function(e, s) {
+      e.__proto__ = s;
+    } || function(e, s) {
+      for (var r in s)
+        Object.prototype.hasOwnProperty.call(s, r) && (e[r] = s[r]);
+    }, t(i, a);
+  };
+  return function(i, a) {
+    if (typeof a != "function" && a !== null)
+      throw new TypeError("Class extends value " + String(a) + " is not a constructor or null");
+    t(i, a);
+    function e() {
+      this.constructor = i;
+    }
+    i.prototype = a === null ? Object.create(a) : (e.prototype = a.prototype, new e());
+  };
+}(), Y = [null, "http://www.opengis.net/wmts/1.0"], _t = [null, "http://www.opengis.net/ows/1.1"], Va = w(Y, {
+  Contents: b(ns)
+}), Ka = function(t) {
+  Xa(i, t);
+  function i() {
+    var a = t.call(this) || this;
+    return a.owsParser_ = new Wa(), a;
+  }
+  return i.prototype.readFromNode = function(a) {
+    var e = a.getAttribute("version");
+    e && (e = e.trim());
+    var s = this.owsParser_.readFromNode(a);
+    return s ? (s.version = e, s = p(s, Va, a, []), s || null) : null;
+  }, i;
+}(Ri), Ja = w(Y, {
+  Layer: Q(os),
+  TileMatrixSet: Q(ls)
+}), Za = w(Y, {
+  Style: Q(fs),
+  Format: Q(C),
+  TileMatrixSetLink: Q(us),
+  Dimension: Q(cs),
+  ResourceURL: Q(Ms)
+}, w(_t, {
+  Title: b(C),
+  Abstract: b(C),
+  WGS84BoundingBox: b(pi),
+  Identifier: b(C)
+})), Ya = w(Y, {
+  LegendURL: Q(vs)
+}, w(_t, {
+  Title: b(C),
+  Identifier: b(C)
+})), ts = w(Y, {
+  TileMatrixSet: b(C),
+  TileMatrixSetLimits: b(ms)
+}), is = w(Y, {
+  TileMatrixLimits: Jt(ys)
+}), as = w(Y, {
+  TileMatrix: b(C),
+  MinTileRow: b(at),
+  MaxTileRow: b(at),
+  MinTileCol: b(at),
+  MaxTileCol: b(at)
+}), ss = w(Y, {
+  Default: b(C),
+  Value: Q(C)
+}, w(_t, {
+  Identifier: b(C)
+})), es = w(_t, {
+  LowerCorner: Jt(Zt),
+  UpperCorner: Jt(Zt)
+}), rs = w(Y, {
+  WellKnownScaleSet: b(C),
+  TileMatrix: Q(ds)
+}, w(_t, {
+  SupportedCRS: b(C),
+  Identifier: b(C),
+  BoundingBox: b(pi)
+})), hs = w(Y, {
+  TopLeftCorner: b(Zt),
+  ScaleDenominator: b(ua),
+  TileWidth: b(at),
+  TileHeight: b(at),
+  MatrixWidth: b(at),
+  MatrixHeight: b(at)
+}, w(_t, {
+  Identifier: b(C)
+}));
+function ns(t, i) {
+  return p({}, Ja, t, i);
+}
+function os(t, i) {
+  return p({}, Za, t, i);
+}
+function ls(t, i) {
+  return p({}, rs, t, i);
+}
+function fs(t, i) {
+  var a = p({}, Ya, t, i);
+  if (!!a) {
+    var e = t.getAttribute("isDefault") === "true";
+    return a.isDefault = e, a;
+  }
+}
+function us(t, i) {
+  return p({}, ts, t, i);
+}
+function cs(t, i) {
+  return p({}, ss, t, i);
+}
+function Ms(t, i) {
+  var a = t.getAttribute("format"), e = t.getAttribute("template"), s = t.getAttribute("resourceType"), r = {};
+  return a && (r.format = a), e && (r.template = e), s && (r.resourceType = s), r;
+}
+function pi(t, i) {
+  var a = p([], es, t, i);
+  if (a.length == 2)
+    return ja(a);
+}
+function vs(t, i) {
+  var a = {};
+  return a.format = t.getAttribute("format"), a.href = ei(t), a;
+}
+function Zt(t, i) {
+  var a = C(t).split(/\s+/);
+  if (!(!a || a.length != 2)) {
+    var e = +a[0], s = +a[1];
+    if (!(isNaN(e) || isNaN(s)))
+      return [e, s];
+  }
+}
+function ds(t, i) {
+  return p({}, hs, t, i);
+}
+function ms(t, i) {
+  return p([], is, t, i);
+}
+function ys(t, i) {
+  return p({}, as, t, i);
+}
+const _s = Ka, gs = (t, i) => {
+  const e = new _s().read(t), s = i != null && i.layer ? e.Contents.Layer.find((d) => d.Title === i.layer) : e.Contents.Layer[0], r = (i == null ? void 0 : i.style) || s.Style.find((d) => d.isDefault).Identifier, n = s.ResourceURL[0].template, h = s.TileMatrixSetLink[0].TileMatrixSet, o = e.Contents.TileMatrixSet.find((d) => d.Identifier === h), { TileMatrix: l } = o, {
+    TileWidth: u,
+    TileHeight: f,
+    MatrixWidth: c,
+    MatrixHeight: v,
+    TopLeftCorner: M
+  } = l[Math.min(20, l.length - 1)];
+  return {
+    tileSource: {
+      width: c * u,
+      height: v * f,
+      tileWidth: u,
+      tileHeight: f,
+      minLevel: 8,
+      getTileUrl: (d, y, x) => n.replace("{Style}", r).replace("{TileMatrixSet}", h).replace("{TileMatrix}", d - 8).replace("{TileCol}", y).replace("{TileRow}", x)
+    },
+    mapBounds: s.WGS84BoundingBox,
+    projection: {
+      code: o.SupportedCRS,
+      extent: [2 * Math.abs(M[0]), 2 * Math.abs(M[1])]
+    }
+  };
+};
+function xs(t) {
+  t("EPSG:4326", "+title=WGS 84 (long/lat) +proj=longlat +ellps=WGS84 +datum=WGS84 +units=degrees"), t("EPSG:4269", "+title=NAD83 (long/lat) +proj=longlat +a=6378137.0 +b=6356752.31414036 +ellps=GRS80 +datum=NAD83 +units=degrees"), t("EPSG:3857", "+title=WGS 84 / Pseudo-Mercator +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +no_defs"), t.WGS84 = t["EPSG:4326"], t["EPSG:3785"] = t["EPSG:3857"], t.GOOGLE = t["EPSG:3857"], t["EPSG:900913"] = t["EPSG:3857"], t["EPSG:102113"] = t["EPSG:3857"];
+}
+var ot = 1, lt = 2, Gt = 3, bs = 4, Yt = 5, fi = 6378137, Ss = 6356752314e-3, ui = 0.0066943799901413165, At = 484813681109536e-20, m = Math.PI / 2, Es = 0.16666666666666666, As = 0.04722222222222222, Cs = 0.022156084656084655, _ = 1e-10, D = 0.017453292519943295, K = 57.29577951308232, T = Math.PI / 4, Ct = Math.PI * 2, G = 3.14159265359, j = {};
+j.greenwich = 0;
+j.lisbon = -9.131906111111;
+j.paris = 2.337229166667;
+j.bogota = -74.080916666667;
+j.madrid = -3.687938888889;
+j.rome = 12.452333333333;
+j.bern = 7.439583333333;
+j.jakarta = 106.807719444444;
+j.ferro = -17.666666666667;
+j.brussels = 4.367975;
+j.stockholm = 18.058277777778;
+j.athens = 23.7163375;
+j.oslo = 10.722916666667;
+const Ns = {
+  ft: { to_meter: 0.3048 },
+  "us-ft": { to_meter: 1200 / 3937 }
+};
+var ci = /[\s_\-\/\(\)]/g;
+function et(t, i) {
+  if (t[i])
+    return t[i];
+  for (var a = Object.keys(t), e = i.toLowerCase().replace(ci, ""), s = -1, r, n; ++s < a.length; )
+    if (r = a[s], n = r.toLowerCase().replace(ci, ""), n === e)
+      return t[r];
+}
+function ti(t) {
+  var i = {}, a = t.split("+").map(function(h) {
+    return h.trim();
+  }).filter(function(h) {
+    return h;
+  }).reduce(function(h, o) {
+    var l = o.split("=");
+    return l.push(!0), h[l[0].toLowerCase()] = l[1], h;
+  }, {}), e, s, r, n = {
+    proj: "projName",
+    datum: "datumCode",
+    rf: function(h) {
+      i.rf = parseFloat(h);
+    },
+    lat_0: function(h) {
+      i.lat0 = h * D;
+    },
+    lat_1: function(h) {
+      i.lat1 = h * D;
+    },
+    lat_2: function(h) {
+      i.lat2 = h * D;
+    },
+    lat_ts: function(h) {
+      i.lat_ts = h * D;
+    },
+    lon_0: function(h) {
+      i.long0 = h * D;
+    },
+    lon_1: function(h) {
+      i.long1 = h * D;
+    },
+    lon_2: function(h) {
+      i.long2 = h * D;
+    },
+    alpha: function(h) {
+      i.alpha = parseFloat(h) * D;
+    },
+    gamma: function(h) {
+      i.rectified_grid_angle = parseFloat(h);
+    },
+    lonc: function(h) {
+      i.longc = h * D;
+    },
+    x_0: function(h) {
+      i.x0 = parseFloat(h);
+    },
+    y_0: function(h) {
+      i.y0 = parseFloat(h);
+    },
+    k_0: function(h) {
+      i.k0 = parseFloat(h);
+    },
+    k: function(h) {
+      i.k0 = parseFloat(h);
+    },
+    a: function(h) {
+      i.a = parseFloat(h);
+    },
+    b: function(h) {
+      i.b = parseFloat(h);
+    },
+    r_a: function() {
+      i.R_A = !0;
+    },
+    zone: function(h) {
+      i.zone = parseInt(h, 10);
+    },
+    south: function() {
+      i.utmSouth = !0;
+    },
+    towgs84: function(h) {
+      i.datum_params = h.split(",").map(function(o) {
+        return parseFloat(o);
+      });
+    },
+    to_meter: function(h) {
+      i.to_meter = parseFloat(h);
+    },
+    units: function(h) {
+      i.units = h;
+      var o = et(Ns, h);
+      o && (i.to_meter = o.to_meter);
+    },
+    from_greenwich: function(h) {
+      i.from_greenwich = h * D;
+    },
+    pm: function(h) {
+      var o = et(j, h);
+      i.from_greenwich = (o || parseFloat(h)) * D;
+    },
+    nadgrids: function(h) {
+      h === "@null" ? i.datumCode = "none" : i.nadgrids = h;
+    },
+    axis: function(h) {
+      var o = "ewnsud";
+      h.length === 3 && o.indexOf(h.substr(0, 1)) !== -1 && o.indexOf(h.substr(1, 1)) !== -1 && o.indexOf(h.substr(2, 1)) !== -1 && (i.axis = h);
+    },
+    approx: function() {
+      i.approx = !0;
+    }
+  };
+  for (e in a)
+    s = a[e], e in n ? (r = n[e], typeof r == "function" ? r(s) : i[r] = s) : i[e] = s;
+  return typeof i.datumCode == "string" && i.datumCode !== "WGS84" && (i.datumCode = i.datumCode.toLowerCase()), i;
+}
+var Nt = 1, Oi = 2, Li = 3, zt = 4, qi = 5, ri = -1, Ps = /\s/, Ts = /[A-Za-z]/, Is = /[A-Za-z84]/, Qt = /[,\]]/, Gi = /[\d\.E\-\+]/;
+function it(t) {
+  if (typeof t != "string")
+    throw new Error("not a string");
+  this.text = t.trim(), this.level = 0, this.place = 0, this.root = null, this.stack = [], this.currentObject = null, this.state = Nt;
+}
+it.prototype.readCharicter = function() {
+  var t = this.text[this.place++];
+  if (this.state !== zt)
+    for (; Ps.test(t); ) {
+      if (this.place >= this.text.length)
+        return;
+      t = this.text[this.place++];
+    }
+  switch (this.state) {
+    case Nt:
+      return this.neutral(t);
+    case Oi:
+      return this.keyword(t);
+    case zt:
+      return this.quoted(t);
+    case qi:
+      return this.afterquote(t);
+    case Li:
+      return this.number(t);
+    case ri:
+      return;
+  }
+};
+it.prototype.afterquote = function(t) {
+  if (t === '"') {
+    this.word += '"', this.state = zt;
+    return;
+  }
+  if (Qt.test(t)) {
+    this.word = this.word.trim(), this.afterItem(t);
+    return;
+  }
+  throw new Error(`havn't handled "` + t + '" in afterquote yet, index ' + this.place);
+};
+it.prototype.afterItem = function(t) {
+  if (t === ",") {
+    this.word !== null && this.currentObject.push(this.word), this.word = null, this.state = Nt;
+    return;
+  }
+  if (t === "]") {
+    this.level--, this.word !== null && (this.currentObject.push(this.word), this.word = null), this.state = Nt, this.currentObject = this.stack.pop(), this.currentObject || (this.state = ri);
+    return;
+  }
+};
+it.prototype.number = function(t) {
+  if (Gi.test(t)) {
+    this.word += t;
+    return;
+  }
+  if (Qt.test(t)) {
+    this.word = parseFloat(this.word), this.afterItem(t);
+    return;
+  }
+  throw new Error(`havn't handled "` + t + '" in number yet, index ' + this.place);
+};
+it.prototype.quoted = function(t) {
+  if (t === '"') {
+    this.state = qi;
+    return;
+  }
+  this.word += t;
+};
+it.prototype.keyword = function(t) {
+  if (Is.test(t)) {
+    this.word += t;
+    return;
+  }
+  if (t === "[") {
+    var i = [];
+    i.push(this.word), this.level++, this.root === null ? this.root = i : this.currentObject.push(i), this.stack.push(this.currentObject), this.currentObject = i, this.state = Nt;
+    return;
+  }
+  if (Qt.test(t)) {
+    this.afterItem(t);
+    return;
+  }
+  throw new Error(`havn't handled "` + t + '" in keyword yet, index ' + this.place);
+};
+it.prototype.neutral = function(t) {
+  if (Ts.test(t)) {
+    this.word = t, this.state = Oi;
+    return;
+  }
+  if (t === '"') {
+    this.word = "", this.state = zt;
+    return;
+  }
+  if (Gi.test(t)) {
+    this.word = t, this.state = Li;
+    return;
+  }
+  if (Qt.test(t)) {
+    this.afterItem(t);
+    return;
+  }
+  throw new Error(`havn't handled "` + t + '" in neutral yet, index ' + this.place);
+};
+it.prototype.output = function() {
+  for (; this.place < this.text.length; )
+    this.readCharicter();
+  if (this.state === ri)
+    return this.root;
+  throw new Error('unable to parse string "' + this.text + '". State is ' + this.state);
+};
+function ws(t) {
+  var i = new it(t);
+  return i.output();
+}
+function Mi(t, i, a) {
+  Array.isArray(i) && (a.unshift(i), i = null);
+  var e = i ? {} : t, s = a.reduce(function(r, n) {
+    return ut(n, r), r;
+  }, e);
+  i && (t[i] = s);
+}
+function ut(t, i) {
+  if (!Array.isArray(t)) {
+    i[t] = !0;
+    return;
+  }
+  var a = t.shift();
+  if (a === "PARAMETER" && (a = t.shift()), t.length === 1) {
+    if (Array.isArray(t[0])) {
+      i[a] = {}, ut(t[0], i[a]);
+      return;
+    }
+    i[a] = t[0];
+    return;
+  }
+  if (!t.length) {
+    i[a] = !0;
+    return;
+  }
+  if (a === "TOWGS84") {
+    i[a] = t;
+    return;
+  }
+  if (a === "AXIS") {
+    a in i || (i[a] = []), i[a].push(t);
+    return;
+  }
+  Array.isArray(a) || (i[a] = {});
+  var e;
+  switch (a) {
+    case "UNIT":
+    case "PRIMEM":
+    case "VERT_DATUM":
+      i[a] = {
+        name: t[0].toLowerCase(),
+        convert: t[1]
+      }, t.length === 3 && ut(t[2], i[a]);
+      return;
+    case "SPHEROID":
+    case "ELLIPSOID":
+      i[a] = {
+        name: t[0],
+        a: t[1],
+        rf: t[2]
+      }, t.length === 4 && ut(t[3], i[a]);
+      return;
+    case "PROJECTEDCRS":
+    case "PROJCRS":
+    case "GEOGCS":
+    case "GEOCCS":
+    case "PROJCS":
+    case "LOCAL_CS":
+    case "GEODCRS":
+    case "GEODETICCRS":
+    case "GEODETICDATUM":
+    case "EDATUM":
+    case "ENGINEERINGDATUM":
+    case "VERT_CS":
+    case "VERTCRS":
+    case "VERTICALCRS":
+    case "COMPD_CS":
+    case "COMPOUNDCRS":
+    case "ENGINEERINGCRS":
+    case "ENGCRS":
+    case "FITTED_CS":
+    case "LOCAL_DATUM":
+    case "DATUM":
+      t[0] = ["name", t[0]], Mi(i, a, t);
+      return;
+    default:
+      for (e = -1; ++e < t.length; )
+        if (!Array.isArray(t[e]))
+          return ut(t, i[a]);
+      return Mi(i, a, t);
+  }
+}
+var Rs = 0.017453292519943295;
+function ps(t, i) {
+  var a = i[0], e = i[1];
+  !(a in t) && e in t && (t[a] = t[e], i.length === 3 && (t[a] = i[2](t[a])));
+}
+function tt(t) {
+  return t * Rs;
+}
+function Os(t) {
+  if (t.type === "GEOGCS" ? t.projName = "longlat" : t.type === "LOCAL_CS" ? (t.projName = "identity", t.local = !0) : typeof t.PROJECTION == "object" ? t.projName = Object.keys(t.PROJECTION)[0] : t.projName = t.PROJECTION, t.AXIS) {
+    for (var i = "", a = 0, e = t.AXIS.length; a < e; ++a) {
+      var s = [t.AXIS[a][0].toLowerCase(), t.AXIS[a][1].toLowerCase()];
+      s[0].indexOf("north") !== -1 || (s[0] === "y" || s[0] === "lat") && s[1] === "north" ? i += "n" : s[0].indexOf("south") !== -1 || (s[0] === "y" || s[0] === "lat") && s[1] === "south" ? i += "s" : s[0].indexOf("east") !== -1 || (s[0] === "x" || s[0] === "lon") && s[1] === "east" ? i += "e" : (s[0].indexOf("west") !== -1 || (s[0] === "x" || s[0] === "lon") && s[1] === "west") && (i += "w");
+    }
+    i.length === 2 && (i += "u"), i.length === 3 && (t.axis = i);
+  }
+  t.UNIT && (t.units = t.UNIT.name.toLowerCase(), t.units === "metre" && (t.units = "meter"), t.UNIT.convert && (t.type === "GEOGCS" ? t.DATUM && t.DATUM.SPHEROID && (t.to_meter = t.UNIT.convert * t.DATUM.SPHEROID.a) : t.to_meter = t.UNIT.convert));
+  var r = t.GEOGCS;
+  t.type === "GEOGCS" && (r = t), r && (r.DATUM ? t.datumCode = r.DATUM.name.toLowerCase() : t.datumCode = r.name.toLowerCase(), t.datumCode.slice(0, 2) === "d_" && (t.datumCode = t.datumCode.slice(2)), (t.datumCode === "new_zealand_geodetic_datum_1949" || t.datumCode === "new_zealand_1949") && (t.datumCode = "nzgd49"), (t.datumCode === "wgs_1984" || t.datumCode === "world_geodetic_system_1984") && (t.PROJECTION === "Mercator_Auxiliary_Sphere" && (t.sphere = !0), t.datumCode = "wgs84"), t.datumCode.slice(-6) === "_ferro" && (t.datumCode = t.datumCode.slice(0, -6)), t.datumCode.slice(-8) === "_jakarta" && (t.datumCode = t.datumCode.slice(0, -8)), ~t.datumCode.indexOf("belge") && (t.datumCode = "rnb72"), r.DATUM && r.DATUM.SPHEROID && (t.ellps = r.DATUM.SPHEROID.name.replace("_19", "").replace(/[Cc]larke\_18/, "clrk"), t.ellps.toLowerCase().slice(0, 13) === "international" && (t.ellps = "intl"), t.a = r.DATUM.SPHEROID.a, t.rf = parseFloat(r.DATUM.SPHEROID.rf, 10)), r.DATUM && r.DATUM.TOWGS84 && (t.datum_params = r.DATUM.TOWGS84), ~t.datumCode.indexOf("osgb_1936") && (t.datumCode = "osgb36"), ~t.datumCode.indexOf("osni_1952") && (t.datumCode = "osni52"), (~t.datumCode.indexOf("tm65") || ~t.datumCode.indexOf("geodetic_datum_of_1965")) && (t.datumCode = "ire65"), t.datumCode === "ch1903+" && (t.datumCode = "ch1903"), ~t.datumCode.indexOf("israel") && (t.datumCode = "isr93")), t.b && !isFinite(t.b) && (t.b = t.a);
+  function n(l) {
+    var u = t.to_meter || 1;
+    return l * u;
+  }
+  var h = function(l) {
+    return ps(t, l);
+  }, o = [
+    ["standard_parallel_1", "Standard_Parallel_1"],
+    ["standard_parallel_1", "Latitude of 1st standard parallel"],
+    ["standard_parallel_2", "Standard_Parallel_2"],
+    ["standard_parallel_2", "Latitude of 2nd standard parallel"],
+    ["false_easting", "False_Easting"],
+    ["false_easting", "False easting"],
+    ["false-easting", "Easting at false origin"],
+    ["false_northing", "False_Northing"],
+    ["false_northing", "False northing"],
+    ["false_northing", "Northing at false origin"],
+    ["central_meridian", "Central_Meridian"],
+    ["central_meridian", "Longitude of natural origin"],
+    ["central_meridian", "Longitude of false origin"],
+    ["latitude_of_origin", "Latitude_Of_Origin"],
+    ["latitude_of_origin", "Central_Parallel"],
+    ["latitude_of_origin", "Latitude of natural origin"],
+    ["latitude_of_origin", "Latitude of false origin"],
+    ["scale_factor", "Scale_Factor"],
+    ["k0", "scale_factor"],
+    ["latitude_of_center", "Latitude_Of_Center"],
+    ["latitude_of_center", "Latitude_of_center"],
+    ["lat0", "latitude_of_center", tt],
+    ["longitude_of_center", "Longitude_Of_Center"],
+    ["longitude_of_center", "Longitude_of_center"],
+    ["longc", "longitude_of_center", tt],
+    ["x0", "false_easting", n],
+    ["y0", "false_northing", n],
+    ["long0", "central_meridian", tt],
+    ["lat0", "latitude_of_origin", tt],
+    ["lat0", "standard_parallel_1", tt],
+    ["lat1", "standard_parallel_1", tt],
+    ["lat2", "standard_parallel_2", tt],
+    ["azimuth", "Azimuth"],
+    ["alpha", "azimuth", tt],
+    ["srsCode", "name"]
+  ];
+  o.forEach(h), !t.long0 && t.longc && (t.projName === "Albers_Conic_Equal_Area" || t.projName === "Lambert_Azimuthal_Equal_Area") && (t.long0 = t.longc), !t.lat_ts && t.lat1 && (t.projName === "Stereographic_South_Pole" || t.projName === "Polar Stereographic (variant B)") && (t.lat0 = tt(t.lat1 > 0 ? 90 : -90), t.lat_ts = t.lat1);
+}
+function $i(t) {
+  var i = ws(t), a = i.shift(), e = i.shift();
+  i.unshift(["name", e]), i.unshift(["type", a]);
+  var s = {};
+  return ut(i, s), Os(s), s;
+}
+function z(t) {
+  var i = this;
+  if (arguments.length === 2) {
+    var a = arguments[1];
+    typeof a == "string" ? a.charAt(0) === "+" ? z[t] = ti(arguments[1]) : z[t] = $i(arguments[1]) : z[t] = a;
+  } else if (arguments.length === 1) {
+    if (Array.isArray(t))
+      return t.map(function(e) {
+        Array.isArray(e) ? z.apply(i, e) : z(e);
+      });
+    if (typeof t == "string") {
+      if (t in z)
+        return z[t];
+    } else
+      "EPSG" in t ? z["EPSG:" + t.EPSG] = t : "ESRI" in t ? z["ESRI:" + t.ESRI] = t : "IAU2000" in t ? z["IAU2000:" + t.IAU2000] = t : console.log(t);
+    return;
+  }
+}
+xs(z);
+function Ls(t) {
+  return typeof t == "string";
+}
+function qs(t) {
+  return t in z;
+}
+var Gs = ["PROJECTEDCRS", "PROJCRS", "GEOGCS", "GEOCCS", "PROJCS", "LOCAL_CS", "GEODCRS", "GEODETICCRS", "GEODETICDATUM", "ENGCRS", "ENGINEERINGCRS"];
+function $s(t) {
+  return Gs.some(function(i) {
+    return t.indexOf(i) > -1;
+  });
+}
+var Ds = ["3857", "900913", "3785", "102113"];
+function Bs(t) {
+  var i = et(t, "authority");
+  if (!!i) {
+    var a = et(i, "epsg");
+    return a && Ds.indexOf(a) > -1;
+  }
+}
+function ks(t) {
+  var i = et(t, "extension");
+  if (!!i)
+    return et(i, "proj4");
+}
+function zs(t) {
+  return t[0] === "+";
+}
+function Fs(t) {
+  if (Ls(t)) {
+    if (qs(t))
+      return z[t];
+    if ($s(t)) {
+      var i = $i(t);
+      if (Bs(i))
+        return z["EPSG:3857"];
+      var a = ks(i);
+      return a ? ti(a) : i;
+    }
+    if (zs(t))
+      return ti(t);
+  } else
+    return t;
+}
+function vi(t, i) {
+  t = t || {};
+  var a, e;
+  if (!i)
+    return t;
+  for (e in i)
+    a = i[e], a !== void 0 && (t[e] = a);
+  return t;
+}
+function Z(t, i, a) {
+  var e = t * i;
+  return a / Math.sqrt(1 - e * e);
+}
+function Tt(t) {
+  return t < 0 ? -1 : 1;
+}
+function g(t) {
+  return Math.abs(t) <= G ? t : t - Tt(t) * Ct;
+}
+function X(t, i, a) {
+  var e = t * a, s = 0.5 * t;
+  return e = Math.pow((1 - e) / (1 + e), s), Math.tan(0.5 * (m - i)) / e;
+}
+function Pt(t, i) {
+  for (var a = 0.5 * t, e, s, r = m - 2 * Math.atan(i), n = 0; n <= 15; n++)
+    if (e = t * Math.sin(r), s = m - 2 * Math.atan(i * Math.pow((1 - e) / (1 + e), a)) - r, r += s, Math.abs(s) <= 1e-10)
+      return r;
+  return -9999;
+}
+function Us() {
+  var t = this.b / this.a;
+  this.es = 1 - t * t, "x0" in this || (this.x0 = 0), "y0" in this || (this.y0 = 0), this.e = Math.sqrt(this.es), this.lat_ts ? this.sphere ? this.k0 = Math.cos(this.lat_ts) : this.k0 = Z(this.e, Math.sin(this.lat_ts), Math.cos(this.lat_ts)) : this.k0 || (this.k ? this.k0 = this.k : this.k0 = 1);
+}
+function Ws(t) {
+  var i = t.x, a = t.y;
+  if (a * K > 90 && a * K < -90 && i * K > 180 && i * K < -180)
+    return null;
+  var e, s;
+  if (Math.abs(Math.abs(a) - m) <= _)
+    return null;
+  if (this.sphere)
+    e = this.x0 + this.a * this.k0 * g(i - this.long0), s = this.y0 + this.a * this.k0 * Math.log(Math.tan(T + 0.5 * a));
+  else {
+    var r = Math.sin(a), n = X(this.e, a, r);
+    e = this.x0 + this.a * this.k0 * g(i - this.long0), s = this.y0 - this.a * this.k0 * Math.log(n);
+  }
+  return t.x = e, t.y = s, t;
+}
+function js(t) {
+  var i = t.x - this.x0, a = t.y - this.y0, e, s;
+  if (this.sphere)
+    s = m - 2 * Math.atan(Math.exp(-a / (this.a * this.k0)));
+  else {
+    var r = Math.exp(-a / (this.a * this.k0));
+    if (s = Pt(this.e, r), s === -9999)
+      return null;
+  }
+  return e = g(this.long0 + i / (this.a * this.k0)), t.x = e, t.y = s, t;
+}
+var Qs = ["Mercator", "Popular Visualisation Pseudo Mercator", "Mercator_1SP", "Mercator_Auxiliary_Sphere", "merc"];
+const Hs = {
+  init: Us,
+  forward: Ws,
+  inverse: js,
+  names: Qs
+};
+function Xs() {
+}
+function di(t) {
+  return t;
+}
+var Vs = ["longlat", "identity"];
+const Ks = {
+  init: Xs,
+  forward: di,
+  inverse: di,
+  names: Vs
+};
+var Js = [Hs, Ks], $t = {}, Ft = [];
+function Di(t, i) {
+  var a = Ft.length;
+  return t.names ? (Ft[a] = t, t.names.forEach(function(e) {
+    $t[e.toLowerCase()] = a;
+  }), this) : (console.log(i), !0);
+}
+function Zs(t) {
+  if (!t)
+    return !1;
+  var i = t.toLowerCase();
+  if (typeof $t[i] < "u" && Ft[$t[i]])
+    return Ft[$t[i]];
+}
+function Ys() {
+  Js.forEach(Di);
+}
+const te = {
+  start: Ys,
+  add: Di,
+  get: Zs
+};
+var E = {};
+E.MERIT = {
+  a: 6378137,
+  rf: 298.257,
+  ellipseName: "MERIT 1983"
+};
+E.SGS85 = {
+  a: 6378136,
+  rf: 298.257,
+  ellipseName: "Soviet Geodetic System 85"
+};
+E.GRS80 = {
+  a: 6378137,
+  rf: 298.257222101,
+  ellipseName: "GRS 1980(IUGG, 1980)"
+};
+E.IAU76 = {
+  a: 6378140,
+  rf: 298.257,
+  ellipseName: "IAU 1976"
+};
+E.airy = {
+  a: 6377563396e-3,
+  b: 635625691e-2,
+  ellipseName: "Airy 1830"
+};
+E.APL4 = {
+  a: 6378137,
+  rf: 298.25,
+  ellipseName: "Appl. Physics. 1965"
+};
+E.NWL9D = {
+  a: 6378145,
+  rf: 298.25,
+  ellipseName: "Naval Weapons Lab., 1965"
+};
+E.mod_airy = {
+  a: 6377340189e-3,
+  b: 6356034446e-3,
+  ellipseName: "Modified Airy"
+};
+E.andrae = {
+  a: 637710443e-2,
+  rf: 300,
+  ellipseName: "Andrae 1876 (Den., Iclnd.)"
+};
+E.aust_SA = {
+  a: 6378160,
+  rf: 298.25,
+  ellipseName: "Australian Natl & S. Amer. 1969"
+};
+E.GRS67 = {
+  a: 6378160,
+  rf: 298.247167427,
+  ellipseName: "GRS 67(IUGG 1967)"
+};
+E.bessel = {
+  a: 6377397155e-3,
+  rf: 299.1528128,
+  ellipseName: "Bessel 1841"
+};
+E.bess_nam = {
+  a: 6377483865e-3,
+  rf: 299.1528128,
+  ellipseName: "Bessel 1841 (Namibia)"
+};
+E.clrk66 = {
+  a: 63782064e-1,
+  b: 63565838e-1,
+  ellipseName: "Clarke 1866"
+};
+E.clrk80 = {
+  a: 6378249145e-3,
+  rf: 293.4663,
+  ellipseName: "Clarke 1880 mod."
+};
+E.clrk58 = {
+  a: 6378293645208759e-9,
+  rf: 294.2606763692654,
+  ellipseName: "Clarke 1858"
+};
+E.CPM = {
+  a: 63757387e-1,
+  rf: 334.29,
+  ellipseName: "Comm. des Poids et Mesures 1799"
+};
+E.delmbr = {
+  a: 6376428,
+  rf: 311.5,
+  ellipseName: "Delambre 1810 (Belgium)"
+};
+E.engelis = {
+  a: 637813605e-2,
+  rf: 298.2566,
+  ellipseName: "Engelis 1985"
+};
+E.evrst30 = {
+  a: 6377276345e-3,
+  rf: 300.8017,
+  ellipseName: "Everest 1830"
+};
+E.evrst48 = {
+  a: 6377304063e-3,
+  rf: 300.8017,
+  ellipseName: "Everest 1948"
+};
+E.evrst56 = {
+  a: 6377301243e-3,
+  rf: 300.8017,
+  ellipseName: "Everest 1956"
+};
+E.evrst69 = {
+  a: 6377295664e-3,
+  rf: 300.8017,
+  ellipseName: "Everest 1969"
+};
+E.evrstSS = {
+  a: 6377298556e-3,
+  rf: 300.8017,
+  ellipseName: "Everest (Sabah & Sarawak)"
+};
+E.fschr60 = {
+  a: 6378166,
+  rf: 298.3,
+  ellipseName: "Fischer (Mercury Datum) 1960"
+};
+E.fschr60m = {
+  a: 6378155,
+  rf: 298.3,
+  ellipseName: "Fischer 1960"
+};
+E.fschr68 = {
+  a: 6378150,
+  rf: 298.3,
+  ellipseName: "Fischer 1968"
+};
+E.helmert = {
+  a: 6378200,
+  rf: 298.3,
+  ellipseName: "Helmert 1906"
+};
+E.hough = {
+  a: 6378270,
+  rf: 297,
+  ellipseName: "Hough"
+};
+E.intl = {
+  a: 6378388,
+  rf: 297,
+  ellipseName: "International 1909 (Hayford)"
+};
+E.kaula = {
+  a: 6378163,
+  rf: 298.24,
+  ellipseName: "Kaula 1961"
+};
+E.lerch = {
+  a: 6378139,
+  rf: 298.257,
+  ellipseName: "Lerch 1979"
+};
+E.mprts = {
+  a: 6397300,
+  rf: 191,
+  ellipseName: "Maupertius 1738"
+};
+E.new_intl = {
+  a: 63781575e-1,
+  b: 63567722e-1,
+  ellipseName: "New International 1967"
+};
+E.plessis = {
+  a: 6376523,
+  rf: 6355863,
+  ellipseName: "Plessis 1817 (France)"
+};
+E.krass = {
+  a: 6378245,
+  rf: 298.3,
+  ellipseName: "Krassovsky, 1942"
+};
+E.SEasia = {
+  a: 6378155,
+  b: 63567733205e-4,
+  ellipseName: "Southeast Asia"
+};
+E.walbeck = {
+  a: 6376896,
+  b: 63558348467e-4,
+  ellipseName: "Walbeck"
+};
+E.WGS60 = {
+  a: 6378165,
+  rf: 298.3,
+  ellipseName: "WGS 60"
+};
+E.WGS66 = {
+  a: 6378145,
+  rf: 298.25,
+  ellipseName: "WGS 66"
+};
+E.WGS7 = {
+  a: 6378135,
+  rf: 298.26,
+  ellipseName: "WGS 72"
+};
+var ie = E.WGS84 = {
+  a: 6378137,
+  rf: 298.257223563,
+  ellipseName: "WGS 84"
+};
+E.sphere = {
+  a: 6370997,
+  b: 6370997,
+  ellipseName: "Normal Sphere (r=6370997)"
+};
+function ae(t, i, a, e) {
+  var s = t * t, r = i * i, n = (s - r) / s, h = 0;
+  e ? (t *= 1 - n * (Es + n * (As + n * Cs)), s = t * t, n = 0) : h = Math.sqrt(n);
+  var o = (s - r) / r;
+  return {
+    es: n,
+    e: h,
+    ep2: o
+  };
+}
+function se(t, i, a, e, s) {
+  if (!t) {
+    var r = et(E, e);
+    r || (r = ie), t = r.a, i = r.b, a = r.rf;
+  }
+  return a && !i && (i = (1 - 1 / a) * t), (a === 0 || Math.abs(t - i) < _) && (s = !0, i = t), {
+    a: t,
+    b: i,
+    rf: a,
+    sphere: s
+  };
+}
+var $ = {};
+$.wgs84 = {
+  towgs84: "0,0,0",
+  ellipse: "WGS84",
+  datumName: "WGS84"
+};
+$.ch1903 = {
+  towgs84: "674.374,15.056,405.346",
+  ellipse: "bessel",
+  datumName: "swiss"
+};
+$.ggrs87 = {
+  towgs84: "-199.87,74.79,246.62",
+  ellipse: "GRS80",
+  datumName: "Greek_Geodetic_Reference_System_1987"
+};
+$.nad83 = {
+  towgs84: "0,0,0",
+  ellipse: "GRS80",
+  datumName: "North_American_Datum_1983"
+};
+$.nad27 = {
+  nadgrids: "@conus,@alaska,@ntv2_0.gsb,@ntv1_can.dat",
+  ellipse: "clrk66",
+  datumName: "North_American_Datum_1927"
+};
+$.potsdam = {
+  towgs84: "598.1,73.7,418.2,0.202,0.045,-2.455,6.7",
+  ellipse: "bessel",
+  datumName: "Potsdam Rauenberg 1950 DHDN"
+};
+$.carthage = {
+  towgs84: "-263.0,6.0,431.0",
+  ellipse: "clark80",
+  datumName: "Carthage 1934 Tunisia"
+};
+$.hermannskogel = {
+  towgs84: "577.326,90.129,463.919,5.137,1.474,5.297,2.4232",
+  ellipse: "bessel",
+  datumName: "Hermannskogel"
+};
+$.osni52 = {
+  towgs84: "482.530,-130.596,564.557,-1.042,-0.214,-0.631,8.15",
+  ellipse: "airy",
+  datumName: "Irish National"
+};
+$.ire65 = {
+  towgs84: "482.530,-130.596,564.557,-1.042,-0.214,-0.631,8.15",
+  ellipse: "mod_airy",
+  datumName: "Ireland 1965"
+};
+$.rassadiran = {
+  towgs84: "-133.63,-157.5,-158.62",
+  ellipse: "intl",
+  datumName: "Rassadiran"
+};
+$.nzgd49 = {
+  towgs84: "59.47,-5.04,187.44,0.47,-0.1,1.024,-4.5993",
+  ellipse: "intl",
+  datumName: "New Zealand Geodetic Datum 1949"
+};
+$.osgb36 = {
+  towgs84: "446.448,-125.157,542.060,0.1502,0.2470,0.8421,-20.4894",
+  ellipse: "airy",
+  datumName: "Airy 1830"
+};
+$.s_jtsk = {
+  towgs84: "589,76,480",
+  ellipse: "bessel",
+  datumName: "S-JTSK (Ferro)"
+};
+$.beduaram = {
+  towgs84: "-106,-87,188",
+  ellipse: "clrk80",
+  datumName: "Beduaram"
+};
+$.gunung_segara = {
+  towgs84: "-403,684,41",
+  ellipse: "bessel",
+  datumName: "Gunung Segara Jakarta"
+};
+$.rnb72 = {
+  towgs84: "106.869,-52.2978,103.724,-0.33657,0.456955,-1.84218,1",
+  ellipse: "intl",
+  datumName: "Reseau National Belge 1972"
+};
+function ee(t, i, a, e, s, r, n) {
+  var h = {};
+  return t === void 0 || t === "none" ? h.datum_type = Yt : h.datum_type = bs, i && (h.datum_params = i.map(parseFloat), (h.datum_params[0] !== 0 || h.datum_params[1] !== 0 || h.datum_params[2] !== 0) && (h.datum_type = ot), h.datum_params.length > 3 && (h.datum_params[3] !== 0 || h.datum_params[4] !== 0 || h.datum_params[5] !== 0 || h.datum_params[6] !== 0) && (h.datum_type = lt, h.datum_params[3] *= At, h.datum_params[4] *= At, h.datum_params[5] *= At, h.datum_params[6] = h.datum_params[6] / 1e6 + 1)), n && (h.datum_type = Gt, h.grids = n), h.a = a, h.b = e, h.es = s, h.ep2 = r, h;
+}
+var Bi = {};
+function re(t, i) {
+  var a = new DataView(i), e = oe(a), s = le(a, e);
+  s.nSubgrids > 1 && console.log("Only single NTv2 subgrids are currently supported, subsequent sub grids are ignored");
+  var r = fe(a, s, e), n = { header: s, subgrids: r };
+  return Bi[t] = n, n;
+}
+function he(t) {
+  if (t === void 0)
+    return null;
+  var i = t.split(",");
+  return i.map(ne);
+}
+function ne(t) {
+  if (t.length === 0)
+    return null;
+  var i = t[0] === "@";
+  return i && (t = t.slice(1)), t === "null" ? { name: "null", mandatory: !i, grid: null, isNull: !0 } : {
+    name: t,
+    mandatory: !i,
+    grid: Bi[t] || null,
+    isNull: !1
+  };
+}
+function ct(t) {
+  return t / 3600 * Math.PI / 180;
+}
+function oe(t) {
+  var i = t.getInt32(8, !1);
+  return i === 11 ? !1 : (i = t.getInt32(8, !0), i !== 11 && console.warn("Failed to detect nadgrid endian-ness, defaulting to little-endian"), !0);
+}
+function le(t, i) {
+  return {
+    nFields: t.getInt32(8, i),
+    nSubgridFields: t.getInt32(24, i),
+    nSubgrids: t.getInt32(40, i),
+    shiftType: ii(t, 56, 56 + 8).trim(),
+    fromSemiMajorAxis: t.getFloat64(120, i),
+    fromSemiMinorAxis: t.getFloat64(136, i),
+    toSemiMajorAxis: t.getFloat64(152, i),
+    toSemiMinorAxis: t.getFloat64(168, i)
+  };
+}
+function ii(t, i, a) {
+  return String.fromCharCode.apply(null, new Uint8Array(t.buffer.slice(i, a)));
+}
+function fe(t, i, a) {
+  for (var e = 176, s = [], r = 0; r < i.nSubgrids; r++) {
+    var n = ce(t, e, a), h = Me(t, e, n, a), o = Math.round(
+      1 + (n.upperLongitude - n.lowerLongitude) / n.longitudeInterval
+    ), l = Math.round(
+      1 + (n.upperLatitude - n.lowerLatitude) / n.latitudeInterval
+    );
+    s.push({
+      ll: [ct(n.lowerLongitude), ct(n.lowerLatitude)],
+      del: [ct(n.longitudeInterval), ct(n.latitudeInterval)],
+      lim: [o, l],
+      count: n.gridNodeCount,
+      cvs: ue(h)
+    });
+  }
+  return s;
+}
+function ue(t) {
+  return t.map(function(i) {
+    return [ct(i.longitudeShift), ct(i.latitudeShift)];
+  });
+}
+function ce(t, i, a) {
+  return {
+    name: ii(t, i + 8, i + 16).trim(),
+    parent: ii(t, i + 24, i + 24 + 8).trim(),
+    lowerLatitude: t.getFloat64(i + 72, a),
+    upperLatitude: t.getFloat64(i + 88, a),
+    lowerLongitude: t.getFloat64(i + 104, a),
+    upperLongitude: t.getFloat64(i + 120, a),
+    latitudeInterval: t.getFloat64(i + 136, a),
+    longitudeInterval: t.getFloat64(i + 152, a),
+    gridNodeCount: t.getInt32(i + 168, a)
+  };
+}
+function Me(t, i, a, e) {
+  for (var s = i + 176, r = 16, n = [], h = 0; h < a.gridNodeCount; h++) {
+    var o = {
+      latitudeShift: t.getFloat32(s + h * r, e),
+      longitudeShift: t.getFloat32(s + h * r + 4, e),
+      latitudeAccuracy: t.getFloat32(s + h * r + 8, e),
+      longitudeAccuracy: t.getFloat32(s + h * r + 12, e)
+    };
+    n.push(o);
+  }
+  return n;
+}
+function J(t, i) {
+  if (!(this instanceof J))
+    return new J(t);
+  i = i || function(l) {
+    if (l)
+      throw l;
+  };
+  var a = Fs(t);
+  if (typeof a != "object") {
+    i(t);
+    return;
+  }
+  var e = J.projections.get(a.projName);
+  if (!e) {
+    i(t);
+    return;
+  }
+  if (a.datumCode && a.datumCode !== "none") {
+    var s = et($, a.datumCode);
+    s && (a.datum_params = a.datum_params || (s.towgs84 ? s.towgs84.split(",") : null), a.ellps = s.ellipse, a.datumName = s.datumName ? s.datumName : a.datumCode);
+  }
+  a.k0 = a.k0 || 1, a.axis = a.axis || "enu", a.ellps = a.ellps || "wgs84", a.lat1 = a.lat1 || a.lat0;
+  var r = se(a.a, a.b, a.rf, a.ellps, a.sphere), n = ae(r.a, r.b, r.rf, a.R_A), h = he(a.nadgrids), o = a.datum || ee(
+    a.datumCode,
+    a.datum_params,
+    r.a,
+    r.b,
+    n.es,
+    n.ep2,
+    h
+  );
+  vi(this, a), vi(this, e), this.a = r.a, this.b = r.b, this.rf = r.rf, this.sphere = r.sphere, this.es = n.es, this.e = n.e, this.ep2 = n.ep2, this.datum = o, this.init(), i(null, this);
+}
+J.projections = te;
+J.projections.start();
+function ve(t, i) {
+  return t.datum_type !== i.datum_type || t.a !== i.a || Math.abs(t.es - i.es) > 5e-11 ? !1 : t.datum_type === ot ? t.datum_params[0] === i.datum_params[0] && t.datum_params[1] === i.datum_params[1] && t.datum_params[2] === i.datum_params[2] : t.datum_type === lt ? t.datum_params[0] === i.datum_params[0] && t.datum_params[1] === i.datum_params[1] && t.datum_params[2] === i.datum_params[2] && t.datum_params[3] === i.datum_params[3] && t.datum_params[4] === i.datum_params[4] && t.datum_params[5] === i.datum_params[5] && t.datum_params[6] === i.datum_params[6] : !0;
+}
+function ki(t, i, a) {
+  var e = t.x, s = t.y, r = t.z ? t.z : 0, n, h, o, l;
+  if (s < -m && s > -1.001 * m)
+    s = -m;
+  else if (s > m && s < 1.001 * m)
+    s = m;
+  else {
+    if (s < -m)
+      return { x: -1 / 0, y: -1 / 0, z: t.z };
+    if (s > m)
+      return { x: 1 / 0, y: 1 / 0, z: t.z };
+  }
+  return e > Math.PI && (e -= 2 * Math.PI), h = Math.sin(s), l = Math.cos(s), o = h * h, n = a / Math.sqrt(1 - i * o), {
+    x: (n + r) * l * Math.cos(e),
+    y: (n + r) * l * Math.sin(e),
+    z: (n * (1 - i) + r) * h
+  };
+}
+function zi(t, i, a, e) {
+  var s = 1e-12, r = s * s, n = 30, h, o, l, u, f, c, v, M, d, y, x, S, A, R = t.x, N = t.y, P = t.z ? t.z : 0, B, L, V;
+  if (h = Math.sqrt(R * R + N * N), o = Math.sqrt(R * R + N * N + P * P), h / a < s) {
+    if (B = 0, o / a < s)
+      return L = m, V = -e, {
+        x: t.x,
+        y: t.y,
+        z: t.z
+      };
+  } else
+    B = Math.atan2(N, R);
+  l = P / o, u = h / o, f = 1 / Math.sqrt(1 - i * (2 - i) * u * u), M = u * (1 - i) * f, d = l * f, A = 0;
+  do
+    A++, v = a / Math.sqrt(1 - i * d * d), V = h * M + P * d - v * (1 - i * d * d), c = i * v / (v + V), f = 1 / Math.sqrt(1 - c * (2 - c) * u * u), y = u * (1 - c) * f, x = l * f, S = x * M - y * d, M = y, d = x;
+  while (S * S > r && A < n);
+  return L = Math.atan(x / Math.abs(y)), {
+    x: B,
+    y: L,
+    z: V
+  };
+}
+function de(t, i, a) {
+  if (i === ot)
+    return {
+      x: t.x + a[0],
+      y: t.y + a[1],
+      z: t.z + a[2]
+    };
+  if (i === lt) {
+    var e = a[0], s = a[1], r = a[2], n = a[3], h = a[4], o = a[5], l = a[6];
+    return {
+      x: l * (t.x - o * t.y + h * t.z) + e,
+      y: l * (o * t.x + t.y - n * t.z) + s,
+      z: l * (-h * t.x + n * t.y + t.z) + r
+    };
+  }
+}
+function me(t, i, a) {
+  if (i === ot)
+    return {
+      x: t.x - a[0],
+      y: t.y - a[1],
+      z: t.z - a[2]
+    };
+  if (i === lt) {
+    var e = a[0], s = a[1], r = a[2], n = a[3], h = a[4], o = a[5], l = a[6], u = (t.x - e) / l, f = (t.y - s) / l, c = (t.z - r) / l;
+    return {
+      x: u + o * f - h * c,
+      y: -o * u + f + n * c,
+      z: h * u - n * f + c
+    };
+  }
+}
+function Lt(t) {
+  return t === ot || t === lt;
+}
+function ye(t, i, a) {
+  if (ve(t, i) || t.datum_type === Yt || i.datum_type === Yt)
+    return a;
+  var e = t.a, s = t.es;
+  if (t.datum_type === Gt) {
+    var r = mi(t, !1, a);
+    if (r !== 0)
+      return;
+    e = fi, s = ui;
+  }
+  var n = i.a, h = i.b, o = i.es;
+  if (i.datum_type === Gt && (n = fi, h = Ss, o = ui), s === o && e === n && !Lt(t.datum_type) && !Lt(i.datum_type))
+    return a;
+  if (a = ki(a, s, e), Lt(t.datum_type) && (a = de(a, t.datum_type, t.datum_params)), Lt(i.datum_type) && (a = me(a, i.datum_type, i.datum_params)), a = zi(a, o, n, h), i.datum_type === Gt) {
+    var l = mi(i, !0, a);
+    if (l !== 0)
+      return;
+  }
+  return a;
+}
+function mi(t, i, a) {
+  if (t.grids === null || t.grids.length === 0)
+    return console.log("Grid shift grids not found"), -1;
+  for (var e = { x: -a.x, y: a.y }, s = { x: Number.NaN, y: Number.NaN }, r = [], n = 0; n < t.grids.length; n++) {
+    var h = t.grids[n];
+    if (r.push(h.name), h.isNull) {
+      s = e;
+      break;
+    }
+    if (h.mandatory, h.grid === null) {
+      if (h.mandatory)
+        return console.log("Unable to find mandatory grid '" + h.name + "'"), -1;
+      continue;
+    }
+    var o = h.grid.subgrids[0], l = (Math.abs(o.del[1]) + Math.abs(o.del[0])) / 1e4, u = o.ll[0] - l, f = o.ll[1] - l, c = o.ll[0] + (o.lim[0] - 1) * o.del[0] + l, v = o.ll[1] + (o.lim[1] - 1) * o.del[1] + l;
+    if (!(f > e.y || u > e.x || v < e.y || c < e.x) && (s = _e(e, i, o), !isNaN(s.x)))
+      break;
+  }
+  return isNaN(s.x) ? (console.log("Failed to find a grid shift table for location '" + -e.x * K + " " + e.y * K + " tried: '" + r + "'"), -1) : (a.x = -s.x, a.y = s.y, 0);
+}
+function _e(t, i, a) {
+  var e = { x: Number.NaN, y: Number.NaN };
+  if (isNaN(t.x))
+    return e;
+  var s = { x: t.x, y: t.y };
+  s.x -= a.ll[0], s.y -= a.ll[1], s.x = g(s.x - Math.PI) + Math.PI;
+  var r = yi(s, a);
+  if (i) {
+    if (isNaN(r.x))
+      return e;
+    r.x = s.x - r.x, r.y = s.y - r.y;
+    var n = 9, h = 1e-12, o, l;
+    do {
+      if (l = yi(r, a), isNaN(l.x)) {
+        console.log("Inverse grid shift iteration failed, presumably at grid edge.  Using first approximation.");
+        break;
+      }
+      o = { x: s.x - (l.x + r.x), y: s.y - (l.y + r.y) }, r.x += o.x, r.y += o.y;
+    } while (n-- && Math.abs(o.x) > h && Math.abs(o.y) > h);
+    if (n < 0)
+      return console.log("Inverse grid shift iterator failed to converge."), e;
+    e.x = g(r.x + a.ll[0]), e.y = r.y + a.ll[1];
+  } else
+    isNaN(r.x) || (e.x = t.x + r.x, e.y = t.y + r.y);
+  return e;
+}
+function yi(t, i) {
+  var a = { x: t.x / i.del[0], y: t.y / i.del[1] }, e = { x: Math.floor(a.x), y: Math.floor(a.y) }, s = { x: a.x - 1 * e.x, y: a.y - 1 * e.y }, r = { x: Number.NaN, y: Number.NaN }, n;
+  if (e.x < 0 || e.x >= i.lim[0] || e.y < 0 || e.y >= i.lim[1])
+    return r;
+  n = e.y * i.lim[0] + e.x;
+  var h = { x: i.cvs[n][0], y: i.cvs[n][1] };
+  n++;
+  var o = { x: i.cvs[n][0], y: i.cvs[n][1] };
+  n += i.lim[0];
+  var l = { x: i.cvs[n][0], y: i.cvs[n][1] };
+  n--;
+  var u = { x: i.cvs[n][0], y: i.cvs[n][1] }, f = s.x * s.y, c = s.x * (1 - s.y), v = (1 - s.x) * (1 - s.y), M = (1 - s.x) * s.y;
+  return r.x = v * h.x + c * o.x + M * u.x + f * l.x, r.y = v * h.y + c * o.y + M * u.y + f * l.y, r;
+}
+function _i(t, i, a) {
+  var e = a.x, s = a.y, r = a.z || 0, n, h, o, l = {};
+  for (o = 0; o < 3; o++)
+    if (!(i && o === 2 && a.z === void 0))
+      switch (o === 0 ? (n = e, "ew".indexOf(t.axis[o]) !== -1 ? h = "x" : h = "y") : o === 1 ? (n = s, "ns".indexOf(t.axis[o]) !== -1 ? h = "y" : h = "x") : (n = r, h = "z"), t.axis[o]) {
+        case "e":
+          l[h] = n;
+          break;
+        case "w":
+          l[h] = -n;
+          break;
+        case "n":
+          l[h] = n;
+          break;
+        case "s":
+          l[h] = -n;
+          break;
+        case "u":
+          a[h] !== void 0 && (l.z = n);
+          break;
+        case "d":
+          a[h] !== void 0 && (l.z = -n);
+          break;
+        default:
+          return null;
+      }
+  return l;
+}
+function Fi(t) {
+  var i = {
+    x: t[0],
+    y: t[1]
+  };
+  return t.length > 2 && (i.z = t[2]), t.length > 3 && (i.m = t[3]), i;
+}
+function ge(t) {
+  gi(t.x), gi(t.y);
+}
+function gi(t) {
+  if (typeof Number.isFinite == "function") {
+    if (Number.isFinite(t))
+      return;
+    throw new TypeError("coordinates must be finite numbers");
+  }
+  if (typeof t != "number" || t !== t || !isFinite(t))
+    throw new TypeError("coordinates must be finite numbers");
+}
+function xe(t, i) {
+  return (t.datum.datum_type === ot || t.datum.datum_type === lt) && i.datumCode !== "WGS84" || (i.datum.datum_type === ot || i.datum.datum_type === lt) && t.datumCode !== "WGS84";
+}
+function Ut(t, i, a, e) {
+  var s;
+  if (Array.isArray(a) && (a = Fi(a)), ge(a), t.datum && i.datum && xe(t, i) && (s = new J("WGS84"), a = Ut(t, s, a, e), t = s), e && t.axis !== "enu" && (a = _i(t, !1, a)), t.projName === "longlat")
+    a = {
+      x: a.x * D,
+      y: a.y * D,
+      z: a.z || 0
+    };
+  else if (t.to_meter && (a = {
+    x: a.x * t.to_meter,
+    y: a.y * t.to_meter,
+    z: a.z || 0
+  }), a = t.inverse(a), !a)
+    return;
+  if (t.from_greenwich && (a.x += t.from_greenwich), a = ye(t.datum, i.datum, a), !!a)
+    return i.from_greenwich && (a = {
+      x: a.x - i.from_greenwich,
+      y: a.y,
+      z: a.z || 0
+    }), i.projName === "longlat" ? a = {
+      x: a.x * K,
+      y: a.y * K,
+      z: a.z || 0
+    } : (a = i.forward(a), i.to_meter && (a = {
+      x: a.x / i.to_meter,
+      y: a.y / i.to_meter,
+      z: a.z || 0
+    })), e && i.axis !== "enu" ? _i(i, !0, a) : a;
+}
+var xi = J("WGS84");
+function Vt(t, i, a, e) {
+  var s, r, n;
+  return Array.isArray(a) ? (s = Ut(t, i, a, e) || { x: NaN, y: NaN }, a.length > 2 ? typeof t.name < "u" && t.name === "geocent" || typeof i.name < "u" && i.name === "geocent" ? typeof s.z == "number" ? [s.x, s.y, s.z].concat(a.splice(3)) : [s.x, s.y, a[2]].concat(a.splice(3)) : [s.x, s.y].concat(a.splice(2)) : [s.x, s.y]) : (r = Ut(t, i, a, e), n = Object.keys(a), n.length === 2 || n.forEach(function(h) {
+    if (typeof t.name < "u" && t.name === "geocent" || typeof i.name < "u" && i.name === "geocent") {
+      if (h === "x" || h === "y" || h === "z")
+        return;
+    } else if (h === "x" || h === "y")
+      return;
+    r[h] = a[h];
+  }), r);
+}
+function bi(t) {
+  return t instanceof J ? t : t.oProj ? t.oProj : J(t);
+}
+function q(t, i, a) {
+  t = bi(t);
+  var e = !1, s;
+  return typeof i > "u" ? (i = t, t = xi, e = !0) : (typeof i.x < "u" || Array.isArray(i)) && (a = i, i = t, t = xi, e = !0), i = bi(i), a ? Vt(t, i, a) : (s = {
+    forward: function(r, n) {
+      return Vt(t, i, r, n);
+    },
+    inverse: function(r, n) {
+      return Vt(i, t, r, n);
+    }
+  }, e && (s.oProj = i), s);
+}
+var Si = 6, Ui = "AJSAJS", Wi = "AFAFAF", Mt = 65, U = 73, H = 79, bt = 86, St = 90;
+const be = {
+  forward: ji,
+  inverse: Se,
+  toPoint: Qi
+};
+function ji(t, i) {
+  return i = i || 5, Ce(Ee({
+    lat: t[1],
+    lon: t[0]
+  }), i);
+}
+function Se(t) {
+  var i = hi(Xi(t.toUpperCase()));
+  return i.lat && i.lon ? [i.lon, i.lat, i.lon, i.lat] : [i.left, i.bottom, i.right, i.top];
+}
+function Qi(t) {
+  var i = hi(Xi(t.toUpperCase()));
+  return i.lat && i.lon ? [i.lon, i.lat] : [(i.left + i.right) / 2, (i.top + i.bottom) / 2];
+}
+function Kt(t) {
+  return t * (Math.PI / 180);
+}
+function Ei(t) {
+  return 180 * (t / Math.PI);
+}
+function Ee(t) {
+  var i = t.lat, a = t.lon, e = 6378137, s = 669438e-8, r = 0.9996, n, h, o, l, u, f, c, v = Kt(i), M = Kt(a), d, y;
+  y = Math.floor((a + 180) / 6) + 1, a === 180 && (y = 60), i >= 56 && i < 64 && a >= 3 && a < 12 && (y = 32), i >= 72 && i < 84 && (a >= 0 && a < 9 ? y = 31 : a >= 9 && a < 21 ? y = 33 : a >= 21 && a < 33 ? y = 35 : a >= 33 && a < 42 && (y = 37)), n = (y - 1) * 6 - 180 + 3, d = Kt(n), h = s / (1 - s), o = e / Math.sqrt(1 - s * Math.sin(v) * Math.sin(v)), l = Math.tan(v) * Math.tan(v), u = h * Math.cos(v) * Math.cos(v), f = Math.cos(v) * (M - d), c = e * ((1 - s / 4 - 3 * s * s / 64 - 5 * s * s * s / 256) * v - (3 * s / 8 + 3 * s * s / 32 + 45 * s * s * s / 1024) * Math.sin(2 * v) + (15 * s * s / 256 + 45 * s * s * s / 1024) * Math.sin(4 * v) - 35 * s * s * s / 3072 * Math.sin(6 * v));
+  var x = r * o * (f + (1 - l + u) * f * f * f / 6 + (5 - 18 * l + l * l + 72 * u - 58 * h) * f * f * f * f * f / 120) + 5e5, S = r * (c + o * Math.tan(v) * (f * f / 2 + (5 - l + 9 * u + 4 * u * u) * f * f * f * f / 24 + (61 - 58 * l + l * l + 600 * u - 330 * h) * f * f * f * f * f * f / 720));
+  return i < 0 && (S += 1e7), {
+    northing: Math.round(S),
+    easting: Math.round(x),
+    zoneNumber: y,
+    zoneLetter: Ae(i)
+  };
+}
+function hi(t) {
+  var i = t.northing, a = t.easting, e = t.zoneLetter, s = t.zoneNumber;
+  if (s < 0 || s > 60)
+    return null;
+  var r = 0.9996, n = 6378137, h = 669438e-8, o, l = (1 - Math.sqrt(1 - h)) / (1 + Math.sqrt(1 - h)), u, f, c, v, M, d, y, x, S, A = a - 5e5, R = i;
+  e < "N" && (R -= 1e7), y = (s - 1) * 6 - 180 + 3, o = h / (1 - h), d = R / r, x = d / (n * (1 - h / 4 - 3 * h * h / 64 - 5 * h * h * h / 256)), S = x + (3 * l / 2 - 27 * l * l * l / 32) * Math.sin(2 * x) + (21 * l * l / 16 - 55 * l * l * l * l / 32) * Math.sin(4 * x) + 151 * l * l * l / 96 * Math.sin(6 * x), u = n / Math.sqrt(1 - h * Math.sin(S) * Math.sin(S)), f = Math.tan(S) * Math.tan(S), c = o * Math.cos(S) * Math.cos(S), v = n * (1 - h) / Math.pow(1 - h * Math.sin(S) * Math.sin(S), 1.5), M = A / (u * r);
+  var N = S - u * Math.tan(S) / v * (M * M / 2 - (5 + 3 * f + 10 * c - 4 * c * c - 9 * o) * M * M * M * M / 24 + (61 + 90 * f + 298 * c + 45 * f * f - 252 * o - 3 * c * c) * M * M * M * M * M * M / 720);
+  N = Ei(N);
+  var P = (M - (1 + 2 * f + c) * M * M * M / 6 + (5 - 2 * c + 28 * f - 3 * c * c + 8 * o + 24 * f * f) * M * M * M * M * M / 120) / Math.cos(S);
+  P = y + Ei(P);
+  var B;
+  if (t.accuracy) {
+    var L = hi({
+      northing: t.northing + t.accuracy,
+      easting: t.easting + t.accuracy,
+      zoneLetter: t.zoneLetter,
+      zoneNumber: t.zoneNumber
+    });
+    B = {
+      top: L.lat,
+      right: L.lon,
+      bottom: N,
+      left: P
+    };
+  } else
+    B = {
+      lat: N,
+      lon: P
+    };
+  return B;
+}
+function Ae(t) {
+  var i = "Z";
+  return 84 >= t && t >= 72 ? i = "X" : 72 > t && t >= 64 ? i = "W" : 64 > t && t >= 56 ? i = "V" : 56 > t && t >= 48 ? i = "U" : 48 > t && t >= 40 ? i = "T" : 40 > t && t >= 32 ? i = "S" : 32 > t && t >= 24 ? i = "R" : 24 > t && t >= 16 ? i = "Q" : 16 > t && t >= 8 ? i = "P" : 8 > t && t >= 0 ? i = "N" : 0 > t && t >= -8 ? i = "M" : -8 > t && t >= -16 ? i = "L" : -16 > t && t >= -24 ? i = "K" : -24 > t && t >= -32 ? i = "J" : -32 > t && t >= -40 ? i = "H" : -40 > t && t >= -48 ? i = "G" : -48 > t && t >= -56 ? i = "F" : -56 > t && t >= -64 ? i = "E" : -64 > t && t >= -72 ? i = "D" : -72 > t && t >= -80 && (i = "C"), i;
+}
+function Ce(t, i) {
+  var a = "00000" + t.easting, e = "00000" + t.northing;
+  return t.zoneNumber + t.zoneLetter + Ne(t.easting, t.northing, t.zoneNumber) + a.substr(a.length - 5, i) + e.substr(e.length - 5, i);
+}
+function Ne(t, i, a) {
+  var e = Hi(a), s = Math.floor(t / 1e5), r = Math.floor(i / 1e5) % 20;
+  return Pe(s, r, e);
+}
+function Hi(t) {
+  var i = t % Si;
+  return i === 0 && (i = Si), i;
+}
+function Pe(t, i, a) {
+  var e = a - 1, s = Ui.charCodeAt(e), r = Wi.charCodeAt(e), n = s + t - 1, h = r + i, o = !1;
+  n > St && (n = n - St + Mt - 1, o = !0), (n === U || s < U && n > U || (n > U || s < U) && o) && n++, (n === H || s < H && n > H || (n > H || s < H) && o) && (n++, n === U && n++), n > St && (n = n - St + Mt - 1), h > bt ? (h = h - bt + Mt - 1, o = !0) : o = !1, (h === U || r < U && h > U || (h > U || r < U) && o) && h++, (h === H || r < H && h > H || (h > H || r < H) && o) && (h++, h === U && h++), h > bt && (h = h - bt + Mt - 1);
+  var l = String.fromCharCode(n) + String.fromCharCode(h);
+  return l;
+}
+function Xi(t) {
+  if (t && t.length === 0)
+    throw "MGRSPoint coverting from nothing";
+  for (var i = t.length, a = null, e = "", s, r = 0; !/[A-Z]/.test(s = t.charAt(r)); ) {
+    if (r >= 2)
+      throw "MGRSPoint bad conversion from: " + t;
+    e += s, r++;
+  }
+  var n = parseInt(e, 10);
+  if (r === 0 || r + 3 > i)
+    throw "MGRSPoint bad conversion from: " + t;
+  var h = t.charAt(r++);
+  if (h <= "A" || h === "B" || h === "Y" || h >= "Z" || h === "I" || h === "O")
+    throw "MGRSPoint zone letter " + h + " not handled: " + t;
+  a = t.substring(r, r += 2);
+  for (var o = Hi(n), l = Te(a.charAt(0), o), u = Ie(a.charAt(1), o); u < we(h); )
+    u += 2e6;
+  var f = i - r;
+  if (f % 2 !== 0)
+    throw `MGRSPoint has to have an even number 
+of digits after the zone letter and two 100km letters - front 
+half for easting meters, second half for 
+northing meters` + t;
+  var c = f / 2, v = 0, M = 0, d, y, x, S, A;
+  return c > 0 && (d = 1e5 / Math.pow(10, c), y = t.substring(r, r + c), v = parseFloat(y) * d, x = t.substring(r + c), M = parseFloat(x) * d), S = v + l, A = M + u, {
+    easting: S,
+    northing: A,
+    zoneLetter: h,
+    zoneNumber: n,
+    accuracy: d
+  };
+}
+function Te(t, i) {
+  for (var a = Ui.charCodeAt(i - 1), e = 1e5, s = !1; a !== t.charCodeAt(0); ) {
+    if (a++, a === U && a++, a === H && a++, a > St) {
+      if (s)
+        throw "Bad character: " + t;
+      a = Mt, s = !0;
+    }
+    e += 1e5;
+  }
+  return e;
+}
+function Ie(t, i) {
+  if (t > "V")
+    throw "MGRSPoint given invalid Northing " + t;
+  for (var a = Wi.charCodeAt(i - 1), e = 0, s = !1; a !== t.charCodeAt(0); ) {
+    if (a++, a === U && a++, a === H && a++, a > bt) {
+      if (s)
+        throw "Bad character: " + t;
+      a = Mt, s = !0;
+    }
+    e += 1e5;
+  }
+  return e;
+}
+function we(t) {
+  var i;
+  switch (t) {
+    case "C":
+      i = 11e5;
+      break;
+    case "D":
+      i = 2e6;
+      break;
+    case "E":
+      i = 28e5;
+      break;
+    case "F":
+      i = 37e5;
+      break;
+    case "G":
+      i = 46e5;
+      break;
+    case "H":
+      i = 55e5;
+      break;
+    case "J":
+      i = 64e5;
+      break;
+    case "K":
+      i = 73e5;
+      break;
+    case "L":
+      i = 82e5;
+      break;
+    case "M":
+      i = 91e5;
+      break;
+    case "N":
+      i = 0;
+      break;
+    case "P":
+      i = 8e5;
+      break;
+    case "Q":
+      i = 17e5;
+      break;
+    case "R":
+      i = 26e5;
+      break;
+    case "S":
+      i = 35e5;
+      break;
+    case "T":
+      i = 44e5;
+      break;
+    case "U":
+      i = 53e5;
+      break;
+    case "V":
+      i = 62e5;
+      break;
+    case "W":
+      i = 7e6;
+      break;
+    case "X":
+      i = 79e5;
+      break;
+    default:
+      i = -1;
+  }
+  if (i >= 0)
+    return i;
+  throw "Invalid zone letter: " + t;
+}
+function mt(t, i, a) {
+  if (!(this instanceof mt))
+    return new mt(t, i, a);
+  if (Array.isArray(t))
+    this.x = t[0], this.y = t[1], this.z = t[2] || 0;
+  else if (typeof t == "object")
+    this.x = t.x, this.y = t.y, this.z = t.z || 0;
+  else if (typeof t == "string" && typeof i > "u") {
+    var e = t.split(",");
+    this.x = parseFloat(e[0], 10), this.y = parseFloat(e[1], 10), this.z = parseFloat(e[2], 10) || 0;
+  } else
+    this.x = t, this.y = i, this.z = a || 0;
+  console.warn("proj4.Point will be removed in version 3, use proj4.toPoint");
+}
+mt.fromMGRS = function(t) {
+  return new mt(Qi(t));
+};
+mt.prototype.toMGRS = function(t) {
+  return ji([this.x, this.y], t);
+};
+var Re = 1, pe = 0.25, Ai = 0.046875, Ci = 0.01953125, Ni = 0.01068115234375, Oe = 0.75, Le = 0.46875, qe = 0.013020833333333334, Ge = 0.007120768229166667, $e = 0.3645833333333333, De = 0.005696614583333333, Be = 0.3076171875;
+function Vi(t) {
+  var i = [];
+  i[0] = Re - t * (pe + t * (Ai + t * (Ci + t * Ni))), i[1] = t * (Oe - t * (Ai + t * (Ci + t * Ni)));
+  var a = t * t;
+  return i[2] = a * (Le - t * (qe + t * Ge)), a *= t, i[3] = a * ($e - t * De), i[4] = a * t * Be, i;
+}
+function Ht(t, i, a, e) {
+  return a *= i, i *= i, e[0] * t - a * (e[1] + i * (e[2] + i * (e[3] + i * e[4])));
+}
+var ke = 20;
+function Ki(t, i, a) {
+  for (var e = 1 / (1 - i), s = t, r = ke; r; --r) {
+    var n = Math.sin(s), h = 1 - i * n * n;
+    if (h = (Ht(s, n, Math.cos(s), a) - t) * (h * Math.sqrt(h)) * e, s -= h, Math.abs(h) < _)
+      return s;
+  }
+  return s;
+}
+function ze() {
+  this.x0 = this.x0 !== void 0 ? this.x0 : 0, this.y0 = this.y0 !== void 0 ? this.y0 : 0, this.long0 = this.long0 !== void 0 ? this.long0 : 0, this.lat0 = this.lat0 !== void 0 ? this.lat0 : 0, this.es && (this.en = Vi(this.es), this.ml0 = Ht(this.lat0, Math.sin(this.lat0), Math.cos(this.lat0), this.en));
+}
+function Fe(t) {
+  var i = t.x, a = t.y, e = g(i - this.long0), s, r, n, h = Math.sin(a), o = Math.cos(a);
+  if (this.es) {
+    var u = o * e, f = Math.pow(u, 2), c = this.ep2 * Math.pow(o, 2), v = Math.pow(c, 2), M = Math.abs(o) > _ ? Math.tan(a) : 0, d = Math.pow(M, 2), y = Math.pow(d, 2);
+    s = 1 - this.es * Math.pow(h, 2), u = u / Math.sqrt(s);
+    var x = Ht(a, h, o, this.en);
+    r = this.a * (this.k0 * u * (1 + f / 6 * (1 - d + c + f / 20 * (5 - 18 * d + y + 14 * c - 58 * d * c + f / 42 * (61 + 179 * y - y * d - 479 * d))))) + this.x0, n = this.a * (this.k0 * (x - this.ml0 + h * e * u / 2 * (1 + f / 12 * (5 - d + 9 * c + 4 * v + f / 30 * (61 + y - 58 * d + 270 * c - 330 * d * c + f / 56 * (1385 + 543 * y - y * d - 3111 * d)))))) + this.y0;
+  } else {
+    var l = o * Math.sin(e);
+    if (Math.abs(Math.abs(l) - 1) < _)
+      return 93;
+    if (r = 0.5 * this.a * this.k0 * Math.log((1 + l) / (1 - l)) + this.x0, n = o * Math.cos(e) / Math.sqrt(1 - Math.pow(l, 2)), l = Math.abs(n), l >= 1) {
+      if (l - 1 > _)
+        return 93;
+      n = 0;
+    } else
+      n = Math.acos(n);
+    a < 0 && (n = -n), n = this.a * this.k0 * (n - this.lat0) + this.y0;
+  }
+  return t.x = r, t.y = n, t;
+}
+function Ue(t) {
+  var i, a, e, s, r = (t.x - this.x0) * (1 / this.a), n = (t.y - this.y0) * (1 / this.a);
+  if (this.es)
+    if (i = this.ml0 + n / this.k0, a = Ki(i, this.es, this.en), Math.abs(a) < m) {
+      var f = Math.sin(a), c = Math.cos(a), v = Math.abs(c) > _ ? Math.tan(a) : 0, M = this.ep2 * Math.pow(c, 2), d = Math.pow(M, 2), y = Math.pow(v, 2), x = Math.pow(y, 2);
+      i = 1 - this.es * Math.pow(f, 2);
+      var S = r * Math.sqrt(i) / this.k0, A = Math.pow(S, 2);
+      i = i * v, e = a - i * A / (1 - this.es) * 0.5 * (1 - A / 12 * (5 + 3 * y - 9 * M * y + M - 4 * d - A / 30 * (61 + 90 * y - 252 * M * y + 45 * x + 46 * M - A / 56 * (1385 + 3633 * y + 4095 * x + 1574 * x * y)))), s = g(this.long0 + S * (1 - A / 6 * (1 + 2 * y + M - A / 20 * (5 + 28 * y + 24 * x + 8 * M * y + 6 * M - A / 42 * (61 + 662 * y + 1320 * x + 720 * x * y)))) / c);
+    } else
+      e = m * Tt(n), s = 0;
+  else {
+    var h = Math.exp(r / this.k0), o = 0.5 * (h - 1 / h), l = this.lat0 + n / this.k0, u = Math.cos(l);
+    i = Math.sqrt((1 - Math.pow(u, 2)) / (1 + Math.pow(o, 2))), e = Math.asin(i), n < 0 && (e = -e), o === 0 && u === 0 ? s = 0 : s = g(Math.atan2(o, u) + this.long0);
+  }
+  return t.x = s, t.y = e, t;
+}
+var We = ["Fast_Transverse_Mercator", "Fast Transverse Mercator"];
+const Dt = {
+  init: ze,
+  forward: Fe,
+  inverse: Ue,
+  names: We
+};
+function Ji(t) {
+  var i = Math.exp(t);
+  return i = (i - 1 / i) / 2, i;
+}
+function Xt(t, i) {
+  t = Math.abs(t), i = Math.abs(i);
+  var a = Math.max(t, i), e = Math.min(t, i) / (a || 1);
+  return a * Math.sqrt(1 + Math.pow(e, 2));
+}
+function je(t) {
+  var i = 1 + t, a = i - 1;
+  return a === 0 ? t : t * Math.log(i) / a;
+}
+function Qe(t) {
+  var i = Math.abs(t);
+  return i = je(i * (1 + i / (Xt(1, i) + 1))), t < 0 ? -i : i;
+}
+function ni(t, i) {
+  for (var a = 2 * Math.cos(2 * i), e = t.length - 1, s = t[e], r = 0, n; --e >= 0; )
+    n = -r + a * s + t[e], r = s, s = n;
+  return i + n * Math.sin(2 * i);
+}
+function He(t, i) {
+  for (var a = 2 * Math.cos(i), e = t.length - 1, s = t[e], r = 0, n; --e >= 0; )
+    n = -r + a * s + t[e], r = s, s = n;
+  return Math.sin(i) * n;
+}
+function Xe(t) {
+  var i = Math.exp(t);
+  return i = (i + 1 / i) / 2, i;
+}
+function Zi(t, i, a) {
+  for (var e = Math.sin(i), s = Math.cos(i), r = Ji(a), n = Xe(a), h = 2 * s * n, o = -2 * e * r, l = t.length - 1, u = t[l], f = 0, c = 0, v = 0, M, d; --l >= 0; )
+    M = c, d = f, c = u, f = v, u = -M + h * c - o * f + t[l], v = -d + o * c + h * f;
+  return h = e * n, o = s * r, [h * u - o * v, h * v + o * u];
+}
+function Ve() {
+  if (!this.approx && (isNaN(this.es) || this.es <= 0))
+    throw new Error('Incorrect elliptical usage. Try using the +approx option in the proj string, or PROJECTION["Fast_Transverse_Mercator"] in the WKT.');
+  this.approx && (Dt.init.apply(this), this.forward = Dt.forward, this.inverse = Dt.inverse), this.x0 = this.x0 !== void 0 ? this.x0 : 0, this.y0 = this.y0 !== void 0 ? this.y0 : 0, this.long0 = this.long0 !== void 0 ? this.long0 : 0, this.lat0 = this.lat0 !== void 0 ? this.lat0 : 0, this.cgb = [], this.cbg = [], this.utg = [], this.gtu = [];
+  var t = this.es / (1 + Math.sqrt(1 - this.es)), i = t / (2 - t), a = i;
+  this.cgb[0] = i * (2 + i * (-2 / 3 + i * (-2 + i * (116 / 45 + i * (26 / 45 + i * (-2854 / 675)))))), this.cbg[0] = i * (-2 + i * (2 / 3 + i * (4 / 3 + i * (-82 / 45 + i * (32 / 45 + i * (4642 / 4725)))))), a = a * i, this.cgb[1] = a * (7 / 3 + i * (-8 / 5 + i * (-227 / 45 + i * (2704 / 315 + i * (2323 / 945))))), this.cbg[1] = a * (5 / 3 + i * (-16 / 15 + i * (-13 / 9 + i * (904 / 315 + i * (-1522 / 945))))), a = a * i, this.cgb[2] = a * (56 / 15 + i * (-136 / 35 + i * (-1262 / 105 + i * (73814 / 2835)))), this.cbg[2] = a * (-26 / 15 + i * (34 / 21 + i * (8 / 5 + i * (-12686 / 2835)))), a = a * i, this.cgb[3] = a * (4279 / 630 + i * (-332 / 35 + i * (-399572 / 14175))), this.cbg[3] = a * (1237 / 630 + i * (-12 / 5 + i * (-24832 / 14175))), a = a * i, this.cgb[4] = a * (4174 / 315 + i * (-144838 / 6237)), this.cbg[4] = a * (-734 / 315 + i * (109598 / 31185)), a = a * i, this.cgb[5] = a * (601676 / 22275), this.cbg[5] = a * (444337 / 155925), a = Math.pow(i, 2), this.Qn = this.k0 / (1 + i) * (1 + a * (1 / 4 + a * (1 / 64 + a / 256))), this.utg[0] = i * (-0.5 + i * (2 / 3 + i * (-37 / 96 + i * (1 / 360 + i * (81 / 512 + i * (-96199 / 604800)))))), this.gtu[0] = i * (0.5 + i * (-2 / 3 + i * (5 / 16 + i * (41 / 180 + i * (-127 / 288 + i * (7891 / 37800)))))), this.utg[1] = a * (-1 / 48 + i * (-1 / 15 + i * (437 / 1440 + i * (-46 / 105 + i * (1118711 / 3870720))))), this.gtu[1] = a * (13 / 48 + i * (-3 / 5 + i * (557 / 1440 + i * (281 / 630 + i * (-1983433 / 1935360))))), a = a * i, this.utg[2] = a * (-17 / 480 + i * (37 / 840 + i * (209 / 4480 + i * (-5569 / 90720)))), this.gtu[2] = a * (61 / 240 + i * (-103 / 140 + i * (15061 / 26880 + i * (167603 / 181440)))), a = a * i, this.utg[3] = a * (-4397 / 161280 + i * (11 / 504 + i * (830251 / 7257600))), this.gtu[3] = a * (49561 / 161280 + i * (-179 / 168 + i * (6601661 / 7257600))), a = a * i, this.utg[4] = a * (-4583 / 161280 + i * (108847 / 3991680)), this.gtu[4] = a * (34729 / 80640 + i * (-3418889 / 1995840)), a = a * i, this.utg[5] = a * (-20648693 / 638668800), this.gtu[5] = a * (212378941 / 319334400);
+  var e = ni(this.cbg, this.lat0);
+  this.Zb = -this.Qn * (e + He(this.gtu, 2 * e));
+}
+function Ke(t) {
+  var i = g(t.x - this.long0), a = t.y;
+  a = ni(this.cbg, a);
+  var e = Math.sin(a), s = Math.cos(a), r = Math.sin(i), n = Math.cos(i);
+  a = Math.atan2(e, n * s), i = Math.atan2(r * s, Xt(e, s * n)), i = Qe(Math.tan(i));
+  var h = Zi(this.gtu, 2 * a, 2 * i);
+  a = a + h[0], i = i + h[1];
+  var o, l;
+  return Math.abs(i) <= 2.623395162778 ? (o = this.a * (this.Qn * i) + this.x0, l = this.a * (this.Qn * a + this.Zb) + this.y0) : (o = 1 / 0, l = 1 / 0), t.x = o, t.y = l, t;
+}
+function Je(t) {
+  var i = (t.x - this.x0) * (1 / this.a), a = (t.y - this.y0) * (1 / this.a);
+  a = (a - this.Zb) / this.Qn, i = i / this.Qn;
+  var e, s;
+  if (Math.abs(i) <= 2.623395162778) {
+    var r = Zi(this.utg, 2 * a, 2 * i);
+    a = a + r[0], i = i + r[1], i = Math.atan(Ji(i));
+    var n = Math.sin(a), h = Math.cos(a), o = Math.sin(i), l = Math.cos(i);
+    a = Math.atan2(n * l, Xt(o, l * h)), i = Math.atan2(o, l * h), e = g(i + this.long0), s = ni(this.cgb, a);
+  } else
+    e = 1 / 0, s = 1 / 0;
+  return t.x = e, t.y = s, t;
+}
+var Ze = ["Extended_Transverse_Mercator", "Extended Transverse Mercator", "etmerc", "Transverse_Mercator", "Transverse Mercator", "tmerc"];
+const Bt = {
+  init: Ve,
+  forward: Ke,
+  inverse: Je,
+  names: Ze
+};
+function Ye(t, i) {
+  if (t === void 0) {
+    if (t = Math.floor((g(i) + Math.PI) * 30 / Math.PI) + 1, t < 0)
+      return 0;
+    if (t > 60)
+      return 60;
+  }
+  return t;
+}
+var tr = "etmerc";
+function ir() {
+  var t = Ye(this.zone, this.long0);
+  if (t === void 0)
+    throw new Error("unknown utm zone");
+  this.lat0 = 0, this.long0 = (6 * Math.abs(t) - 183) * D, this.x0 = 5e5, this.y0 = this.utmSouth ? 1e7 : 0, this.k0 = 0.9996, Bt.init.apply(this), this.forward = Bt.forward, this.inverse = Bt.inverse;
+}
+var ar = ["Universal Transverse Mercator System", "utm"];
+const sr = {
+  init: ir,
+  names: ar,
+  dependsOn: tr
+};
+function oi(t, i) {
+  return Math.pow((1 - t) / (1 + t), i);
+}
+var er = 20;
+function rr() {
+  var t = Math.sin(this.lat0), i = Math.cos(this.lat0);
+  i *= i, this.rc = Math.sqrt(1 - this.es) / (1 - this.es * t * t), this.C = Math.sqrt(1 + this.es * i * i / (1 - this.es)), this.phic0 = Math.asin(t / this.C), this.ratexp = 0.5 * this.C * this.e, this.K = Math.tan(0.5 * this.phic0 + T) / (Math.pow(Math.tan(0.5 * this.lat0 + T), this.C) * oi(this.e * t, this.ratexp));
+}
+function hr(t) {
+  var i = t.x, a = t.y;
+  return t.y = 2 * Math.atan(this.K * Math.pow(Math.tan(0.5 * a + T), this.C) * oi(this.e * Math.sin(a), this.ratexp)) - m, t.x = this.C * i, t;
+}
+function nr(t) {
+  for (var i = 1e-14, a = t.x / this.C, e = t.y, s = Math.pow(Math.tan(0.5 * e + T) / this.K, 1 / this.C), r = er; r > 0 && (e = 2 * Math.atan(s * oi(this.e * Math.sin(t.y), -0.5 * this.e)) - m, !(Math.abs(e - t.y) < i)); --r)
+    t.y = e;
+  return r ? (t.x = a, t.y = e, t) : null;
+}
+var or = ["gauss"];
+const li = {
+  init: rr,
+  forward: hr,
+  inverse: nr,
+  names: or
+};
+function lr() {
+  li.init.apply(this), this.rc && (this.sinc0 = Math.sin(this.phic0), this.cosc0 = Math.cos(this.phic0), this.R2 = 2 * this.rc, this.title || (this.title = "Oblique Stereographic Alternative"));
+}
+function fr(t) {
+  var i, a, e, s;
+  return t.x = g(t.x - this.long0), li.forward.apply(this, [t]), i = Math.sin(t.y), a = Math.cos(t.y), e = Math.cos(t.x), s = this.k0 * this.R2 / (1 + this.sinc0 * i + this.cosc0 * a * e), t.x = s * a * Math.sin(t.x), t.y = s * (this.cosc0 * i - this.sinc0 * a * e), t.x = this.a * t.x + this.x0, t.y = this.a * t.y + this.y0, t;
+}
+function ur(t) {
+  var i, a, e, s, r;
+  if (t.x = (t.x - this.x0) / this.a, t.y = (t.y - this.y0) / this.a, t.x /= this.k0, t.y /= this.k0, r = Math.sqrt(t.x * t.x + t.y * t.y)) {
+    var n = 2 * Math.atan2(r, this.R2);
+    i = Math.sin(n), a = Math.cos(n), s = Math.asin(a * this.sinc0 + t.y * i * this.cosc0 / r), e = Math.atan2(t.x * i, r * this.cosc0 * a - t.y * this.sinc0 * i);
+  } else
+    s = this.phic0, e = 0;
+  return t.x = e, t.y = s, li.inverse.apply(this, [t]), t.x = g(t.x + this.long0), t;
+}
+var cr = ["Stereographic_North_Pole", "Oblique_Stereographic", "Polar_Stereographic", "sterea", "Oblique Stereographic Alternative", "Double_Stereographic"];
+const Mr = {
+  init: lr,
+  forward: fr,
+  inverse: ur,
+  names: cr
+};
+function vr(t, i, a) {
+  return i *= a, Math.tan(0.5 * (m + t)) * Math.pow((1 - i) / (1 + i), 0.5 * a);
+}
+function dr() {
+  this.coslat0 = Math.cos(this.lat0), this.sinlat0 = Math.sin(this.lat0), this.sphere ? this.k0 === 1 && !isNaN(this.lat_ts) && Math.abs(this.coslat0) <= _ && (this.k0 = 0.5 * (1 + Tt(this.lat0) * Math.sin(this.lat_ts))) : (Math.abs(this.coslat0) <= _ && (this.lat0 > 0 ? this.con = 1 : this.con = -1), this.cons = Math.sqrt(Math.pow(1 + this.e, 1 + this.e) * Math.pow(1 - this.e, 1 - this.e)), this.k0 === 1 && !isNaN(this.lat_ts) && Math.abs(this.coslat0) <= _ && (this.k0 = 0.5 * this.cons * Z(this.e, Math.sin(this.lat_ts), Math.cos(this.lat_ts)) / X(this.e, this.con * this.lat_ts, this.con * Math.sin(this.lat_ts))), this.ms1 = Z(this.e, this.sinlat0, this.coslat0), this.X0 = 2 * Math.atan(this.ssfn_(this.lat0, this.sinlat0, this.e)) - m, this.cosX0 = Math.cos(this.X0), this.sinX0 = Math.sin(this.X0));
+}
+function mr(t) {
+  var i = t.x, a = t.y, e = Math.sin(a), s = Math.cos(a), r, n, h, o, l, u, f = g(i - this.long0);
+  return Math.abs(Math.abs(i - this.long0) - Math.PI) <= _ && Math.abs(a + this.lat0) <= _ ? (t.x = NaN, t.y = NaN, t) : this.sphere ? (r = 2 * this.k0 / (1 + this.sinlat0 * e + this.coslat0 * s * Math.cos(f)), t.x = this.a * r * s * Math.sin(f) + this.x0, t.y = this.a * r * (this.coslat0 * e - this.sinlat0 * s * Math.cos(f)) + this.y0, t) : (n = 2 * Math.atan(this.ssfn_(a, e, this.e)) - m, o = Math.cos(n), h = Math.sin(n), Math.abs(this.coslat0) <= _ ? (l = X(this.e, a * this.con, this.con * e), u = 2 * this.a * this.k0 * l / this.cons, t.x = this.x0 + u * Math.sin(i - this.long0), t.y = this.y0 - this.con * u * Math.cos(i - this.long0), t) : (Math.abs(this.sinlat0) < _ ? (r = 2 * this.a * this.k0 / (1 + o * Math.cos(f)), t.y = r * h) : (r = 2 * this.a * this.k0 * this.ms1 / (this.cosX0 * (1 + this.sinX0 * h + this.cosX0 * o * Math.cos(f))), t.y = r * (this.cosX0 * h - this.sinX0 * o * Math.cos(f)) + this.y0), t.x = r * o * Math.sin(f) + this.x0, t));
+}
+function yr(t) {
+  t.x -= this.x0, t.y -= this.y0;
+  var i, a, e, s, r, n = Math.sqrt(t.x * t.x + t.y * t.y);
+  if (this.sphere) {
+    var h = 2 * Math.atan(n / (2 * this.a * this.k0));
+    return i = this.long0, a = this.lat0, n <= _ ? (t.x = i, t.y = a, t) : (a = Math.asin(Math.cos(h) * this.sinlat0 + t.y * Math.sin(h) * this.coslat0 / n), Math.abs(this.coslat0) < _ ? this.lat0 > 0 ? i = g(this.long0 + Math.atan2(t.x, -1 * t.y)) : i = g(this.long0 + Math.atan2(t.x, t.y)) : i = g(this.long0 + Math.atan2(t.x * Math.sin(h), n * this.coslat0 * Math.cos(h) - t.y * this.sinlat0 * Math.sin(h))), t.x = i, t.y = a, t);
+  } else if (Math.abs(this.coslat0) <= _) {
+    if (n <= _)
+      return a = this.lat0, i = this.long0, t.x = i, t.y = a, t;
+    t.x *= this.con, t.y *= this.con, e = n * this.cons / (2 * this.a * this.k0), a = this.con * Pt(this.e, e), i = this.con * g(this.con * this.long0 + Math.atan2(t.x, -1 * t.y));
+  } else
+    s = 2 * Math.atan(n * this.cosX0 / (2 * this.a * this.k0 * this.ms1)), i = this.long0, n <= _ ? r = this.X0 : (r = Math.asin(Math.cos(s) * this.sinX0 + t.y * Math.sin(s) * this.cosX0 / n), i = g(this.long0 + Math.atan2(t.x * Math.sin(s), n * this.cosX0 * Math.cos(s) - t.y * this.sinX0 * Math.sin(s)))), a = -1 * Pt(this.e, Math.tan(0.5 * (m + r)));
+  return t.x = i, t.y = a, t;
+}
+var _r = ["stere", "Stereographic_South_Pole", "Polar Stereographic (variant B)"];
+const gr = {
+  init: dr,
+  forward: mr,
+  inverse: yr,
+  names: _r,
+  ssfn_: vr
+};
+function xr() {
+  var t = this.lat0;
+  this.lambda0 = this.long0;
+  var i = Math.sin(t), a = this.a, e = this.rf, s = 1 / e, r = 2 * s - Math.pow(s, 2), n = this.e = Math.sqrt(r);
+  this.R = this.k0 * a * Math.sqrt(1 - r) / (1 - r * Math.pow(i, 2)), this.alpha = Math.sqrt(1 + r / (1 - r) * Math.pow(Math.cos(t), 4)), this.b0 = Math.asin(i / this.alpha);
+  var h = Math.log(Math.tan(Math.PI / 4 + this.b0 / 2)), o = Math.log(Math.tan(Math.PI / 4 + t / 2)), l = Math.log((1 + n * i) / (1 - n * i));
+  this.K = h - this.alpha * o + this.alpha * n / 2 * l;
+}
+function br(t) {
+  var i = Math.log(Math.tan(Math.PI / 4 - t.y / 2)), a = this.e / 2 * Math.log((1 + this.e * Math.sin(t.y)) / (1 - this.e * Math.sin(t.y))), e = -this.alpha * (i + a) + this.K, s = 2 * (Math.atan(Math.exp(e)) - Math.PI / 4), r = this.alpha * (t.x - this.lambda0), n = Math.atan(Math.sin(r) / (Math.sin(this.b0) * Math.tan(s) + Math.cos(this.b0) * Math.cos(r))), h = Math.asin(Math.cos(this.b0) * Math.sin(s) - Math.sin(this.b0) * Math.cos(s) * Math.cos(r));
+  return t.y = this.R / 2 * Math.log((1 + Math.sin(h)) / (1 - Math.sin(h))) + this.y0, t.x = this.R * n + this.x0, t;
+}
+function Sr(t) {
+  for (var i = t.x - this.x0, a = t.y - this.y0, e = i / this.R, s = 2 * (Math.atan(Math.exp(a / this.R)) - Math.PI / 4), r = Math.asin(Math.cos(this.b0) * Math.sin(s) + Math.sin(this.b0) * Math.cos(s) * Math.cos(e)), n = Math.atan(Math.sin(e) / (Math.cos(this.b0) * Math.cos(e) - Math.sin(this.b0) * Math.tan(s))), h = this.lambda0 + n / this.alpha, o = 0, l = r, u = -1e3, f = 0; Math.abs(l - u) > 1e-7; ) {
+    if (++f > 20)
+      return;
+    o = 1 / this.alpha * (Math.log(Math.tan(Math.PI / 4 + r / 2)) - this.K) + this.e * Math.log(Math.tan(Math.PI / 4 + Math.asin(this.e * Math.sin(l)) / 2)), u = l, l = 2 * Math.atan(Math.exp(o)) - Math.PI / 2;
+  }
+  return t.x = h, t.y = l, t;
+}
+var Er = ["somerc"];
+const Ar = {
+  init: xr,
+  forward: br,
+  inverse: Sr,
+  names: Er
+};
+var ft = 1e-7;
+function Cr(t) {
+  var i = ["Hotine_Oblique_Mercator", "Hotine_Oblique_Mercator_Azimuth_Natural_Origin"], a = typeof t.PROJECTION == "object" ? Object.keys(t.PROJECTION)[0] : t.PROJECTION;
+  return "no_uoff" in t || "no_off" in t || i.indexOf(a) !== -1;
+}
+function Nr() {
+  var t, i, a, e, s, r, n, h, o, l, u = 0, f, c = 0, v = 0, M = 0, d = 0, y = 0, x = 0;
+  this.no_off = Cr(this), this.no_rot = "no_rot" in this;
+  var S = !1;
+  "alpha" in this && (S = !0);
+  var A = !1;
+  if ("rectified_grid_angle" in this && (A = !0), S && (x = this.alpha), A && (u = this.rectified_grid_angle * D), S || A)
+    c = this.longc;
+  else if (v = this.long1, d = this.lat1, M = this.long2, y = this.lat2, Math.abs(d - y) <= ft || (t = Math.abs(d)) <= ft || Math.abs(t - m) <= ft || Math.abs(Math.abs(this.lat0) - m) <= ft || Math.abs(Math.abs(y) - m) <= ft)
+    throw new Error();
+  var R = 1 - this.es;
+  i = Math.sqrt(R), Math.abs(this.lat0) > _ ? (h = Math.sin(this.lat0), a = Math.cos(this.lat0), t = 1 - this.es * h * h, this.B = a * a, this.B = Math.sqrt(1 + this.es * this.B * this.B / R), this.A = this.B * this.k0 * i / t, e = this.B * i / (a * Math.sqrt(t)), s = e * e - 1, s <= 0 ? s = 0 : (s = Math.sqrt(s), this.lat0 < 0 && (s = -s)), this.E = s += e, this.E *= Math.pow(X(this.e, this.lat0, h), this.B)) : (this.B = 1 / i, this.A = this.k0, this.E = e = s = 1), S || A ? (S ? (f = Math.asin(Math.sin(x) / e), A || (u = x)) : (f = u, x = Math.asin(e * Math.sin(f))), this.lam0 = c - Math.asin(0.5 * (s - 1 / s) * Math.tan(f)) / this.B) : (r = Math.pow(X(this.e, d, Math.sin(d)), this.B), n = Math.pow(X(this.e, y, Math.sin(y)), this.B), s = this.E / r, o = (n - r) / (n + r), l = this.E * this.E, l = (l - n * r) / (l + n * r), t = v - M, t < -Math.pi ? M -= Ct : t > Math.pi && (M += Ct), this.lam0 = g(0.5 * (v + M) - Math.atan(l * Math.tan(0.5 * this.B * (v - M)) / o) / this.B), f = Math.atan(2 * Math.sin(this.B * g(v - this.lam0)) / (s - 1 / s)), u = x = Math.asin(e * Math.sin(f))), this.singam = Math.sin(f), this.cosgam = Math.cos(f), this.sinrot = Math.sin(u), this.cosrot = Math.cos(u), this.rB = 1 / this.B, this.ArB = this.A * this.rB, this.BrA = 1 / this.ArB, this.A * this.B, this.no_off ? this.u_0 = 0 : (this.u_0 = Math.abs(this.ArB * Math.atan(Math.sqrt(e * e - 1) / Math.cos(x))), this.lat0 < 0 && (this.u_0 = -this.u_0)), s = 0.5 * f, this.v_pole_n = this.ArB * Math.log(Math.tan(T - s)), this.v_pole_s = this.ArB * Math.log(Math.tan(T + s));
+}
+function Pr(t) {
+  var i = {}, a, e, s, r, n, h, o, l;
+  if (t.x = t.x - this.lam0, Math.abs(Math.abs(t.y) - m) > _) {
+    if (n = this.E / Math.pow(X(this.e, t.y, Math.sin(t.y)), this.B), h = 1 / n, a = 0.5 * (n - h), e = 0.5 * (n + h), r = Math.sin(this.B * t.x), s = (a * this.singam - r * this.cosgam) / e, Math.abs(Math.abs(s) - 1) < _)
+      throw new Error();
+    l = 0.5 * this.ArB * Math.log((1 - s) / (1 + s)), h = Math.cos(this.B * t.x), Math.abs(h) < ft ? o = this.A * t.x : o = this.ArB * Math.atan2(a * this.cosgam + r * this.singam, h);
+  } else
+    l = t.y > 0 ? this.v_pole_n : this.v_pole_s, o = this.ArB * t.y;
+  return this.no_rot ? (i.x = o, i.y = l) : (o -= this.u_0, i.x = l * this.cosrot + o * this.sinrot, i.y = o * this.cosrot - l * this.sinrot), i.x = this.a * i.x + this.x0, i.y = this.a * i.y + this.y0, i;
+}
+function Tr(t) {
+  var i, a, e, s, r, n, h, o = {};
+  if (t.x = (t.x - this.x0) * (1 / this.a), t.y = (t.y - this.y0) * (1 / this.a), this.no_rot ? (a = t.y, i = t.x) : (a = t.x * this.cosrot - t.y * this.sinrot, i = t.y * this.cosrot + t.x * this.sinrot + this.u_0), e = Math.exp(-this.BrA * a), s = 0.5 * (e - 1 / e), r = 0.5 * (e + 1 / e), n = Math.sin(this.BrA * i), h = (n * this.cosgam + s * this.singam) / r, Math.abs(Math.abs(h) - 1) < _)
+    o.x = 0, o.y = h < 0 ? -m : m;
+  else {
+    if (o.y = this.E / Math.sqrt((1 + h) / (1 - h)), o.y = Pt(this.e, Math.pow(o.y, 1 / this.B)), o.y === 1 / 0)
+      throw new Error();
+    o.x = -this.rB * Math.atan2(s * this.cosgam - n * this.singam, Math.cos(this.BrA * i));
+  }
+  return o.x += this.lam0, o;
+}
+var Ir = ["Hotine_Oblique_Mercator", "Hotine Oblique Mercator", "Hotine_Oblique_Mercator_Azimuth_Natural_Origin", "Hotine_Oblique_Mercator_Two_Point_Natural_Origin", "Hotine_Oblique_Mercator_Azimuth_Center", "Oblique_Mercator", "omerc"];
+const wr = {
+  init: Nr,
+  forward: Pr,
+  inverse: Tr,
+  names: Ir
+};
+function Rr() {
+  if (this.lat2 || (this.lat2 = this.lat1), this.k0 || (this.k0 = 1), this.x0 = this.x0 || 0, this.y0 = this.y0 || 0, !(Math.abs(this.lat1 + this.lat2) < _)) {
+    var t = this.b / this.a;
+    this.e = Math.sqrt(1 - t * t);
+    var i = Math.sin(this.lat1), a = Math.cos(this.lat1), e = Z(this.e, i, a), s = X(this.e, this.lat1, i), r = Math.sin(this.lat2), n = Math.cos(this.lat2), h = Z(this.e, r, n), o = X(this.e, this.lat2, r), l = X(this.e, this.lat0, Math.sin(this.lat0));
+    Math.abs(this.lat1 - this.lat2) > _ ? this.ns = Math.log(e / h) / Math.log(s / o) : this.ns = i, isNaN(this.ns) && (this.ns = i), this.f0 = e / (this.ns * Math.pow(s, this.ns)), this.rh = this.a * this.f0 * Math.pow(l, this.ns), this.title || (this.title = "Lambert Conformal Conic");
+  }
+}
+function pr(t) {
+  var i = t.x, a = t.y;
+  Math.abs(2 * Math.abs(a) - Math.PI) <= _ && (a = Tt(a) * (m - 2 * _));
+  var e = Math.abs(Math.abs(a) - m), s, r;
+  if (e > _)
+    s = X(this.e, a, Math.sin(a)), r = this.a * this.f0 * Math.pow(s, this.ns);
+  else {
+    if (e = a * this.ns, e <= 0)
+      return null;
+    r = 0;
+  }
+  var n = this.ns * g(i - this.long0);
+  return t.x = this.k0 * (r * Math.sin(n)) + this.x0, t.y = this.k0 * (this.rh - r * Math.cos(n)) + this.y0, t;
+}
+function Or(t) {
+  var i, a, e, s, r, n = (t.x - this.x0) / this.k0, h = this.rh - (t.y - this.y0) / this.k0;
+  this.ns > 0 ? (i = Math.sqrt(n * n + h * h), a = 1) : (i = -Math.sqrt(n * n + h * h), a = -1);
+  var o = 0;
+  if (i !== 0 && (o = Math.atan2(a * n, a * h)), i !== 0 || this.ns > 0) {
+    if (a = 1 / this.ns, e = Math.pow(i / (this.a * this.f0), a), s = Pt(this.e, e), s === -9999)
+      return null;
+  } else
+    s = -m;
+  return r = g(o / this.ns + this.long0), t.x = r, t.y = s, t;
+}
+var Lr = [
+  "Lambert Tangential Conformal Conic Projection",
+  "Lambert_Conformal_Conic",
+  "Lambert_Conformal_Conic_1SP",
+  "Lambert_Conformal_Conic_2SP",
+  "lcc"
+];
+const qr = {
+  init: Rr,
+  forward: pr,
+  inverse: Or,
+  names: Lr
+};
+function Gr() {
+  this.a = 6377397155e-3, this.es = 0.006674372230614, this.e = Math.sqrt(this.es), this.lat0 || (this.lat0 = 0.863937979737193), this.long0 || (this.long0 = 0.7417649320975901 - 0.308341501185665), this.k0 || (this.k0 = 0.9999), this.s45 = 0.785398163397448, this.s90 = 2 * this.s45, this.fi0 = this.lat0, this.e2 = this.es, this.e = Math.sqrt(this.e2), this.alfa = Math.sqrt(1 + this.e2 * Math.pow(Math.cos(this.fi0), 4) / (1 - this.e2)), this.uq = 1.04216856380474, this.u0 = Math.asin(Math.sin(this.fi0) / this.alfa), this.g = Math.pow((1 + this.e * Math.sin(this.fi0)) / (1 - this.e * Math.sin(this.fi0)), this.alfa * this.e / 2), this.k = Math.tan(this.u0 / 2 + this.s45) / Math.pow(Math.tan(this.fi0 / 2 + this.s45), this.alfa) * this.g, this.k1 = this.k0, this.n0 = this.a * Math.sqrt(1 - this.e2) / (1 - this.e2 * Math.pow(Math.sin(this.fi0), 2)), this.s0 = 1.37008346281555, this.n = Math.sin(this.s0), this.ro0 = this.k1 * this.n0 / Math.tan(this.s0), this.ad = this.s90 - this.uq;
+}
+function $r(t) {
+  var i, a, e, s, r, n, h, o = t.x, l = t.y, u = g(o - this.long0);
+  return i = Math.pow((1 + this.e * Math.sin(l)) / (1 - this.e * Math.sin(l)), this.alfa * this.e / 2), a = 2 * (Math.atan(this.k * Math.pow(Math.tan(l / 2 + this.s45), this.alfa) / i) - this.s45), e = -u * this.alfa, s = Math.asin(Math.cos(this.ad) * Math.sin(a) + Math.sin(this.ad) * Math.cos(a) * Math.cos(e)), r = Math.asin(Math.cos(a) * Math.sin(e) / Math.cos(s)), n = this.n * r, h = this.ro0 * Math.pow(Math.tan(this.s0 / 2 + this.s45), this.n) / Math.pow(Math.tan(s / 2 + this.s45), this.n), t.y = h * Math.cos(n) / 1, t.x = h * Math.sin(n) / 1, this.czech || (t.y *= -1, t.x *= -1), t;
+}
+function Dr(t) {
+  var i, a, e, s, r, n, h, o, l = t.x;
+  t.x = t.y, t.y = l, this.czech || (t.y *= -1, t.x *= -1), n = Math.sqrt(t.x * t.x + t.y * t.y), r = Math.atan2(t.y, t.x), s = r / Math.sin(this.s0), e = 2 * (Math.atan(Math.pow(this.ro0 / n, 1 / this.n) * Math.tan(this.s0 / 2 + this.s45)) - this.s45), i = Math.asin(Math.cos(this.ad) * Math.sin(e) - Math.sin(this.ad) * Math.cos(e) * Math.cos(s)), a = Math.asin(Math.cos(e) * Math.sin(s) / Math.cos(i)), t.x = this.long0 - a / this.alfa, h = i, o = 0;
+  var u = 0;
+  do
+    t.y = 2 * (Math.atan(Math.pow(this.k, -1 / this.alfa) * Math.pow(Math.tan(i / 2 + this.s45), 1 / this.alfa) * Math.pow((1 + this.e * Math.sin(h)) / (1 - this.e * Math.sin(h)), this.e / 2)) - this.s45), Math.abs(h - t.y) < 1e-10 && (o = 1), h = t.y, u += 1;
+  while (o === 0 && u < 15);
+  return u >= 15 ? null : t;
+}
+var Br = ["Krovak", "krovak"];
+const kr = {
+  init: Gr,
+  forward: $r,
+  inverse: Dr,
+  names: Br
+};
+function F(t, i, a, e, s) {
+  return t * s - i * Math.sin(2 * s) + a * Math.sin(4 * s) - e * Math.sin(6 * s);
+}
+function It(t) {
+  return 1 - 0.25 * t * (1 + t / 16 * (3 + 1.25 * t));
+}
+function wt(t) {
+  return 0.375 * t * (1 + 0.25 * t * (1 + 0.46875 * t));
+}
+function Rt(t) {
+  return 0.05859375 * t * t * (1 + 0.75 * t);
+}
+function pt(t) {
+  return t * t * t * (35 / 3072);
+}
+function yt(t, i, a) {
+  var e = i * a;
+  return t / Math.sqrt(1 - e * e);
+}
+function gt(t) {
+  return Math.abs(t) < m ? t : t - Tt(t) * Math.PI;
+}
+function Wt(t, i, a, e, s) {
+  var r, n;
+  r = t / i;
+  for (var h = 0; h < 15; h++)
+    if (n = (t - (i * r - a * Math.sin(2 * r) + e * Math.sin(4 * r) - s * Math.sin(6 * r))) / (i - 2 * a * Math.cos(2 * r) + 4 * e * Math.cos(4 * r) - 6 * s * Math.cos(6 * r)), r += n, Math.abs(n) <= 1e-10)
+      return r;
+  return NaN;
+}
+function zr() {
+  this.sphere || (this.e0 = It(this.es), this.e1 = wt(this.es), this.e2 = Rt(this.es), this.e3 = pt(this.es), this.ml0 = this.a * F(this.e0, this.e1, this.e2, this.e3, this.lat0));
+}
+function Fr(t) {
+  var i, a, e = t.x, s = t.y;
+  if (e = g(e - this.long0), this.sphere)
+    i = this.a * Math.asin(Math.cos(s) * Math.sin(e)), a = this.a * (Math.atan2(Math.tan(s), Math.cos(e)) - this.lat0);
+  else {
+    var r = Math.sin(s), n = Math.cos(s), h = yt(this.a, this.e, r), o = Math.tan(s) * Math.tan(s), l = e * Math.cos(s), u = l * l, f = this.es * n * n / (1 - this.es), c = this.a * F(this.e0, this.e1, this.e2, this.e3, s);
+    i = h * l * (1 - u * o * (1 / 6 - (8 - o + 8 * f) * u / 120)), a = c - this.ml0 + h * r / n * u * (0.5 + (5 - o + 6 * f) * u / 24);
+  }
+  return t.x = i + this.x0, t.y = a + this.y0, t;
+}
+function Ur(t) {
+  t.x -= this.x0, t.y -= this.y0;
+  var i = t.x / this.a, a = t.y / this.a, e, s;
+  if (this.sphere) {
+    var r = a + this.lat0;
+    e = Math.asin(Math.sin(r) * Math.cos(i)), s = Math.atan2(Math.tan(i), Math.cos(r));
+  } else {
+    var n = this.ml0 / this.a + a, h = Wt(n, this.e0, this.e1, this.e2, this.e3);
+    if (Math.abs(Math.abs(h) - m) <= _)
+      return t.x = this.long0, t.y = m, a < 0 && (t.y *= -1), t;
+    var o = yt(this.a, this.e, Math.sin(h)), l = o * o * o / this.a / this.a * (1 - this.es), u = Math.pow(Math.tan(h), 2), f = i * this.a / o, c = f * f;
+    e = h - o * Math.tan(h) / l * f * f * (0.5 - (1 + 3 * u) * f * f / 24), s = f * (1 - c * (u / 3 + (1 + 3 * u) * u * c / 15)) / Math.cos(h);
+  }
+  return t.x = g(s + this.long0), t.y = gt(e), t;
+}
+var Wr = ["Cassini", "Cassini_Soldner", "cass"];
+const jr = {
+  init: zr,
+  forward: Fr,
+  inverse: Ur,
+  names: Wr
+};
+function st(t, i) {
+  var a;
+  return t > 1e-7 ? (a = t * i, (1 - t * t) * (i / (1 - a * a) - 0.5 / t * Math.log((1 - a) / (1 + a)))) : 2 * i;
+}
+var Qr = 1, Hr = 2, Xr = 3, Vr = 4;
+function Kr() {
+  var t = Math.abs(this.lat0);
+  if (Math.abs(t - m) < _ ? this.mode = this.lat0 < 0 ? this.S_POLE : this.N_POLE : Math.abs(t) < _ ? this.mode = this.EQUIT : this.mode = this.OBLIQ, this.es > 0) {
+    var i;
+    switch (this.qp = st(this.e, 1), this.mmf = 0.5 / (1 - this.es), this.apa = rh(this.es), this.mode) {
+      case this.N_POLE:
+        this.dd = 1;
+        break;
+      case this.S_POLE:
+        this.dd = 1;
+        break;
+      case this.EQUIT:
+        this.rq = Math.sqrt(0.5 * this.qp), this.dd = 1 / this.rq, this.xmf = 1, this.ymf = 0.5 * this.qp;
+        break;
+      case this.OBLIQ:
+        this.rq = Math.sqrt(0.5 * this.qp), i = Math.sin(this.lat0), this.sinb1 = st(this.e, i) / this.qp, this.cosb1 = Math.sqrt(1 - this.sinb1 * this.sinb1), this.dd = Math.cos(this.lat0) / (Math.sqrt(1 - this.es * i * i) * this.rq * this.cosb1), this.ymf = (this.xmf = this.rq) / this.dd, this.xmf *= this.dd;
+        break;
+    }
+  } else
+    this.mode === this.OBLIQ && (this.sinph0 = Math.sin(this.lat0), this.cosph0 = Math.cos(this.lat0));
+}
+function Jr(t) {
+  var i, a, e, s, r, n, h, o, l, u, f = t.x, c = t.y;
+  if (f = g(f - this.long0), this.sphere) {
+    if (r = Math.sin(c), u = Math.cos(c), e = Math.cos(f), this.mode === this.OBLIQ || this.mode === this.EQUIT) {
+      if (a = this.mode === this.EQUIT ? 1 + u * e : 1 + this.sinph0 * r + this.cosph0 * u * e, a <= _)
+        return null;
+      a = Math.sqrt(2 / a), i = a * u * Math.sin(f), a *= this.mode === this.EQUIT ? r : this.cosph0 * r - this.sinph0 * u * e;
+    } else if (this.mode === this.N_POLE || this.mode === this.S_POLE) {
+      if (this.mode === this.N_POLE && (e = -e), Math.abs(c + this.lat0) < _)
+        return null;
+      a = T - c * 0.5, a = 2 * (this.mode === this.S_POLE ? Math.cos(a) : Math.sin(a)), i = a * Math.sin(f), a *= e;
+    }
+  } else {
+    switch (h = 0, o = 0, l = 0, e = Math.cos(f), s = Math.sin(f), r = Math.sin(c), n = st(this.e, r), (this.mode === this.OBLIQ || this.mode === this.EQUIT) && (h = n / this.qp, o = Math.sqrt(1 - h * h)), this.mode) {
+      case this.OBLIQ:
+        l = 1 + this.sinb1 * h + this.cosb1 * o * e;
+        break;
+      case this.EQUIT:
+        l = 1 + o * e;
+        break;
+      case this.N_POLE:
+        l = m + c, n = this.qp - n;
+        break;
+      case this.S_POLE:
+        l = c - m, n = this.qp + n;
+        break;
+    }
+    if (Math.abs(l) < _)
+      return null;
+    switch (this.mode) {
+      case this.OBLIQ:
+      case this.EQUIT:
+        l = Math.sqrt(2 / l), this.mode === this.OBLIQ ? a = this.ymf * l * (this.cosb1 * h - this.sinb1 * o * e) : a = (l = Math.sqrt(2 / (1 + o * e))) * h * this.ymf, i = this.xmf * l * o * s;
+        break;
+      case this.N_POLE:
+      case this.S_POLE:
+        n >= 0 ? (i = (l = Math.sqrt(n)) * s, a = e * (this.mode === this.S_POLE ? l : -l)) : i = a = 0;
+        break;
+    }
+  }
+  return t.x = this.a * i + this.x0, t.y = this.a * a + this.y0, t;
+}
+function Zr(t) {
+  t.x -= this.x0, t.y -= this.y0;
+  var i = t.x / this.a, a = t.y / this.a, e, s, r, n, h, o, l;
+  if (this.sphere) {
+    var u = 0, f, c = 0;
+    if (f = Math.sqrt(i * i + a * a), s = f * 0.5, s > 1)
+      return null;
+    switch (s = 2 * Math.asin(s), (this.mode === this.OBLIQ || this.mode === this.EQUIT) && (c = Math.sin(s), u = Math.cos(s)), this.mode) {
+      case this.EQUIT:
+        s = Math.abs(f) <= _ ? 0 : Math.asin(a * c / f), i *= c, a = u * f;
+        break;
+      case this.OBLIQ:
+        s = Math.abs(f) <= _ ? this.lat0 : Math.asin(u * this.sinph0 + a * c * this.cosph0 / f), i *= c * this.cosph0, a = (u - Math.sin(s) * this.sinph0) * f;
+        break;
+      case this.N_POLE:
+        a = -a, s = m - s;
+        break;
+      case this.S_POLE:
+        s -= m;
+        break;
+    }
+    e = a === 0 && (this.mode === this.EQUIT || this.mode === this.OBLIQ) ? 0 : Math.atan2(i, a);
+  } else {
+    if (l = 0, this.mode === this.OBLIQ || this.mode === this.EQUIT) {
+      if (i /= this.dd, a *= this.dd, o = Math.sqrt(i * i + a * a), o < _)
+        return t.x = this.long0, t.y = this.lat0, t;
+      n = 2 * Math.asin(0.5 * o / this.rq), r = Math.cos(n), i *= n = Math.sin(n), this.mode === this.OBLIQ ? (l = r * this.sinb1 + a * n * this.cosb1 / o, h = this.qp * l, a = o * this.cosb1 * r - a * this.sinb1 * n) : (l = a * n / o, h = this.qp * l, a = o * r);
+    } else if (this.mode === this.N_POLE || this.mode === this.S_POLE) {
+      if (this.mode === this.N_POLE && (a = -a), h = i * i + a * a, !h)
+        return t.x = this.long0, t.y = this.lat0, t;
+      l = 1 - h / this.qp, this.mode === this.S_POLE && (l = -l);
+    }
+    e = Math.atan2(i, a), s = hh(Math.asin(l), this.apa);
+  }
+  return t.x = g(this.long0 + e), t.y = s, t;
+}
+var Yr = 0.3333333333333333, th = 0.17222222222222222, ih = 0.10257936507936508, ah = 0.06388888888888888, sh = 0.0664021164021164, eh = 0.016415012942191543;
+function rh(t) {
+  var i, a = [];
+  return a[0] = t * Yr, i = t * t, a[0] += i * th, a[1] = i * ah, i *= t, a[0] += i * ih, a[1] += i * sh, a[2] = i * eh, a;
+}
+function hh(t, i) {
+  var a = t + t;
+  return t + i[0] * Math.sin(a) + i[1] * Math.sin(a + a) + i[2] * Math.sin(a + a + a);
+}
+var nh = ["Lambert Azimuthal Equal Area", "Lambert_Azimuthal_Equal_Area", "laea"];
+const oh = {
+  init: Kr,
+  forward: Jr,
+  inverse: Zr,
+  names: nh,
+  S_POLE: Qr,
+  N_POLE: Hr,
+  EQUIT: Xr,
+  OBLIQ: Vr
+};
+function rt(t) {
+  return Math.abs(t) > 1 && (t = t > 1 ? 1 : -1), Math.asin(t);
+}
+function lh() {
+  Math.abs(this.lat1 + this.lat2) < _ || (this.temp = this.b / this.a, this.es = 1 - Math.pow(this.temp, 2), this.e3 = Math.sqrt(this.es), this.sin_po = Math.sin(this.lat1), this.cos_po = Math.cos(this.lat1), this.t1 = this.sin_po, this.con = this.sin_po, this.ms1 = Z(this.e3, this.sin_po, this.cos_po), this.qs1 = st(this.e3, this.sin_po, this.cos_po), this.sin_po = Math.sin(this.lat2), this.cos_po = Math.cos(this.lat2), this.t2 = this.sin_po, this.ms2 = Z(this.e3, this.sin_po, this.cos_po), this.qs2 = st(this.e3, this.sin_po, this.cos_po), this.sin_po = Math.sin(this.lat0), this.cos_po = Math.cos(this.lat0), this.t3 = this.sin_po, this.qs0 = st(this.e3, this.sin_po, this.cos_po), Math.abs(this.lat1 - this.lat2) > _ ? this.ns0 = (this.ms1 * this.ms1 - this.ms2 * this.ms2) / (this.qs2 - this.qs1) : this.ns0 = this.con, this.c = this.ms1 * this.ms1 + this.ns0 * this.qs1, this.rh = this.a * Math.sqrt(this.c - this.ns0 * this.qs0) / this.ns0);
+}
+function fh(t) {
+  var i = t.x, a = t.y;
+  this.sin_phi = Math.sin(a), this.cos_phi = Math.cos(a);
+  var e = st(this.e3, this.sin_phi, this.cos_phi), s = this.a * Math.sqrt(this.c - this.ns0 * e) / this.ns0, r = this.ns0 * g(i - this.long0), n = s * Math.sin(r) + this.x0, h = this.rh - s * Math.cos(r) + this.y0;
+  return t.x = n, t.y = h, t;
+}
+function uh(t) {
+  var i, a, e, s, r, n;
+  return t.x -= this.x0, t.y = this.rh - t.y + this.y0, this.ns0 >= 0 ? (i = Math.sqrt(t.x * t.x + t.y * t.y), e = 1) : (i = -Math.sqrt(t.x * t.x + t.y * t.y), e = -1), s = 0, i !== 0 && (s = Math.atan2(e * t.x, e * t.y)), e = i * this.ns0 / this.a, this.sphere ? n = Math.asin((this.c - e * e) / (2 * this.ns0)) : (a = (this.c - e * e) / this.ns0, n = this.phi1z(this.e3, a)), r = g(s / this.ns0 + this.long0), t.x = r, t.y = n, t;
+}
+function ch(t, i) {
+  var a, e, s, r, n, h = rt(0.5 * i);
+  if (t < _)
+    return h;
+  for (var o = t * t, l = 1; l <= 25; l++)
+    if (a = Math.sin(h), e = Math.cos(h), s = t * a, r = 1 - s * s, n = 0.5 * r * r / e * (i / (1 - o) - a / r + 0.5 / t * Math.log((1 - s) / (1 + s))), h = h + n, Math.abs(n) <= 1e-7)
+      return h;
+  return null;
+}
+var Mh = ["Albers_Conic_Equal_Area", "Albers", "aea"];
+const vh = {
+  init: lh,
+  forward: fh,
+  inverse: uh,
+  names: Mh,
+  phi1z: ch
+};
+function dh() {
+  this.sin_p14 = Math.sin(this.lat0), this.cos_p14 = Math.cos(this.lat0), this.infinity_dist = 1e3 * this.a, this.rc = 1;
+}
+function mh(t) {
+  var i, a, e, s, r, n, h, o, l = t.x, u = t.y;
+  return e = g(l - this.long0), i = Math.sin(u), a = Math.cos(u), s = Math.cos(e), n = this.sin_p14 * i + this.cos_p14 * a * s, r = 1, n > 0 || Math.abs(n) <= _ ? (h = this.x0 + this.a * r * a * Math.sin(e) / n, o = this.y0 + this.a * r * (this.cos_p14 * i - this.sin_p14 * a * s) / n) : (h = this.x0 + this.infinity_dist * a * Math.sin(e), o = this.y0 + this.infinity_dist * (this.cos_p14 * i - this.sin_p14 * a * s)), t.x = h, t.y = o, t;
+}
+function yh(t) {
+  var i, a, e, s, r, n;
+  return t.x = (t.x - this.x0) / this.a, t.y = (t.y - this.y0) / this.a, t.x /= this.k0, t.y /= this.k0, (i = Math.sqrt(t.x * t.x + t.y * t.y)) ? (s = Math.atan2(i, this.rc), a = Math.sin(s), e = Math.cos(s), n = rt(e * this.sin_p14 + t.y * a * this.cos_p14 / i), r = Math.atan2(t.x * a, i * this.cos_p14 * e - t.y * this.sin_p14 * a), r = g(this.long0 + r)) : (n = this.phic0, r = 0), t.x = r, t.y = n, t;
+}
+var _h = ["gnom"];
+const gh = {
+  init: dh,
+  forward: mh,
+  inverse: yh,
+  names: _h
+};
+function xh(t, i) {
+  var a = 1 - (1 - t * t) / (2 * t) * Math.log((1 - t) / (1 + t));
+  if (Math.abs(Math.abs(i) - a) < 1e-6)
+    return i < 0 ? -1 * m : m;
+  for (var e = Math.asin(0.5 * i), s, r, n, h, o = 0; o < 30; o++)
+    if (r = Math.sin(e), n = Math.cos(e), h = t * r, s = Math.pow(1 - h * h, 2) / (2 * n) * (i / (1 - t * t) - r / (1 - h * h) + 0.5 / t * Math.log((1 - h) / (1 + h))), e += s, Math.abs(s) <= 1e-10)
+      return e;
+  return NaN;
+}
+function bh() {
+  this.sphere || (this.k0 = Z(this.e, Math.sin(this.lat_ts), Math.cos(this.lat_ts)));
+}
+function Sh(t) {
+  var i = t.x, a = t.y, e, s, r = g(i - this.long0);
+  if (this.sphere)
+    e = this.x0 + this.a * r * Math.cos(this.lat_ts), s = this.y0 + this.a * Math.sin(a) / Math.cos(this.lat_ts);
+  else {
+    var n = st(this.e, Math.sin(a));
+    e = this.x0 + this.a * this.k0 * r, s = this.y0 + this.a * n * 0.5 / this.k0;
+  }
+  return t.x = e, t.y = s, t;
+}
+function Eh(t) {
+  t.x -= this.x0, t.y -= this.y0;
+  var i, a;
+  return this.sphere ? (i = g(this.long0 + t.x / this.a / Math.cos(this.lat_ts)), a = Math.asin(t.y / this.a * Math.cos(this.lat_ts))) : (a = xh(this.e, 2 * t.y * this.k0 / this.a), i = g(this.long0 + t.x / (this.a * this.k0))), t.x = i, t.y = a, t;
+}
+var Ah = ["cea"];
+const Ch = {
+  init: bh,
+  forward: Sh,
+  inverse: Eh,
+  names: Ah
+};
+function Nh() {
+  this.x0 = this.x0 || 0, this.y0 = this.y0 || 0, this.lat0 = this.lat0 || 0, this.long0 = this.long0 || 0, this.lat_ts = this.lat_ts || 0, this.title = this.title || "Equidistant Cylindrical (Plate Carre)", this.rc = Math.cos(this.lat_ts);
+}
+function Ph(t) {
+  var i = t.x, a = t.y, e = g(i - this.long0), s = gt(a - this.lat0);
+  return t.x = this.x0 + this.a * e * this.rc, t.y = this.y0 + this.a * s, t;
+}
+function Th(t) {
+  var i = t.x, a = t.y;
+  return t.x = g(this.long0 + (i - this.x0) / (this.a * this.rc)), t.y = gt(this.lat0 + (a - this.y0) / this.a), t;
+}
+var Ih = ["Equirectangular", "Equidistant_Cylindrical", "eqc"];
+const wh = {
+  init: Nh,
+  forward: Ph,
+  inverse: Th,
+  names: Ih
+};
+var Pi = 20;
+function Rh() {
+  this.temp = this.b / this.a, this.es = 1 - Math.pow(this.temp, 2), this.e = Math.sqrt(this.es), this.e0 = It(this.es), this.e1 = wt(this.es), this.e2 = Rt(this.es), this.e3 = pt(this.es), this.ml0 = this.a * F(this.e0, this.e1, this.e2, this.e3, this.lat0);
+}
+function ph(t) {
+  var i = t.x, a = t.y, e, s, r, n = g(i - this.long0);
+  if (r = n * Math.sin(a), this.sphere)
+    Math.abs(a) <= _ ? (e = this.a * n, s = -1 * this.a * this.lat0) : (e = this.a * Math.sin(r) / Math.tan(a), s = this.a * (gt(a - this.lat0) + (1 - Math.cos(r)) / Math.tan(a)));
+  else if (Math.abs(a) <= _)
+    e = this.a * n, s = -1 * this.ml0;
+  else {
+    var h = yt(this.a, this.e, Math.sin(a)) / Math.tan(a);
+    e = h * Math.sin(r), s = this.a * F(this.e0, this.e1, this.e2, this.e3, a) - this.ml0 + h * (1 - Math.cos(r));
+  }
+  return t.x = e + this.x0, t.y = s + this.y0, t;
+}
+function Oh(t) {
+  var i, a, e, s, r, n, h, o, l;
+  if (e = t.x - this.x0, s = t.y - this.y0, this.sphere)
+    if (Math.abs(s + this.a * this.lat0) <= _)
+      i = g(e / this.a + this.long0), a = 0;
+    else {
+      n = this.lat0 + s / this.a, h = e * e / this.a / this.a + n * n, o = n;
+      var u;
+      for (r = Pi; r; --r)
+        if (u = Math.tan(o), l = -1 * (n * (o * u + 1) - o - 0.5 * (o * o + h) * u) / ((o - n) / u - 1), o += l, Math.abs(l) <= _) {
+          a = o;
+          break;
+        }
+      i = g(this.long0 + Math.asin(e * Math.tan(o) / this.a) / Math.sin(a));
+    }
+  else if (Math.abs(s + this.ml0) <= _)
+    a = 0, i = g(this.long0 + e / this.a);
+  else {
+    n = (this.ml0 + s) / this.a, h = e * e / this.a / this.a + n * n, o = n;
+    var f, c, v, M, d;
+    for (r = Pi; r; --r)
+      if (d = this.e * Math.sin(o), f = Math.sqrt(1 - d * d) * Math.tan(o), c = this.a * F(this.e0, this.e1, this.e2, this.e3, o), v = this.e0 - 2 * this.e1 * Math.cos(2 * o) + 4 * this.e2 * Math.cos(4 * o) - 6 * this.e3 * Math.cos(6 * o), M = c / this.a, l = (n * (f * M + 1) - M - 0.5 * f * (M * M + h)) / (this.es * Math.sin(2 * o) * (M * M + h - 2 * n * M) / (4 * f) + (n - M) * (f * v - 2 / Math.sin(2 * o)) - v), o -= l, Math.abs(l) <= _) {
+        a = o;
+        break;
+      }
+    f = Math.sqrt(1 - this.es * Math.pow(Math.sin(a), 2)) * Math.tan(a), i = g(this.long0 + Math.asin(e * f / this.a) / Math.sin(a));
+  }
+  return t.x = i, t.y = a, t;
+}
+var Lh = ["Polyconic", "poly"];
+const qh = {
+  init: Rh,
+  forward: ph,
+  inverse: Oh,
+  names: Lh
+};
+function Gh() {
+  this.A = [], this.A[1] = 0.6399175073, this.A[2] = -0.1358797613, this.A[3] = 0.063294409, this.A[4] = -0.02526853, this.A[5] = 0.0117879, this.A[6] = -55161e-7, this.A[7] = 26906e-7, this.A[8] = -1333e-6, this.A[9] = 67e-5, this.A[10] = -34e-5, this.B_re = [], this.B_im = [], this.B_re[1] = 0.7557853228, this.B_im[1] = 0, this.B_re[2] = 0.249204646, this.B_im[2] = 3371507e-9, this.B_re[3] = -1541739e-9, this.B_im[3] = 0.04105856, this.B_re[4] = -0.10162907, this.B_im[4] = 0.01727609, this.B_re[5] = -0.26623489, this.B_im[5] = -0.36249218, this.B_re[6] = -0.6870983, this.B_im[6] = -1.1651967, this.C_re = [], this.C_im = [], this.C_re[1] = 1.3231270439, this.C_im[1] = 0, this.C_re[2] = -0.577245789, this.C_im[2] = -7809598e-9, this.C_re[3] = 0.508307513, this.C_im[3] = -0.112208952, this.C_re[4] = -0.15094762, this.C_im[4] = 0.18200602, this.C_re[5] = 1.01418179, this.C_im[5] = 1.64497696, this.C_re[6] = 1.9660549, this.C_im[6] = 2.5127645, this.D = [], this.D[1] = 1.5627014243, this.D[2] = 0.5185406398, this.D[3] = -0.03333098, this.D[4] = -0.1052906, this.D[5] = -0.0368594, this.D[6] = 7317e-6, this.D[7] = 0.0122, this.D[8] = 394e-5, this.D[9] = -13e-4;
+}
+function $h(t) {
+  var i, a = t.x, e = t.y, s = e - this.lat0, r = a - this.long0, n = s / At * 1e-5, h = r, o = 1, l = 0;
+  for (i = 1; i <= 10; i++)
+    o = o * n, l = l + this.A[i] * o;
+  var u = l, f = h, c = 1, v = 0, M, d, y = 0, x = 0;
+  for (i = 1; i <= 6; i++)
+    M = c * u - v * f, d = v * u + c * f, c = M, v = d, y = y + this.B_re[i] * c - this.B_im[i] * v, x = x + this.B_im[i] * c + this.B_re[i] * v;
+  return t.x = x * this.a + this.x0, t.y = y * this.a + this.y0, t;
+}
+function Dh(t) {
+  var i, a = t.x, e = t.y, s = a - this.x0, r = e - this.y0, n = r / this.a, h = s / this.a, o = 1, l = 0, u, f, c = 0, v = 0;
+  for (i = 1; i <= 6; i++)
+    u = o * n - l * h, f = l * n + o * h, o = u, l = f, c = c + this.C_re[i] * o - this.C_im[i] * l, v = v + this.C_im[i] * o + this.C_re[i] * l;
+  for (var M = 0; M < this.iterations; M++) {
+    var d = c, y = v, x, S, A = n, R = h;
+    for (i = 2; i <= 6; i++)
+      x = d * c - y * v, S = y * c + d * v, d = x, y = S, A = A + (i - 1) * (this.B_re[i] * d - this.B_im[i] * y), R = R + (i - 1) * (this.B_im[i] * d + this.B_re[i] * y);
+    d = 1, y = 0;
+    var N = this.B_re[1], P = this.B_im[1];
+    for (i = 2; i <= 6; i++)
+      x = d * c - y * v, S = y * c + d * v, d = x, y = S, N = N + i * (this.B_re[i] * d - this.B_im[i] * y), P = P + i * (this.B_im[i] * d + this.B_re[i] * y);
+    var B = N * N + P * P;
+    c = (A * N + R * P) / B, v = (R * N - A * P) / B;
+  }
+  var L = c, V = v, ht = 1, nt = 0;
+  for (i = 1; i <= 9; i++)
+    ht = ht * L, nt = nt + this.D[i] * ht;
+  var Ot = this.lat0 + nt * At * 1e5, ra = this.long0 + V;
+  return t.x = ra, t.y = Ot, t;
+}
+var Bh = ["New_Zealand_Map_Grid", "nzmg"];
+const kh = {
+  init: Gh,
+  forward: $h,
+  inverse: Dh,
+  names: Bh
+};
+function zh() {
+}
+function Fh(t) {
+  var i = t.x, a = t.y, e = g(i - this.long0), s = this.x0 + this.a * e, r = this.y0 + this.a * Math.log(Math.tan(Math.PI / 4 + a / 2.5)) * 1.25;
+  return t.x = s, t.y = r, t;
+}
+function Uh(t) {
+  t.x -= this.x0, t.y -= this.y0;
+  var i = g(this.long0 + t.x / this.a), a = 2.5 * (Math.atan(Math.exp(0.8 * t.y / this.a)) - Math.PI / 4);
+  return t.x = i, t.y = a, t;
+}
+var Wh = ["Miller_Cylindrical", "mill"];
+const jh = {
+  init: zh,
+  forward: Fh,
+  inverse: Uh,
+  names: Wh
+};
+var Qh = 20;
+function Hh() {
+  this.sphere ? (this.n = 1, this.m = 0, this.es = 0, this.C_y = Math.sqrt((this.m + 1) / this.n), this.C_x = this.C_y / (this.m + 1)) : this.en = Vi(this.es);
+}
+function Xh(t) {
+  var i, a, e = t.x, s = t.y;
+  if (e = g(e - this.long0), this.sphere) {
+    if (!this.m)
+      s = this.n !== 1 ? Math.asin(this.n * Math.sin(s)) : s;
+    else
+      for (var r = this.n * Math.sin(s), n = Qh; n; --n) {
+        var h = (this.m * s + Math.sin(s) - r) / (this.m + Math.cos(s));
+        if (s -= h, Math.abs(h) < _)
+          break;
+      }
+    i = this.a * this.C_x * e * (this.m + Math.cos(s)), a = this.a * this.C_y * s;
+  } else {
+    var o = Math.sin(s), l = Math.cos(s);
+    a = this.a * Ht(s, o, l, this.en), i = this.a * e * l / Math.sqrt(1 - this.es * o * o);
+  }
+  return t.x = i, t.y = a, t;
+}
+function Vh(t) {
+  var i, a, e, s;
+  return t.x -= this.x0, e = t.x / this.a, t.y -= this.y0, i = t.y / this.a, this.sphere ? (i /= this.C_y, e = e / (this.C_x * (this.m + Math.cos(i))), this.m ? i = rt((this.m * i + Math.sin(i)) / this.n) : this.n !== 1 && (i = rt(Math.sin(i) / this.n)), e = g(e + this.long0), i = gt(i)) : (i = Ki(t.y / this.a, this.es, this.en), s = Math.abs(i), s < m ? (s = Math.sin(i), a = this.long0 + t.x * Math.sqrt(1 - this.es * s * s) / (this.a * Math.cos(i)), e = g(a)) : s - _ < m && (e = this.long0)), t.x = e, t.y = i, t;
+}
+var Kh = ["Sinusoidal", "sinu"];
+const Jh = {
+  init: Hh,
+  forward: Xh,
+  inverse: Vh,
+  names: Kh
+};
+function Zh() {
+}
+function Yh(t) {
+  for (var i = t.x, a = t.y, e = g(i - this.long0), s = a, r = Math.PI * Math.sin(a); ; ) {
+    var n = -(s + Math.sin(s) - r) / (1 + Math.cos(s));
+    if (s += n, Math.abs(n) < _)
+      break;
+  }
+  s /= 2, Math.PI / 2 - Math.abs(a) < _ && (e = 0);
+  var h = 0.900316316158 * this.a * e * Math.cos(s) + this.x0, o = 1.4142135623731 * this.a * Math.sin(s) + this.y0;
+  return t.x = h, t.y = o, t;
+}
+function tn(t) {
+  var i, a;
+  t.x -= this.x0, t.y -= this.y0, a = t.y / (1.4142135623731 * this.a), Math.abs(a) > 0.999999999999 && (a = 0.999999999999), i = Math.asin(a);
+  var e = g(this.long0 + t.x / (0.900316316158 * this.a * Math.cos(i)));
+  e < -Math.PI && (e = -Math.PI), e > Math.PI && (e = Math.PI), a = (2 * i + Math.sin(2 * i)) / Math.PI, Math.abs(a) > 1 && (a = 1);
+  var s = Math.asin(a);
+  return t.x = e, t.y = s, t;
+}
+var an = ["Mollweide", "moll"];
+const sn = {
+  init: Zh,
+  forward: Yh,
+  inverse: tn,
+  names: an
+};
+function en() {
+  Math.abs(this.lat1 + this.lat2) < _ || (this.lat2 = this.lat2 || this.lat1, this.temp = this.b / this.a, this.es = 1 - Math.pow(this.temp, 2), this.e = Math.sqrt(this.es), this.e0 = It(this.es), this.e1 = wt(this.es), this.e2 = Rt(this.es), this.e3 = pt(this.es), this.sinphi = Math.sin(this.lat1), this.cosphi = Math.cos(this.lat1), this.ms1 = Z(this.e, this.sinphi, this.cosphi), this.ml1 = F(this.e0, this.e1, this.e2, this.e3, this.lat1), Math.abs(this.lat1 - this.lat2) < _ ? this.ns = this.sinphi : (this.sinphi = Math.sin(this.lat2), this.cosphi = Math.cos(this.lat2), this.ms2 = Z(this.e, this.sinphi, this.cosphi), this.ml2 = F(this.e0, this.e1, this.e2, this.e3, this.lat2), this.ns = (this.ms1 - this.ms2) / (this.ml2 - this.ml1)), this.g = this.ml1 + this.ms1 / this.ns, this.ml0 = F(this.e0, this.e1, this.e2, this.e3, this.lat0), this.rh = this.a * (this.g - this.ml0));
+}
+function rn(t) {
+  var i = t.x, a = t.y, e;
+  if (this.sphere)
+    e = this.a * (this.g - a);
+  else {
+    var s = F(this.e0, this.e1, this.e2, this.e3, a);
+    e = this.a * (this.g - s);
+  }
+  var r = this.ns * g(i - this.long0), n = this.x0 + e * Math.sin(r), h = this.y0 + this.rh - e * Math.cos(r);
+  return t.x = n, t.y = h, t;
+}
+function hn(t) {
+  t.x -= this.x0, t.y = this.rh - t.y + this.y0;
+  var i, a, e, s;
+  this.ns >= 0 ? (a = Math.sqrt(t.x * t.x + t.y * t.y), i = 1) : (a = -Math.sqrt(t.x * t.x + t.y * t.y), i = -1);
+  var r = 0;
+  if (a !== 0 && (r = Math.atan2(i * t.x, i * t.y)), this.sphere)
+    return s = g(this.long0 + r / this.ns), e = gt(this.g - a / this.a), t.x = s, t.y = e, t;
+  var n = this.g - a / this.a;
+  return e = Wt(n, this.e0, this.e1, this.e2, this.e3), s = g(this.long0 + r / this.ns), t.x = s, t.y = e, t;
+}
+var nn = ["Equidistant_Conic", "eqdc"];
+const on = {
+  init: en,
+  forward: rn,
+  inverse: hn,
+  names: nn
+};
+function ln() {
+  this.R = this.a;
+}
+function fn(t) {
+  var i = t.x, a = t.y, e = g(i - this.long0), s, r;
+  Math.abs(a) <= _ && (s = this.x0 + this.R * e, r = this.y0);
+  var n = rt(2 * Math.abs(a / Math.PI));
+  (Math.abs(e) <= _ || Math.abs(Math.abs(a) - m) <= _) && (s = this.x0, a >= 0 ? r = this.y0 + Math.PI * this.R * Math.tan(0.5 * n) : r = this.y0 + Math.PI * this.R * -Math.tan(0.5 * n));
+  var h = 0.5 * Math.abs(Math.PI / e - e / Math.PI), o = h * h, l = Math.sin(n), u = Math.cos(n), f = u / (l + u - 1), c = f * f, v = f * (2 / l - 1), M = v * v, d = Math.PI * this.R * (h * (f - M) + Math.sqrt(o * (f - M) * (f - M) - (M + o) * (c - M))) / (M + o);
+  e < 0 && (d = -d), s = this.x0 + d;
+  var y = o + f;
+  return d = Math.PI * this.R * (v * y - h * Math.sqrt((M + o) * (o + 1) - y * y)) / (M + o), a >= 0 ? r = this.y0 + d : r = this.y0 - d, t.x = s, t.y = r, t;
+}
+function un(t) {
+  var i, a, e, s, r, n, h, o, l, u, f, c, v;
+  return t.x -= this.x0, t.y -= this.y0, f = Math.PI * this.R, e = t.x / f, s = t.y / f, r = e * e + s * s, n = -Math.abs(s) * (1 + r), h = n - 2 * s * s + e * e, o = -2 * n + 1 + 2 * s * s + r * r, v = s * s / o + (2 * h * h * h / o / o / o - 9 * n * h / o / o) / 27, l = (n - h * h / 3 / o) / o, u = 2 * Math.sqrt(-l / 3), f = 3 * v / l / u, Math.abs(f) > 1 && (f >= 0 ? f = 1 : f = -1), c = Math.acos(f) / 3, t.y >= 0 ? a = (-u * Math.cos(c + Math.PI / 3) - h / 3 / o) * Math.PI : a = -(-u * Math.cos(c + Math.PI / 3) - h / 3 / o) * Math.PI, Math.abs(e) < _ ? i = this.long0 : i = g(this.long0 + Math.PI * (r - 1 + Math.sqrt(1 + 2 * (e * e - s * s) + r * r)) / 2 / e), t.x = i, t.y = a, t;
+}
+var cn = ["Van_der_Grinten_I", "VanDerGrinten", "vandg"];
+const Mn = {
+  init: ln,
+  forward: fn,
+  inverse: un,
+  names: cn
+};
+function vn() {
+  this.sin_p12 = Math.sin(this.lat0), this.cos_p12 = Math.cos(this.lat0);
+}
+function dn(t) {
+  var i = t.x, a = t.y, e = Math.sin(t.y), s = Math.cos(t.y), r = g(i - this.long0), n, h, o, l, u, f, c, v, M, d, y, x, S, A, R, N, P, B, L, V, ht, nt, Ot;
+  return this.sphere ? Math.abs(this.sin_p12 - 1) <= _ ? (t.x = this.x0 + this.a * (m - a) * Math.sin(r), t.y = this.y0 - this.a * (m - a) * Math.cos(r), t) : Math.abs(this.sin_p12 + 1) <= _ ? (t.x = this.x0 + this.a * (m + a) * Math.sin(r), t.y = this.y0 + this.a * (m + a) * Math.cos(r), t) : (B = this.sin_p12 * e + this.cos_p12 * s * Math.cos(r), N = Math.acos(B), P = N ? N / Math.sin(N) : 1, t.x = this.x0 + this.a * P * s * Math.sin(r), t.y = this.y0 + this.a * P * (this.cos_p12 * e - this.sin_p12 * s * Math.cos(r)), t) : (n = It(this.es), h = wt(this.es), o = Rt(this.es), l = pt(this.es), Math.abs(this.sin_p12 - 1) <= _ ? (u = this.a * F(n, h, o, l, m), f = this.a * F(n, h, o, l, a), t.x = this.x0 + (u - f) * Math.sin(r), t.y = this.y0 - (u - f) * Math.cos(r), t) : Math.abs(this.sin_p12 + 1) <= _ ? (u = this.a * F(n, h, o, l, m), f = this.a * F(n, h, o, l, a), t.x = this.x0 + (u + f) * Math.sin(r), t.y = this.y0 + (u + f) * Math.cos(r), t) : (c = e / s, v = yt(this.a, this.e, this.sin_p12), M = yt(this.a, this.e, e), d = Math.atan((1 - this.es) * c + this.es * v * this.sin_p12 / (M * s)), y = Math.atan2(Math.sin(r), this.cos_p12 * Math.tan(d) - this.sin_p12 * Math.cos(r)), y === 0 ? L = Math.asin(this.cos_p12 * Math.sin(d) - this.sin_p12 * Math.cos(d)) : Math.abs(Math.abs(y) - Math.PI) <= _ ? L = -Math.asin(this.cos_p12 * Math.sin(d) - this.sin_p12 * Math.cos(d)) : L = Math.asin(Math.sin(r) * Math.cos(d) / Math.sin(y)), x = this.e * this.sin_p12 / Math.sqrt(1 - this.es), S = this.e * this.cos_p12 * Math.cos(y) / Math.sqrt(1 - this.es), A = x * S, R = S * S, V = L * L, ht = V * L, nt = ht * L, Ot = nt * L, N = v * L * (1 - V * R * (1 - R) / 6 + ht / 8 * A * (1 - 2 * R) + nt / 120 * (R * (4 - 7 * R) - 3 * x * x * (1 - 7 * R)) - Ot / 48 * A), t.x = this.x0 + N * Math.sin(y), t.y = this.y0 + N * Math.cos(y), t));
+}
+function mn(t) {
+  t.x -= this.x0, t.y -= this.y0;
+  var i, a, e, s, r, n, h, o, l, u, f, c, v, M, d, y, x, S, A, R, N, P, B, L;
+  return this.sphere ? (i = Math.sqrt(t.x * t.x + t.y * t.y), i > 2 * m * this.a ? void 0 : (a = i / this.a, e = Math.sin(a), s = Math.cos(a), r = this.long0, Math.abs(i) <= _ ? n = this.lat0 : (n = rt(s * this.sin_p12 + t.y * e * this.cos_p12 / i), h = Math.abs(this.lat0) - m, Math.abs(h) <= _ ? this.lat0 >= 0 ? r = g(this.long0 + Math.atan2(t.x, -t.y)) : r = g(this.long0 - Math.atan2(-t.x, t.y)) : r = g(this.long0 + Math.atan2(t.x * e, i * this.cos_p12 * s - t.y * this.sin_p12 * e))), t.x = r, t.y = n, t)) : (o = It(this.es), l = wt(this.es), u = Rt(this.es), f = pt(this.es), Math.abs(this.sin_p12 - 1) <= _ ? (c = this.a * F(o, l, u, f, m), i = Math.sqrt(t.x * t.x + t.y * t.y), v = c - i, n = Wt(v / this.a, o, l, u, f), r = g(this.long0 + Math.atan2(t.x, -1 * t.y)), t.x = r, t.y = n, t) : Math.abs(this.sin_p12 + 1) <= _ ? (c = this.a * F(o, l, u, f, m), i = Math.sqrt(t.x * t.x + t.y * t.y), v = i - c, n = Wt(v / this.a, o, l, u, f), r = g(this.long0 + Math.atan2(t.x, t.y)), t.x = r, t.y = n, t) : (i = Math.sqrt(t.x * t.x + t.y * t.y), y = Math.atan2(t.x, t.y), M = yt(this.a, this.e, this.sin_p12), x = Math.cos(y), S = this.e * this.cos_p12 * x, A = -S * S / (1 - this.es), R = 3 * this.es * (1 - A) * this.sin_p12 * this.cos_p12 * x / (1 - this.es), N = i / M, P = N - A * (1 + A) * Math.pow(N, 3) / 6 - R * (1 + 3 * A) * Math.pow(N, 4) / 24, B = 1 - A * P * P / 2 - N * P * P * P / 6, d = Math.asin(this.sin_p12 * Math.cos(P) + this.cos_p12 * Math.sin(P) * x), r = g(this.long0 + Math.asin(Math.sin(y) * Math.sin(P) / Math.cos(d))), L = Math.sin(d), n = Math.atan2((L - this.es * B * this.sin_p12) * Math.tan(d), L * (1 - this.es)), t.x = r, t.y = n, t));
+}
+var yn = ["Azimuthal_Equidistant", "aeqd"];
+const _n = {
+  init: vn,
+  forward: dn,
+  inverse: mn,
+  names: yn
+};
+function gn() {
+  this.sin_p14 = Math.sin(this.lat0), this.cos_p14 = Math.cos(this.lat0);
+}
+function xn(t) {
+  var i, a, e, s, r, n, h, o, l = t.x, u = t.y;
+  return e = g(l - this.long0), i = Math.sin(u), a = Math.cos(u), s = Math.cos(e), n = this.sin_p14 * i + this.cos_p14 * a * s, r = 1, (n > 0 || Math.abs(n) <= _) && (h = this.a * r * a * Math.sin(e), o = this.y0 + this.a * r * (this.cos_p14 * i - this.sin_p14 * a * s)), t.x = h, t.y = o, t;
+}
+function bn(t) {
+  var i, a, e, s, r, n, h;
+  return t.x -= this.x0, t.y -= this.y0, i = Math.sqrt(t.x * t.x + t.y * t.y), a = rt(i / this.a), e = Math.sin(a), s = Math.cos(a), n = this.long0, Math.abs(i) <= _ ? (h = this.lat0, t.x = n, t.y = h, t) : (h = rt(s * this.sin_p14 + t.y * e * this.cos_p14 / i), r = Math.abs(this.lat0) - m, Math.abs(r) <= _ ? (this.lat0 >= 0 ? n = g(this.long0 + Math.atan2(t.x, -t.y)) : n = g(this.long0 - Math.atan2(-t.x, t.y)), t.x = n, t.y = h, t) : (n = g(this.long0 + Math.atan2(t.x * e, i * this.cos_p14 * s - t.y * this.sin_p14 * e)), t.x = n, t.y = h, t));
+}
+var Sn = ["ortho"];
+const En = {
+  init: gn,
+  forward: xn,
+  inverse: bn,
+  names: Sn
+};
+var O = {
+  FRONT: 1,
+  RIGHT: 2,
+  BACK: 3,
+  LEFT: 4,
+  TOP: 5,
+  BOTTOM: 6
+}, I = {
+  AREA_0: 1,
+  AREA_1: 2,
+  AREA_2: 3,
+  AREA_3: 4
+};
+function An() {
+  this.x0 = this.x0 || 0, this.y0 = this.y0 || 0, this.lat0 = this.lat0 || 0, this.long0 = this.long0 || 0, this.lat_ts = this.lat_ts || 0, this.title = this.title || "Quadrilateralized Spherical Cube", this.lat0 >= m - T / 2 ? this.face = O.TOP : this.lat0 <= -(m - T / 2) ? this.face = O.BOTTOM : Math.abs(this.long0) <= T ? this.face = O.FRONT : Math.abs(this.long0) <= m + T ? this.face = this.long0 > 0 ? O.RIGHT : O.LEFT : this.face = O.BACK, this.es !== 0 && (this.one_minus_f = 1 - (this.a - this.b) / this.a, this.one_minus_f_squared = this.one_minus_f * this.one_minus_f);
+}
+function Cn(t) {
+  var i = { x: 0, y: 0 }, a, e, s, r, n, h, o = { value: 0 };
+  if (t.x -= this.long0, this.es !== 0 ? a = Math.atan(this.one_minus_f_squared * Math.tan(t.y)) : a = t.y, e = t.x, this.face === O.TOP)
+    r = m - a, e >= T && e <= m + T ? (o.value = I.AREA_0, s = e - m) : e > m + T || e <= -(m + T) ? (o.value = I.AREA_1, s = e > 0 ? e - G : e + G) : e > -(m + T) && e <= -T ? (o.value = I.AREA_2, s = e + m) : (o.value = I.AREA_3, s = e);
+  else if (this.face === O.BOTTOM)
+    r = m + a, e >= T && e <= m + T ? (o.value = I.AREA_0, s = -e + m) : e < T && e >= -T ? (o.value = I.AREA_1, s = -e) : e < -T && e >= -(m + T) ? (o.value = I.AREA_2, s = -e - m) : (o.value = I.AREA_3, s = e > 0 ? -e + G : -e - G);
+  else {
+    var l, u, f, c, v, M, d;
+    this.face === O.RIGHT ? e = dt(e, +m) : this.face === O.BACK ? e = dt(e, +G) : this.face === O.LEFT && (e = dt(e, -m)), c = Math.sin(a), v = Math.cos(a), M = Math.sin(e), d = Math.cos(e), l = v * d, u = v * M, f = c, this.face === O.FRONT ? (r = Math.acos(l), s = qt(r, f, u, o)) : this.face === O.RIGHT ? (r = Math.acos(u), s = qt(r, f, -l, o)) : this.face === O.BACK ? (r = Math.acos(-l), s = qt(r, f, -u, o)) : this.face === O.LEFT ? (r = Math.acos(-u), s = qt(r, f, l, o)) : (r = s = 0, o.value = I.AREA_0);
+  }
+  return h = Math.atan(12 / G * (s + Math.acos(Math.sin(s) * Math.cos(T)) - m)), n = Math.sqrt((1 - Math.cos(r)) / (Math.cos(h) * Math.cos(h)) / (1 - Math.cos(Math.atan(1 / Math.cos(s))))), o.value === I.AREA_1 ? h += m : o.value === I.AREA_2 ? h += G : o.value === I.AREA_3 && (h += 1.5 * G), i.x = n * Math.cos(h), i.y = n * Math.sin(h), i.x = i.x * this.a + this.x0, i.y = i.y * this.a + this.y0, t.x = i.x, t.y = i.y, t;
+}
+function Nn(t) {
+  var i = { lam: 0, phi: 0 }, a, e, s, r, n, h, o, l, u, f = { value: 0 };
+  if (t.x = (t.x - this.x0) / this.a, t.y = (t.y - this.y0) / this.a, e = Math.atan(Math.sqrt(t.x * t.x + t.y * t.y)), a = Math.atan2(t.y, t.x), t.x >= 0 && t.x >= Math.abs(t.y) ? f.value = I.AREA_0 : t.y >= 0 && t.y >= Math.abs(t.x) ? (f.value = I.AREA_1, a -= m) : t.x < 0 && -t.x >= Math.abs(t.y) ? (f.value = I.AREA_2, a = a < 0 ? a + G : a - G) : (f.value = I.AREA_3, a += m), u = G / 12 * Math.tan(a), n = Math.sin(u) / (Math.cos(u) - 1 / Math.sqrt(2)), h = Math.atan(n), s = Math.cos(a), r = Math.tan(e), o = 1 - s * s * r * r * (1 - Math.cos(Math.atan(1 / Math.cos(h)))), o < -1 ? o = -1 : o > 1 && (o = 1), this.face === O.TOP)
+    l = Math.acos(o), i.phi = m - l, f.value === I.AREA_0 ? i.lam = h + m : f.value === I.AREA_1 ? i.lam = h < 0 ? h + G : h - G : f.value === I.AREA_2 ? i.lam = h - m : i.lam = h;
+  else if (this.face === O.BOTTOM)
+    l = Math.acos(o), i.phi = l - m, f.value === I.AREA_0 ? i.lam = -h + m : f.value === I.AREA_1 ? i.lam = -h : f.value === I.AREA_2 ? i.lam = -h - m : i.lam = h < 0 ? -h - G : -h + G;
+  else {
+    var c, v, M;
+    c = o, u = c * c, u >= 1 ? M = 0 : M = Math.sqrt(1 - u) * Math.sin(h), u += M * M, u >= 1 ? v = 0 : v = Math.sqrt(1 - u), f.value === I.AREA_1 ? (u = v, v = -M, M = u) : f.value === I.AREA_2 ? (v = -v, M = -M) : f.value === I.AREA_3 && (u = v, v = M, M = -u), this.face === O.RIGHT ? (u = c, c = -v, v = u) : this.face === O.BACK ? (c = -c, v = -v) : this.face === O.LEFT && (u = c, c = v, v = -u), i.phi = Math.acos(-M) - m, i.lam = Math.atan2(v, c), this.face === O.RIGHT ? i.lam = dt(i.lam, -m) : this.face === O.BACK ? i.lam = dt(i.lam, -G) : this.face === O.LEFT && (i.lam = dt(i.lam, +m));
+  }
+  if (this.es !== 0) {
+    var d, y, x;
+    d = i.phi < 0 ? 1 : 0, y = Math.tan(i.phi), x = this.b / Math.sqrt(y * y + this.one_minus_f_squared), i.phi = Math.atan(Math.sqrt(this.a * this.a - x * x) / (this.one_minus_f * x)), d && (i.phi = -i.phi);
+  }
+  return i.lam += this.long0, t.x = i.lam, t.y = i.phi, t;
+}
+function qt(t, i, a, e) {
+  var s;
+  return t < _ ? (e.value = I.AREA_0, s = 0) : (s = Math.atan2(i, a), Math.abs(s) <= T ? e.value = I.AREA_0 : s > T && s <= m + T ? (e.value = I.AREA_1, s -= m) : s > m + T || s <= -(m + T) ? (e.value = I.AREA_2, s = s >= 0 ? s - G : s + G) : (e.value = I.AREA_3, s += m)), s;
+}
+function dt(t, i) {
+  var a = t + i;
+  return a < -G ? a += Ct : a > +G && (a -= Ct), a;
+}
+var Pn = ["Quadrilateralized Spherical Cube", "Quadrilateralized_Spherical_Cube", "qsc"];
+const Tn = {
+  init: An,
+  forward: Cn,
+  inverse: Nn,
+  names: Pn
+};
+var ai = [
+  [1, 22199e-21, -715515e-10, 31103e-10],
+  [0.9986, -482243e-9, -24897e-9, -13309e-10],
+  [0.9954, -83103e-8, -448605e-10, -986701e-12],
+  [0.99, -135364e-8, -59661e-9, 36777e-10],
+  [0.9822, -167442e-8, -449547e-11, -572411e-11],
+  [0.973, -214868e-8, -903571e-10, 18736e-12],
+  [0.96, -305085e-8, -900761e-10, 164917e-11],
+  [0.9427, -382792e-8, -653386e-10, -26154e-10],
+  [0.9216, -467746e-8, -10457e-8, 481243e-11],
+  [0.8962, -536223e-8, -323831e-10, -543432e-11],
+  [0.8679, -609363e-8, -113898e-9, 332484e-11],
+  [0.835, -698325e-8, -640253e-10, 934959e-12],
+  [0.7986, -755338e-8, -500009e-10, 935324e-12],
+  [0.7597, -798324e-8, -35971e-9, -227626e-11],
+  [0.7186, -851367e-8, -701149e-10, -86303e-10],
+  [0.6732, -986209e-8, -199569e-9, 191974e-10],
+  [0.6213, -0.010418, 883923e-10, 624051e-11],
+  [0.5722, -906601e-8, 182e-6, 624051e-11],
+  [0.5322, -677797e-8, 275608e-9, 624051e-11]
+], Et = [
+  [-520417e-23, 0.0124, 121431e-23, -845284e-16],
+  [0.062, 0.0124, -126793e-14, 422642e-15],
+  [0.124, 0.0124, 507171e-14, -160604e-14],
+  [0.186, 0.0123999, -190189e-13, 600152e-14],
+  [0.248, 0.0124002, 710039e-13, -224e-10],
+  [0.31, 0.0123992, -264997e-12, 835986e-13],
+  [0.372, 0.0124029, 988983e-12, -311994e-12],
+  [0.434, 0.0123893, -369093e-11, -435621e-12],
+  [0.4958, 0.0123198, -102252e-10, -345523e-12],
+  [0.5571, 0.0121916, -154081e-10, -582288e-12],
+  [0.6176, 0.0119938, -241424e-10, -525327e-12],
+  [0.6769, 0.011713, -320223e-10, -516405e-12],
+  [0.7346, 0.0113541, -397684e-10, -609052e-12],
+  [0.7903, 0.0109107, -489042e-10, -104739e-11],
+  [0.8435, 0.0103431, -64615e-9, -140374e-14],
+  [0.8936, 969686e-8, -64636e-9, -8547e-9],
+  [0.9394, 840947e-8, -192841e-9, -42106e-10],
+  [0.9761, 616527e-8, -256e-6, -42106e-10],
+  [1, 328947e-8, -319159e-9, -42106e-10]
+], Yi = 0.8487, ta = 1.3523, ia = K / 5, In = 1 / ia, vt = 18, jt = function(t, i) {
+  return t[0] + i * (t[1] + i * (t[2] + i * t[3]));
+}, wn = function(t, i) {
+  return t[1] + i * (2 * t[2] + i * 3 * t[3]);
+};
+function Rn(t, i, a, e) {
+  for (var s = i; e; --e) {
+    var r = t(s);
+    if (s -= r, Math.abs(r) < a)
+      break;
+  }
+  return s;
+}
+function pn() {
+  this.x0 = this.x0 || 0, this.y0 = this.y0 || 0, this.long0 = this.long0 || 0, this.es = 0, this.title = this.title || "Robinson";
+}
+function On(t) {
+  var i = g(t.x - this.long0), a = Math.abs(t.y), e = Math.floor(a * ia);
+  e < 0 ? e = 0 : e >= vt && (e = vt - 1), a = K * (a - In * e);
+  var s = {
+    x: jt(ai[e], a) * i,
+    y: jt(Et[e], a)
+  };
+  return t.y < 0 && (s.y = -s.y), s.x = s.x * this.a * Yi + this.x0, s.y = s.y * this.a * ta + this.y0, s;
+}
+function Ln(t) {
+  var i = {
+    x: (t.x - this.x0) / (this.a * Yi),
+    y: Math.abs(t.y - this.y0) / (this.a * ta)
+  };
+  if (i.y >= 1)
+    i.x /= ai[vt][0], i.y = t.y < 0 ? -m : m;
+  else {
+    var a = Math.floor(i.y * vt);
+    for (a < 0 ? a = 0 : a >= vt && (a = vt - 1); ; )
+      if (Et[a][0] > i.y)
+        --a;
+      else if (Et[a + 1][0] <= i.y)
+        ++a;
+      else
+        break;
+    var e = Et[a], s = 5 * (i.y - e[0]) / (Et[a + 1][0] - e[0]);
+    s = Rn(function(r) {
+      return (jt(e, r) - i.y) / wn(e, r);
+    }, s, _, 100), i.x /= jt(ai[a], s), i.y = (5 * a + s) * D, t.y < 0 && (i.y = -i.y);
+  }
+  return i.x = g(i.x + this.long0), i;
+}
+var qn = ["Robinson", "robin"];
+const Gn = {
+  init: pn,
+  forward: On,
+  inverse: Ln,
+  names: qn
+};
+function $n() {
+  this.name = "geocent";
+}
+function Dn(t) {
+  var i = ki(t, this.es, this.a);
+  return i;
+}
+function Bn(t) {
+  var i = zi(t, this.es, this.a, this.b);
+  return i;
+}
+var kn = ["Geocentric", "geocentric", "geocent", "Geocent"];
+const zn = {
+  init: $n,
+  forward: Dn,
+  inverse: Bn,
+  names: kn
+};
+var k = {
+  N_POLE: 0,
+  S_POLE: 1,
+  EQUIT: 2,
+  OBLIQ: 3
+}, xt = {
+  h: { def: 1e5, num: !0 },
+  azi: { def: 0, num: !0, degrees: !0 },
+  tilt: { def: 0, num: !0, degrees: !0 },
+  long0: { def: 0, num: !0 },
+  lat0: { def: 0, num: !0 }
+};
+function Fn() {
+  if (Object.keys(xt).forEach(function(a) {
+    if (typeof this[a] > "u")
+      this[a] = xt[a].def;
+    else {
+      if (xt[a].num && isNaN(this[a]))
+        throw new Error("Invalid parameter value, must be numeric " + a + " = " + this[a]);
+      xt[a].num && (this[a] = parseFloat(this[a]));
+    }
+    xt[a].degrees && (this[a] = this[a] * D);
+  }.bind(this)), Math.abs(Math.abs(this.lat0) - m) < _ ? this.mode = this.lat0 < 0 ? k.S_POLE : k.N_POLE : Math.abs(this.lat0) < _ ? this.mode = k.EQUIT : (this.mode = k.OBLIQ, this.sinph0 = Math.sin(this.lat0), this.cosph0 = Math.cos(this.lat0)), this.pn1 = this.h / this.a, this.pn1 <= 0 || this.pn1 > 1e10)
+    throw new Error("Invalid height");
+  this.p = 1 + this.pn1, this.rp = 1 / this.p, this.h1 = 1 / this.pn1, this.pfact = (this.p + 1) * this.h1, this.es = 0;
+  var t = this.tilt, i = this.azi;
+  this.cg = Math.cos(i), this.sg = Math.sin(i), this.cw = Math.cos(t), this.sw = Math.sin(t);
+}
+function Un(t) {
+  t.x -= this.long0;
+  var i = Math.sin(t.y), a = Math.cos(t.y), e = Math.cos(t.x), s, r;
+  switch (this.mode) {
+    case k.OBLIQ:
+      r = this.sinph0 * i + this.cosph0 * a * e;
+      break;
+    case k.EQUIT:
+      r = a * e;
+      break;
+    case k.S_POLE:
+      r = -i;
+      break;
+    case k.N_POLE:
+      r = i;
+      break;
+  }
+  switch (r = this.pn1 / (this.p - r), s = r * a * Math.sin(t.x), this.mode) {
+    case k.OBLIQ:
+      r *= this.cosph0 * i - this.sinph0 * a * e;
+      break;
+    case k.EQUIT:
+      r *= i;
+      break;
+    case k.N_POLE:
+      r *= -(a * e);
+      break;
+    case k.S_POLE:
+      r *= a * e;
+      break;
+  }
+  var n, h;
+  return n = r * this.cg + s * this.sg, h = 1 / (n * this.sw * this.h1 + this.cw), s = (s * this.cg - r * this.sg) * this.cw * h, r = n * h, t.x = s * this.a, t.y = r * this.a, t;
+}
+function Wn(t) {
+  t.x /= this.a, t.y /= this.a;
+  var i = { x: t.x, y: t.y }, a, e, s;
+  s = 1 / (this.pn1 - t.y * this.sw), a = this.pn1 * t.x * s, e = this.pn1 * t.y * this.cw * s, t.x = a * this.cg + e * this.sg, t.y = e * this.cg - a * this.sg;
+  var r = Xt(t.x, t.y);
+  if (Math.abs(r) < _)
+    i.x = 0, i.y = t.y;
+  else {
+    var n, h;
+    switch (h = 1 - r * r * this.pfact, h = (this.p - Math.sqrt(h)) / (this.pn1 / r + r / this.pn1), n = Math.sqrt(1 - h * h), this.mode) {
+      case k.OBLIQ:
+        i.y = Math.asin(n * this.sinph0 + t.y * h * this.cosph0 / r), t.y = (n - this.sinph0 * Math.sin(i.y)) * r, t.x *= h * this.cosph0;
+        break;
+      case k.EQUIT:
+        i.y = Math.asin(t.y * h / r), t.y = n * r, t.x *= h;
+        break;
+      case k.N_POLE:
+        i.y = Math.asin(n), t.y = -t.y;
+        break;
+      case k.S_POLE:
+        i.y = -Math.asin(n);
+        break;
+    }
+    i.x = Math.atan2(t.x, t.y);
+  }
+  return t.x = i.x + this.long0, t.y = i.y, t;
+}
+var jn = ["Tilted_Perspective", "tpers"];
+const Qn = {
+  init: Fn,
+  forward: Un,
+  inverse: Wn,
+  names: jn
+};
+function Hn(t) {
+  t.Proj.projections.add(Dt), t.Proj.projections.add(Bt), t.Proj.projections.add(sr), t.Proj.projections.add(Mr), t.Proj.projections.add(gr), t.Proj.projections.add(Ar), t.Proj.projections.add(wr), t.Proj.projections.add(qr), t.Proj.projections.add(kr), t.Proj.projections.add(jr), t.Proj.projections.add(oh), t.Proj.projections.add(vh), t.Proj.projections.add(gh), t.Proj.projections.add(Ch), t.Proj.projections.add(wh), t.Proj.projections.add(qh), t.Proj.projections.add(kh), t.Proj.projections.add(jh), t.Proj.projections.add(Jh), t.Proj.projections.add(sn), t.Proj.projections.add(on), t.Proj.projections.add(Mn), t.Proj.projections.add(_n), t.Proj.projections.add(En), t.Proj.projections.add(Tn), t.Proj.projections.add(Gn), t.Proj.projections.add(zn), t.Proj.projections.add(Qn);
+}
+q.defaultDatum = "WGS84";
+q.Proj = J;
+q.WGS84 = new q.Proj("WGS84");
+q.Point = mt;
+q.toPoint = Fi;
+q.defs = z;
+q.nadgrid = re;
+q.transform = Ut;
+q.mgrs = be;
+q.version = "__VERSION__";
+Hn(q);
+q.defs("urn:ogc:def:crs:EPSG:6.18.3:3857", q.defs("EPSG:3857"));
+q.defs("urn:ogc:def:crs:EPSG:3857", q.defs("EPSG:3857"));
+q.defs("urn:ogc:def:crs:EPSG::3857", q.defs("EPSG:3857"));
+const Ti = (t, i, a = { x: 0, y: 0 }) => (e) => {
+  const s = t.imageToViewportCoordinates(e[0] + a.x, e[1] + a.y);
+  return sa(i)([s.x, s.y]);
+}, Ii = (t, i, a = { x: 0, y: 0 }) => (e) => {
+  const s = kt(i)(e), { x: r, y: n } = t.viewportToImageCoordinates(s[0], s[1]);
+  return [r - a.x, n - a.y];
+}, Xn = (t) => (i) => q("EPSG:4326", t.code, i), kt = (t) => (i) => {
+  const a = q("EPSG:4326", t.code, i);
+  return aa(t.extent)(a);
+}, Vn = (t) => (i) => q(t.code, "EPSG:4326", i), aa = (t) => (i) => {
+  const [a, e] = i, [s, r] = t, [n, h] = [s / 2, r / 2], o = a + n, l = h - e;
+  return [o / s, l / r];
+}, sa = (t) => (i) => {
+  const a = ea(t.extent)(i);
+  return q(t.code, "EPSG:4326", a);
+}, ea = (t) => (i) => {
+  const [a, e] = i, [s, r] = t, [n, h] = [s / 2, r / 2], o = a * s - n, l = h - e * r;
+  return [o, l];
+}, Kn = (t, i) => {
+  const { url: a } = i;
+  return new Promise((e, s) => {
+    fetch(a).then((r) => r.text()).then((r) => {
+      const { tileSource: n, mapBounds: h, projection: o } = gs(r, i), l = kt(o)([
+        Math.min(h[0], h[2]),
+        Math.max(h[3], h[1])
+      ]), u = kt(o)([
+        Math.max(h[2], h[0]),
+        Math.min(h[3], h[1])
+      ]);
+      t.addTiledImage({
+        tileSource: n,
+        success: () => {
+          const f = new OpenSeadragon.Rect(l[0], l[1], u[0] - l[0], u[1] - l[1]);
+          t.viewport.fitBounds(f, !0);
+          const c = t.viewport.viewportToImageCoordinates(l[0], l[1]), v = t.viewport.viewportToImageCoordinates(u[0], u[1]), M = {
+            x: c.x,
+            y: c.y,
+            width: v.x - c.x,
+            height: v.y - c.y
+          };
+          e({
+            mapBounds: h,
+            viewportRegion: f,
+            imageRegion: M,
+            imageToLonLat: Ti(t.viewport, o),
+            imageRegionToLonLat: Ti(t.viewport, o, c),
+            lonLatToImage: Ii(t.viewport, o),
+            lonLatToImageRegion: Ii(t.viewport, o, c),
+            mapToLonLat: Vn(o),
+            mapToViewportCoordinates: aa(o.extent),
+            lonLatToMapCoordinates: Xn(o),
+            lonLatToViewportCoordinates: kt(o),
+            viewportToLonLat: sa(o),
+            viewportToMapCoordinates: ea(o.extent)
+          });
+        },
+        error: (f) => s(f)
+      });
+    });
+  });
+};
+export {
+  Kn as default
+};
 //# sourceMappingURL=openseadragon-wmts.js.map

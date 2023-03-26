@@ -1,17 +1,17 @@
-# OpenSeadragon WMTS Plugin
+# OpenSeadragonWMTS
 
-An experimental OpenSeadragon plugin to display a geo-referenced map layer
-served from a [WMTS](https://en.wikipedia.org/wiki/Web_Map_Tile_Service) endpoint.
+Adds support for displaying geo-referenced [WMTS tile maps](https://en.wikipedia.org/wiki/Web_Map_Tile_Service)
+in OpenSeadragon.
 
-Try the [Demo](https://recogito.github.io/openseadragon-wmts).
+See [online demo](https://annotorious.github.io/openseadragon-wmts).
 
 ## Install
 
-Download the [latest release](https://github.com/recogito/openseadragon-wmts/releases/latest) or grab
+Download the [latest release](https://github.com/annotorious/openseadragon-wmts/releases/latest) or grab
 directly from the CDN. Import into your page:
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/openseadragon-wmts@latest/dist/openseadragon-wmts.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/openseadragon-wmts@latest/dist/openseadragon-wmts.umd.cjs"></script>
 ```
 
 Or install via npm:
@@ -29,7 +29,7 @@ var viewer = OpenSeadragon({
 });
 
 // Initialize the plugin
-var map = await OpenSeadragon.WMTS(viewer, {
+var map = await OpenSeadragonWMTS(viewer, {
   url: 'http://maps.wien.gv.at/wmts/1.0.0/WMTSCapabilities.xml'
 });
 
